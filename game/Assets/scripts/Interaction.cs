@@ -15,13 +15,13 @@ public class Interaction : MonoBehaviour {
 			
 			gos = GameObject.FindGameObjectsWithTag("interactive");
 
-			Debug.Log (gos);
-
 			var fwd = transform.TransformDirection (Vector3.forward);
 			RaycastHit hit;
 
-			if (Physics.Raycast (transform.position, fwd, out hit)) {
-				print ("There is something in front of the object!");
+			Physics.Raycast (transform.position, fwd, out hit);
+
+			if (hit.transform.gameObject.tag == "interactive") {
+				//print ("There is something in front of the object!");
 				foreach(GameObject go in gos){
 					var position = transform.position;
 					var dist = go.transform.position - position;
