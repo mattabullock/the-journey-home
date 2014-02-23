@@ -21,12 +21,12 @@ public class BulletAct : MonoBehaviour {
 		print (collision.gameObject.tag);
 
 		if (collision.gameObject.tag == "Enemy") {
-			Destroy(gameObject);
-			Destroy(collision.gameObject);
+			PhotonNetwork.Destroy(gameObject);
+			PhotonNetwork.Destroy(collision.gameObject);
 		}
 	}
 
 	void Explode () {
-		Destroy (gameObject);
+		PhotonNetwork.Destroy (gameObject);
 	}
 }
