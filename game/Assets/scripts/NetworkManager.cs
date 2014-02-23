@@ -44,6 +44,8 @@ public class NetworkManager : MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("FPSInputController")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("CharacterMotor")).enabled = true;
+//		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerMovement")).enabled = true
+		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
 		myPlayerGO.transform.FindChild("Main Camera").gameObject.SetActive(true);
 
 	}
