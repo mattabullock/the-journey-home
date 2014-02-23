@@ -21,13 +21,13 @@ public class Health : MonoBehaviour {
 	}
 	
 	void Die() {
-		if( GetComponent<PhotonView>().instantiationId==0 ) {
-			Destroy(gameObject);
-		}
-		else {
+//		if( GetComponent<PhotonView>().instantiationId==0 ) {
+//			Destroy(gameObject);
+//		}
+//		else {
 			if( PhotonNetwork.isMasterClient ) {
 				PhotonNetwork.Destroy(gameObject);
 			}
-		}
+//		}
 	}
 }
