@@ -25,9 +25,9 @@ public class Health : MonoBehaviour {
 			Destroy(gameObject);
 		}
 		else {
-//			if( PhotonNetwork.isMasterClient ) {
-				PhotonNetwork.Destroy(gameObject);
-//			}
+			if( PhotonNetwork.isMasterClient ) {
+				//PhotonNetwork.Destroy(gameObject);
+			}
 		}
 	}
 }
