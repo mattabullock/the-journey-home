@@ -22,14 +22,11 @@ public class Health : MonoBehaviour {
 	
 	void Die() {
 		if( GetComponent<PhotonView>().instantiationId==0 ) {
-			Debug.Log ("Or is this happening?");
 			Destroy(gameObject);
 		}
 		else {
-			Debug.Log ("hi jon");
-			if( ! PhotonNetwork.isMasterClient ) {
-				Debug.Log ("Why is this happening?");
-				Destroy(gameObject);
+			if( PhotonNetwork.isMasterClient ) {
+				PhotonNetwork.Destroy(gameObject);
 			}
 		}
 	}
