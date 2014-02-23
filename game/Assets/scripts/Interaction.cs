@@ -10,7 +10,7 @@ public class Interaction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("e")) {
+		if (Input.GetButtonDown ("Interact")) {
 			GameObject[] gos;
 			
 			gos = GameObject.FindGameObjectsWithTag("interactive");
