@@ -16,12 +16,12 @@ public class NetworkManager : MonoBehaviour {
 	
 	void Connect() {
 		//PhotonNetwork.offlineMode = true;
-		PhotonNetwork.ConnectUsingSettings ("v001");
+		PhotonNetwork.ConnectUsingSettings ("v002");
 	}
 	
-	void OnGUI() {
-		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString ());
-	}
+//	void OnGUI() {
+//		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString ());
+//	}
 	
 	void OnJoinedLobby() {
 		PhotonNetwork.JoinRandomRoom ();

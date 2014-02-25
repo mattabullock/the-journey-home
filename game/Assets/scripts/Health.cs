@@ -10,6 +10,10 @@ public class Health : Photon.MonoBehaviour {
 	void Start () {
 		currentHitPoints = hitPoints;
 	}
+
+	void OnGUI() {
+		GUILayout.Label(currentHitPoints.ToString());
+	}
 	
 	[RPC]
 	public void TakeDamage(float amt) {
