@@ -31,10 +31,27 @@ public class Health : Photon.MonoBehaviour {
 		else {
 			if( photonView.isMine ) {
 				PhotonNetwork.Destroy(gameObject);
+				spawn ();
 			}
 //			if( PhotonNetwork.isMasterClient ) {
 //				PhotonNetwork.Destroy(gameObject);
 //			}
 		}
+	}
+
+	void spawn() {
+		
+		SpawnSpot mySpawn = spawnSpots [Random.Range (0, spawnSpots.Length)];
+		
+		levelCam.SetActive (false);
+		
+		GameObject myPlayerGO = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawn.transform.position, mySpawn.transform.rotation, 0);
+		((MonoBehaviour) myPlayerGO.GetComponent ("FPSInputController")).enabled = true;
+		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
+		((MonoBehaviour) myPlayerGO.GetComponent ("CharacterMotor")).enabled = true;
+		//		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerMovement")).enabled = true
+		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
+		myPlayerGO.transform.FindChild("Main Camera").gameObject.SetActive(true);
+		
 	}
 }
