@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Health : MonoBehaviour {
+public class Health : Photon.MonoBehaviour {
 	
 	public float hitPoints = 100f;
 	float currentHitPoints;
@@ -25,9 +25,12 @@ public class Health : MonoBehaviour {
 			Destroy(gameObject);
 		}
 		else {
-			if( PhotonNetwork.isMasterClient ) {
+			if( photonView.isMine ) {
 				PhotonNetwork.Destroy(gameObject);
 			}
+//			if( PhotonNetwork.isMasterClient ) {
+//				PhotonNetwork.Destroy(gameObject);
+//			}
 		}
 	}
 }
