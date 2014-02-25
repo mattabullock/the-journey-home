@@ -4,7 +4,7 @@ using System.Collections;
 public class NetworkManager : MonoBehaviour {
 	
 	public GameObject levelCam;
-	SpawnSpot[] spawnSpots;
+	public static SpawnSpot[] spawnSpots;
 	
 	
 	// Use this for initialization
