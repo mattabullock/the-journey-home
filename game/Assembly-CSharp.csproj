@@ -83,8 +83,11 @@
      <Compile Include="Assets\scripts\BulletAct.cs" />
      <Compile Include="Assets\scripts\FP_Shooter.cs" />
      <Compile Include="Assets\scripts\Follow.cs" />
+     <Compile Include="Assets\scripts\Health.cs" />
+     <Compile Include="Assets\scripts\Interaction.cs" />
      <Compile Include="Assets\scripts\NetworkCharacter.cs" />
      <Compile Include="Assets\scripts\NetworkManager.cs" />
+     <Compile Include="Assets\scripts\PlayerShooting.cs" />
      <Compile Include="Assets\scripts\SpawnSpot.cs" />
      <None Include="Assets\Plugins\release_history.txt" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
