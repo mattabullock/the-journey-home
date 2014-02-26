@@ -216,8 +216,9 @@ GameObject:
   - 33: {fileID: 196708967}
   - 65: {fileID: 196708966}
   - 23: {fileID: 196708965}
-  - 114: {fileID: 196708969}
   - 114: {fileID: 196708970}
+  - 54: {fileID: 196708971}
+  - 114: {fileID: 196708969}
   m_Layer: 0
   m_Name: Cube
   m_TagString: interactive
@@ -284,9 +285,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 196708964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07be743a3267b4ab2b2290dfa1781435, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d5017da6cb6942a8a0ccb163219893d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoints: 100
+  healthBarLength: 100
 --- !u!114 &196708970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,11 +305,26 @@ MonoBehaviour:
   ownerId: 0
   group: 0
   prefixBackup: -1
-  observed: {fileID: 196708969}
+  observed: {fileID: 0}
   synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   instantiationId: 0
+--- !u!54 &196708971
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 196708964}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &237072839
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +338,7 @@ GameObject:
   - 64: {fileID: 237072841}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Level Part
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -567,6 +585,14 @@ Prefab:
       value: 
       objectReference: {fileID: -564478081, guid: 036bc13753e6f3d46b2072367e431230,
         type: 3}
+    - target: {fileID: 100004, guid: dea62ff3e0d65484fa41ac013ca2a34e, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: dea62ff3e0d65484fa41ac013ca2a34e, type: 3}
+      propertyPath: m_TagString
+      value: Level Part
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dea62ff3e0d65484fa41ac013ca2a34e, type: 3}
   m_RootGameObject: {fileID: 2110013388}

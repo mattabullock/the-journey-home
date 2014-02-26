@@ -593,6 +593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: .5
   damage: 25
+  decalHitWall: {fileID: 100002, guid: c7a47b9ec04724b43a3aed55999c2e9d, type: 2}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -604,6 +605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c29ca231ff14793ab0adff9758beaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: .100000001
+  cooldown: 0
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

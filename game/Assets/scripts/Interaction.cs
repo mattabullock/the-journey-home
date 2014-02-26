@@ -2,35 +2,42 @@ using UnityEngine;
 using System.Collections;
 
 public class Interaction : MonoBehaviour {
+	
+	public float delay = .1f; 
+	public float cooldown = 0f;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("Interact")) {
+		cooldown -= Time.deltaTime;
+		if (Input.GetButton ("Interact") && !Input.GetButton ("Fire1")) {
+			interact();
+		}
+	}
 
-			var fwd = transform.TransformDirection (Vector3.forward);
-			RaycastHit hit;
+	void interact() {
 
-			Physics.Raycast (transform.position, fwd, out hit);
+		if(cooldown > 0) {
+			return;
+		}
 
-			if (Physics.Raycast (transform.position, fwd, out hit) && hit.transform.gameObject.tag == "interactive") {
-				var go = hit.transform.gameObject;
-				var position = transform.position;
-				var dist = go.transform.position - position;
-				var absDist = dist.sqrMagnitude;
-
-					if(absDist < 50) {
-						Debug.Log ("lolwut");
-						
-						var component = hit.transform.GetComponent<InteractedWith>();
-						component.GetComponent<PhotonView>().RPC ("repair", PhotonTargets.All, null);
-					}
+		var fwd = transform.TransformDirection (Vector3.forward);
+		RaycastHit hit;
+		
+		Physics.Raycast (transform.position, fwd, out hit);
+		
+		if (Physics.Raycast (transform.position, fwd, out hit) && hit.transform.gameObject.tag == "interactive") {
+			var go = hit.transform.gameObject;
+			var position = transform.position;
+			var dist = go.transform.position - position;
+			var absDist = dist.sqrMagnitude;
+			
+			if(absDist < 50) {
+				var component = hit.transform.GetComponent<SystemHealth>();
+				component.GetComponent<PhotonView>().RPC ("repair", PhotonTargets.All, 1f);
 			}
 		}
 
+		cooldown = delay;
 	}
 }
+	

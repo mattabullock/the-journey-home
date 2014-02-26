@@ -6,13 +6,13 @@ public class PlayerShooting : MonoBehaviour {
 	public float fireRate = 0.5f;
 	float cooldown = 0;
 	public float damage = 25f;
+	public GameObject decalHitWall;
+	float floatInFrontOfWall = 0.0001f;
 	
-	// Update is called once per frame
 	void Update () {
 		cooldown -= Time.deltaTime;
 		
-		if(Input.GetButton("Fire1")) {
-			// Player wants to shoot...so. Shoot.
+		if(Input.GetButton("Fire1") && !Input.GetButton ("Interact")) {
 			Fire ();
 		}
 		
@@ -25,39 +25,50 @@ public class PlayerShooting : MonoBehaviour {
 		
 		Debug.Log ("Firing our gun!");
 		
-		Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-		Transform hitTransform;
-		Vector3   hitPoint;
-		
-		hitTransform = FindClosestHitObject(ray, out hitPoint);
-		
+		RaycastHit hit;
+
+		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 1000000);
+
+		Transform hitTransform = hit.transform;
+
+		if (hitTransform != null && hitTransform.tag == "Level Part") {
+			Debug.Log("DO THIS");
+			Instantiate(decalHitWall,  hit.point + 
+			            (hit.normal * floatInFrontOfWall), Quaternion.LookRotation (hit.normal));
+//			PhotonNetwork.Instantiate ("wallGunshotDecal", hit.point + 
+//					(hit.normal * floatInFrontOfWall), Quaternion.LookRotation (hit.normal), 10);
+		}
+
 		if(hitTransform != null) {
 			Debug.Log ("We hit: " + hitTransform.name);
-			
-			// We could do a special effect at the hit location
-			// DoRicochetEffectAt( hitPoint );
-			
+						
 			Health h = hitTransform.GetComponent<Health>();
 			
 			while(h == null && hitTransform.parent) {
 				hitTransform = hitTransform.parent;
 				h = hitTransform.GetComponent<Health>();
 			}
-			
-			// Once we reach here, hitTransform may not be the hitTransform we started with!
-			
-			if(h != null) {
-				// This next line is the equivalent of calling:
-				//    				h.TakeDamage( damage );
-				// Except more "networky"
+
+			if(h == null) {
+				SystemHealth sh = hitTransform.GetComponent<SystemHealth>();
+				if(sh != null) {
+					PhotonView pv = sh.GetComponent<PhotonView>();
+					if(pv==null) {
+						Debug.LogError("Freak out!");
+					}
+					else {
+						sh.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
+					}
+				}
+			}
+			else if(h != null) {
 				PhotonView pv = h.GetComponent<PhotonView>();
 				if(pv==null) {
 					Debug.LogError("Freak out!");
 				}
 				else {
 					h.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
-				}
-				
+				}	
 			}
 			
 			
@@ -76,19 +87,12 @@ public class PlayerShooting : MonoBehaviour {
 		
 		foreach(RaycastHit hit in hits) {
 			if(hit.transform != this.transform && ( closestHit==null || hit.distance < distance ) ) {
-				// We have hit something that is:
-				// a) not us
-				// b) the first thing we hit (that is not us)
-				// c) or, if not b, is at least closer than the previous closest thing
-				
 				closestHit = hit.transform;
 				distance = hit.distance;
 				hitPoint = hit.point;
 			}
 		}
-		
-		// closestHit is now either still null (i.e. we hit nothing) OR it contains the closest thing that is a valid thing to hit
-		
+
 		return closestHit;
 		
 	}

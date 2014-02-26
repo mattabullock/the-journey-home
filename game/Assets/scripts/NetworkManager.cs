@@ -15,13 +15,12 @@ public class NetworkManager : MonoBehaviour {
 	}
 	
 	void Connect() {
-		//PhotonNetwork.offlineMode = true;
-		PhotonNetwork.ConnectUsingSettings ("v002");
+		PhotonNetwork.ConnectUsingSettings ("v003");
 	}
 	
-//	void OnGUI() {
-//		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString ());
-//	}
+	void OnGUI() {
+		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString ());
+	}
 	
 	void OnJoinedLobby() {
 		PhotonNetwork.JoinRandomRoom ();
@@ -45,7 +44,7 @@ public class NetworkManager : MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("FPSInputController")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("CharacterMotor")).enabled = true;
-		((MonoBehaviour)myPlayerGO.GetComponent ("Interaction")).enabled = true;
+		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
 		myPlayerGO.transform.FindChild("Main Camera").gameObject.SetActive(true);
 		
