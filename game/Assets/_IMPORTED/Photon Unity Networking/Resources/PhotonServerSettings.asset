@@ -26,4 +26,8 @@ MonoBehaviour:
   - DestroyRpc
   - TakeDamage
   - AddChatMessage_RPC
+  - repair
+  - AdjustCurrentHealth
+  - attack
+  - SystemDown
   DisableAutoOpenWizard: 0

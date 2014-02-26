@@ -12,6 +12,10 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	void Start () {
 	
 	}
+
+	void OnGUI(){
+		GUI.Box (new Rect(Screen.width/2,Screen.height/2, .5f, .5f),GUIContent.none);   	
+	}
 	
 	// Update is called once per frame
 	void Update () {
