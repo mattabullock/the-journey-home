@@ -81,7 +81,6 @@
      <Compile Include="Assets\_IMPORTED\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
      <Compile Include="Assets\_IMPORTED\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
      <Compile Include="Assets\scripts\BulletAct.cs" />
-     <Compile Include="Assets\scripts\FP_Shooter.cs" />
      <Compile Include="Assets\scripts\Follow.cs" />
      <Compile Include="Assets\scripts\Health.cs" />
      <Compile Include="Assets\scripts\Interaction.cs" />
@@ -89,6 +88,7 @@
      <Compile Include="Assets\scripts\NetworkManager.cs" />
      <Compile Include="Assets\scripts\PlayerShooting.cs" />
      <Compile Include="Assets\scripts\SpawnSpot.cs" />
+     <Compile Include="Assets\scripts\SystemHealth.cs" />
      <None Include="Assets\Plugins\release_history.txt" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\_IMPORTED\Photon Unity Networking\readme.txt" />
