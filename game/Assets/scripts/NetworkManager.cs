@@ -35,7 +35,7 @@ public class NetworkManager : MonoBehaviour {
 		spawnPlayer ();
 	}
 	
-	void spawnPlayer() {
+	public void spawnPlayer() {
 		
 		SpawnSpot mySpawn = spawnSpots [Random.Range (0, spawnSpots.Length)];
 		
@@ -45,7 +45,7 @@ public class NetworkManager : MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("FPSInputController")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("CharacterMotor")).enabled = true;
-		//		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerMovement")).enabled = true
+		((MonoBehaviour)myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
 		myPlayerGO.transform.FindChild("Main Camera").gameObject.SetActive(true);
 		

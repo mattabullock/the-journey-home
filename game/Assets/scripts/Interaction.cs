@@ -24,7 +24,7 @@ public class Interaction : MonoBehaviour {
 				var absDist = dist.sqrMagnitude;
 
 					if(absDist < 50) {
-					Debug.Log ("lolwut");
+						Debug.Log ("lolwut");
 						
 						var component = hit.transform.GetComponent<InteractedWith>();
 						component.GetComponent<PhotonView>().RPC ("repair", PhotonTargets.All, null);
