@@ -83,7 +83,7 @@ public class EnemySight : MonoBehaviour {
 							playerInSight = true;
 							
 							// Set the last global sighting is the players current position.
-							lastPlayerSighting.position = player.transform.position;
+							//lastPlayerSighting.position = player.transform.position;
 						}
 					}
 				}
@@ -156,7 +156,7 @@ public class EnemySight : MonoBehaviour {
 		// Create an array of points which is the length of the number of corners in the path + 2.
 		Vector3[] allWayPoints = new Vector3[path.corners.Length + 2];
 		
-		// The first point is the enemy's position.
+		 // The first point is the enemy's position.
 		allWayPoints[0] = transform.position;
 		
 		// The last point is the target position.
