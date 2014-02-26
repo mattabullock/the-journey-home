@@ -33,9 +33,6 @@ public class Health : Photon.MonoBehaviour {
 				PhotonNetwork.Destroy(gameObject);
 				spawn ();
 			}
-//			if( PhotonNetwork.isMasterClient ) {
-//				PhotonNetwork.Destroy(gameObject);
-//			}
 		}
 	}
 
