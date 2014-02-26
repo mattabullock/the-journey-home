@@ -3,10 +3,6 @@ using System.Collections;
 
 public class InteractedWith : MonoBehaviour {
 
-	void OnPhotonSerialize() {
-
-	}
-
 	[RPC]
 	public void repair() {
 		Debug.Log ("is this working");
