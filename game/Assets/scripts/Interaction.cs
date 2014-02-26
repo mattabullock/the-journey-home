@@ -17,9 +17,6 @@ public class Interaction : MonoBehaviour {
 
 			Physics.Raycast (transform.position, fwd, out hit);
 
-			Debug.Log (hit.transform.gameObject.name);
-			Debug.Log (hit.transform.gameObject.tag);
-			Debug.Log (hit.transform.tag);
 			if (hit.transform.gameObject.tag == "interactive") {
 				var go = hit.transform.gameObject;
 				var position = transform.position;
