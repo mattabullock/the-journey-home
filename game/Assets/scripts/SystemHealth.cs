@@ -27,7 +27,7 @@ public class SystemHealth : Photon.MonoBehaviour {
 		if (stream.isWriting) {
 			stream.SendNext (down);
 		} else if(stream.isReading) {
-			down = stream.ReceiveNext();
+			down = (bool) stream.ReceiveNext();
 		}
 	}
 
