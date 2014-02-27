@@ -8,12 +8,27 @@ public class SystemHealth : Photon.MonoBehaviour {
 	public float healthBarLength;
 	float currHealthBarLength;
 	GameObject lights;
+	bool down;
 	
 	// Use this for initialization
 	void Start () {
 		lights = GameObject.FindGameObjectWithTag ("Lights");
 		currentHitPoints = hitPoints;
 		currHealthBarLength = healthBarLength;
+	}
+
+	void Update() {
+		if (down && lights.activeSelf) {
+			lights.SetActive (false);
+		}
+	}
+
+	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+		stream.
+
+		if (stream.isWriting) {
+			stream.SendNext (dead);
+		}
 	}
 
 	void OnGUI(){
@@ -62,6 +77,7 @@ public class SystemHealth : Photon.MonoBehaviour {
 	[RPC]
 	void SystemDown() {
 		GameObject lights = GameObject.FindGameObjectWithTag ("Lights");
+		down = true;
 		lights.SetActive (false);
 		Debug.Log ("The system is down.");
 	}
