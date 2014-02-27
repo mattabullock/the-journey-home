@@ -1,18 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/HealthBar.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Health.cs">
     <Files>
-      <File FileName="Assets/scripts/SystemHealth.cs" Line="15" Column="20" />
-      <File FileName="Assets/scripts/Health.cs" Line="23" Column="10" />
-      <File FileName="Assets/scripts/BulletAct.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/NetworkManager.cs" Line="50" Column="66" />
-      <File FileName="Assets/scripts/NetworkCharacter.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/SpawnSpot.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/PlayerShooting.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Interaction.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/InteractedWith.cs" Line="1" Column="1" />
-      <File FileName="Assets/_IMPORTED/Photon Unity Networking/Editor/PhotonNetwork/ServerSettingsInspector.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/HealthBar.js" Line="19" Column="18" />
+      <File FileName="Assets/scripts/NetworkManager.cs" Line="18" Column="55" />
+      <File FileName="Assets/scripts/Health.cs" Line="16" Column="31" />
+      <File FileName="Assets/scripts/NetworkCharacter.cs" Line="62" Column="33" />
+      <File FileName="Assets/scripts/SystemHealth.cs" Line="47" Column="45" />
+      <File FileName="Assets/scripts/Follow.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
