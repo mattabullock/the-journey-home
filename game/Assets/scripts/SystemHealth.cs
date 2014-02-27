@@ -9,25 +9,39 @@ public class SystemHealth : Photon.MonoBehaviour {
 	float currHealthBarLength;
 	GameObject lights;
 	bool down;
+	Transform t;
+	Vector3 realPosition = Vector3.zero;
+	Quaternion realRotation = Quaternion.identity;
 	
 	// Use this for initialization
 	void Start () {
+		t = GetComponent<Transform> ();
 		lights = GameObject.FindGameObjectWithTag ("Lights");
 		currentHitPoints = hitPoints;
 		currHealthBarLength = healthBarLength;
 	}
 
 	void Update() {
-		if (down && lights.activeSelf) {
-			lights.SetActive (false);
+		if (photonView.isMine) {
+
+		} else {
+			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
+			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 0.1f);
+			if (down && lights.activeSelf) {
+				lights.SetActive (false);
+			}
 		}
 	}
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
 		if (stream.isWriting) {
+			stream.SendNext (t.position);
+			stream.SendNext (t.rotation);
 			stream.SendNext (down);
 			stream.SendNext (currentHitPoints);
 		} else if(stream.isReading) {
+			realPosition = (float) stream.ReceiveNext();
+			realRotation = (float) stream.ReceiveNext();
 			down = (bool) stream.ReceiveNext();
 			currentHitPoints = (float) stream.ReceiveNext();
 		}
