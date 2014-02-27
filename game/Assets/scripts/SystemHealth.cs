@@ -40,8 +40,8 @@ public class SystemHealth : Photon.MonoBehaviour {
 			stream.SendNext (down);
 			stream.SendNext (currentHitPoints);
 		} else if(stream.isReading) {
-			realPosition = (float) stream.ReceiveNext();
-			realRotation = (float) stream.ReceiveNext();
+			realPosition = (Vector3) stream.ReceiveNext();
+			realRotation = (Quaternion) stream.ReceiveNext();
 			down = (bool) stream.ReceiveNext();
 			currentHitPoints = (float) stream.ReceiveNext();
 		}
