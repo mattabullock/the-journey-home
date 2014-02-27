@@ -8,7 +8,7 @@ public class SystemHealth : Photon.MonoBehaviour {
 	public float healthBarLength;
 	float currHealthBarLength;
 	GameObject lights;
-	bool down = false;
+	bool down;
 	
 	// Use this for initialization
 	void Start () {
