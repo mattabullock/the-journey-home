@@ -28,8 +28,10 @@ public class SystemHealth : Photon.MonoBehaviour {
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
 		if (stream.isWriting) {
 			stream.SendNext (down);
+			stream.SendNext (currentHitPoints);
 		} else if(stream.isReading) {
 			down = (bool) stream.ReceiveNext();
+			currentHitPoints = (float) stream.ReceiveNext();
 		}
 	}
 
