@@ -34,7 +34,8 @@ public class NetworkManager : MonoBehaviour {
 		PhotonNetwork.CreateRoom (null);
 	}
 
-	void OnCreateRoom() {
+	void OnCreatedRoom() {
+		Debug.Log ("hello");
 		PhotonNetwork.Instantiate ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0);
 	}
 	
