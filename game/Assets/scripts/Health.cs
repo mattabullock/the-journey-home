@@ -10,6 +10,7 @@ public class Health : Photon.MonoBehaviour {
 	public bool notSpawned = false;
 	public float respawnTimer = 0f;
 	float respawn = 5f;
+	float healthBarLength = 60f;
 	
 	// Use this for initialization
 	void Start () {
@@ -21,20 +22,17 @@ public class Health : Photon.MonoBehaviour {
 			respawnTimer += Time.deltaTime;
 			if(respawnTimer >= respawn && dead) {
 				dead = false;
-				notSpawned = true;
+				anim.SetBool("Dead", false);
 				respawnTimer = 0;
 				Die();
-			} else if(respawnTimer >= respawn && notSpawned) {
-				notSpawned = false;
 				spawn ();
-				respawnTimer = 0;
 			}
 		}
 	}
 
-//	void OnGUI() {
-//		GUILayout.Label(currentHitPoints.ToString());
-//	}
+	void OnGUI() {
+		GUI.Box (new Rect(Screen.width - 10 - healthBarLength, 40, healthBarLength, 20), currentHitPoints + "/" + hitPoints);
+	}
 	
 	[RPC]
 	public void TakeDamage(float amt) {
@@ -43,7 +41,6 @@ public class Health : Photon.MonoBehaviour {
 		if(currentHitPoints <= 0) {
 			anim.SetBool("Dead", true);
 			dead = true;
-			((MonoBehaviour) gameObject.GetComponent ("MouseLook")).enabled = false;
 		}
 	}
 

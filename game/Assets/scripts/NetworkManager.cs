@@ -19,7 +19,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 	
 	void Connect() {
-		PhotonNetwork.ConnectUsingSettings ("v003");
+		PhotonNetwork.ConnectUsingSettings ("v004");
 	}
 	
 	void OnGUI() {

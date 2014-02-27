@@ -7,9 +7,11 @@ public class SystemHealth : Photon.MonoBehaviour {
 	float currentHitPoints;
 	public float healthBarLength;
 	float currHealthBarLength;
+	GameObject lights;
 	
 	// Use this for initialization
 	void Start () {
+		lights = GameObject.FindGameObjectWithTag ("Lights");
 		currentHitPoints = hitPoints;
 		currHealthBarLength = healthBarLength;
 	}
@@ -22,12 +24,15 @@ public class SystemHealth : Photon.MonoBehaviour {
 	[RPC]
 	public void repair(float amt) {
 		if (currentHitPoints >= hitPoints) {
-			return;
+			return;	
 		} else if (currentHitPoints + amt > hitPoints) {
 			currentHitPoints = hitPoints;
+		} else if (currentHitPoints + amt > 50) {
+			currentHitPoints += amt;
+			lights.SetActive (true);
 		} else {
 			currentHitPoints += amt;
-		}	
+		}
 
 		currHealthBarLength = healthBarLength * (currentHitPoints / hitPoints);
 	}
@@ -41,14 +46,23 @@ public class SystemHealth : Photon.MonoBehaviour {
 			currentHitPoints = 0;
 			photonView.RPC ("SystemDown", PhotonTargets.All);
 		} else {
+			lights.SetActive(false);
+			StartCoroutine (flickerLights());
 			currentHitPoints -= amt;
 		}	
 
 		currHealthBarLength = healthBarLength * (currentHitPoints / hitPoints);
 	}
 
+	IEnumerator flickerLights() {
+		yield return new WaitForSeconds(.2f);
+		lights.SetActive (true);
+	}
+	
 	[RPC]
 	void SystemDown() {
+		GameObject lights = GameObject.FindGameObjectWithTag ("Lights");
+		lights.SetActive (false);
 		Debug.Log ("The system is down.");
 	}
 
