@@ -18,6 +18,8 @@ public class SystemHealth : Photon.MonoBehaviour {
 	}
 
 	void Update() {
+		Debug.Log (down);
+		Debug.Log (lights);
 		if (down && lights.activeSelf) {
 			lights.SetActive (false);
 		}
@@ -77,7 +79,6 @@ public class SystemHealth : Photon.MonoBehaviour {
 	
 	[RPC]
 	void SystemDown() {
-		lights = GameObject.FindGameObjectWithTag ("Lights");
 		down = true;
 		Debug.Log ("The system is down.");
 	}
