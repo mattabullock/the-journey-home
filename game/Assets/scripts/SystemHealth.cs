@@ -24,10 +24,10 @@ public class SystemHealth : Photon.MonoBehaviour {
 	}
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
-		stream.
-
 		if (stream.isWriting) {
-			stream.SendNext (dead);
+			stream.SendNext (down);
+		} else if(stream.isReading) {
+			stream.ReceiveNext();
 		}
 	}
 
@@ -45,6 +45,7 @@ public class SystemHealth : Photon.MonoBehaviour {
 		} else if (currentHitPoints + amt > 50) {
 			currentHitPoints += amt;
 			lights.SetActive (true);
+			down = false;
 		} else {
 			currentHitPoints += amt;
 		}
@@ -78,7 +79,6 @@ public class SystemHealth : Photon.MonoBehaviour {
 	void SystemDown() {
 		GameObject lights = GameObject.FindGameObjectWithTag ("Lights");
 		down = true;
-		lights.SetActive (false);
 		Debug.Log ("The system is down.");
 	}
 
