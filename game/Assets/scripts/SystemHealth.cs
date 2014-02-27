@@ -77,7 +77,7 @@ public class SystemHealth : Photon.MonoBehaviour {
 	
 	[RPC]
 	void SystemDown() {
-		GameObject lights = GameObject.FindGameObjectWithTag ("Lights");
+		lights = GameObject.FindGameObjectWithTag ("Lights");
 		down = true;
 		Debug.Log ("The system is down.");
 	}
