@@ -13,6 +13,10 @@ public class NetworkManager : MonoBehaviour {
 		Screen.lockCursor = true;
 		Connect ();
 	}
+
+	void Update() {
+		//something about updating respawns should go here?!
+	}
 	
 	void Connect() {
 		PhotonNetwork.ConnectUsingSettings ("v003");
@@ -41,9 +45,8 @@ public class NetworkManager : MonoBehaviour {
 		levelCam.SetActive (false);
 		
 		GameObject myPlayerGO = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawn.transform.position, mySpawn.transform.rotation, 0);
-		((MonoBehaviour) myPlayerGO.GetComponent ("FPSInputController")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
-		((MonoBehaviour) myPlayerGO.GetComponent ("CharacterMotor")).enabled = true;
+		((MonoBehaviour) myPlayerGO.GetComponent ("Health")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
 		myPlayerGO.transform.FindChild("Main Camera").gameObject.SetActive(true);
