@@ -18,8 +18,6 @@ public class SystemHealth : Photon.MonoBehaviour {
 	}
 
 	void Update() {
-		Debug.Log (down);
-		Debug.Log (lights);
 		if (down && lights.activeSelf) {
 			lights.SetActive (false);
 		}
