@@ -8,7 +8,7 @@ public class SystemHealth : Photon.MonoBehaviour {
 	public float healthBarLength;
 	float currHealthBarLength;
 	GameObject lights;
-	bool down;
+	bool down = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -27,7 +27,7 @@ public class SystemHealth : Photon.MonoBehaviour {
 		if (stream.isWriting) {
 			stream.SendNext (down);
 		} else if(stream.isReading) {
-			stream.ReceiveNext();
+			down = stream.ReceiveNext();
 		}
 	}
 
