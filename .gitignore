@@ -5,7 +5,9 @@ game/Temp/
 game/Obj/
 game/UnityGenerated/
 game/Library/
- 
+*.meta 
+
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
