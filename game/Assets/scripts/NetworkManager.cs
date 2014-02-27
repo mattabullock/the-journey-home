@@ -33,6 +33,10 @@ public class NetworkManager : MonoBehaviour {
 	void OnPhotonRandomJoinFailed() {
 		PhotonNetwork.CreateRoom (null);
 	}
+
+	void OnCreateRoom() {
+		PhotonNetwork.Instantiate ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0);
+	}
 	
 	void OnJoinedRoom() {
 		spawnPlayer ();
