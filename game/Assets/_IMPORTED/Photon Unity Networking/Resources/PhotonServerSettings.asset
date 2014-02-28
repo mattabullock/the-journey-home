@@ -30,4 +30,5 @@ MonoBehaviour:
   - AdjustCurrentHealth
   - attack
   - SystemDown
+  - AssaultBulletFX
   DisableAutoOpenWizard: 0

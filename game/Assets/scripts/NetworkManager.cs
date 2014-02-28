@@ -35,7 +35,6 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	void OnCreatedRoom() {
-		Debug.Log ("hello");
 		PhotonNetwork.Instantiate ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0);
 	}
 	
@@ -54,7 +53,9 @@ public class NetworkManager : MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("Health")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
-		myPlayerGO.transform.FindChild("Main Camera").gameObject.SetActive(true);
+//		((MonoBehaviour) myPlayerGO.GetComponent ("NetworkCharacter")).enabled = true;
+		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
+		((AudioListener) myPlayerGO.transform.FindChild ("Main Camera").gameObject.GetComponent ("AudioListener")).enabled = true;
 		
 	}
 	

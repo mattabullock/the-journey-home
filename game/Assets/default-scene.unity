@@ -3091,6 +3091,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1858082988}
   - 114: {fileID: 1858082989}
+  - 114: {fileID: 1858082991}
+  - 114: {fileID: 1858082990}
   m_Layer: 0
   m_Name: _SCRIPTS
   m_TagString: Untagged
@@ -3121,6 +3123,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelCam: {fileID: 1348850516}
+--- !u!114 &1858082990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1858082987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b1df80d7c924ef598db81a62f763cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssaultBulletSFX: {fileID: 8300000, guid: 6eb8422e82fcf4bf99d65c70df814527, type: 3}
+--- !u!114 &1858082991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1858082987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subId: 2
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  instantiationId: 0
 --- !u!1 &1899013293
 GameObject:
   m_ObjectHideFlags: 0

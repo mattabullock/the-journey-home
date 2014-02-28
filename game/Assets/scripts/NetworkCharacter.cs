@@ -12,12 +12,15 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	Vector3 direction = Vector3.zero;
 	CharacterController cc;
 	public Animator anim;
+	public GameObject gun;
+	Animator gunAnim;
 
 	bool gotFirstUpdate = false;
 
 	// Use this for initialization
 	void Start () {
 		cc = GetComponent<CharacterController> ();
+		gunAnim = gun.GetComponent<Animator> ();
 	}
 
 	void OnGUI(){
@@ -32,14 +35,12 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 				yVel = minSpeed;
 			direction = transform.rotation * new Vector3(Input.GetAxis("Horizontal") * speed, 0, yVel);
 			anim.SetFloat("Speed", yVel);
+			gunAnim.SetFloat ("Speed", yVel);
 //			if(direction.magnitude > 1f) {
 //				direction = direction.normalized;
 //			}
-			if (cc.isGrounded) {
-				vertVelocity = .000001f;
-				if(Input.GetButtonDown("Jump")) {
-					vertVelocity = jumpSpeed;
-				}
+			if(cc.isGrounded && Input.GetButton("Jump")) {
+				vertVelocity = jumpSpeed;
 			}
 		}
 		else {
@@ -52,7 +53,11 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	void FixedUpdate() {
 		if (! gameObject.GetComponent<Health> ().dead) {
 			Vector3 distance = direction * Time.deltaTime;
-			vertVelocity += Physics.gravity.y * Time.deltaTime;
+			if(cc.isGrounded && vertVelocity < 0) {
+				vertVelocity = Physics.gravity.y * Time.deltaTime;
+			} else {
+				vertVelocity += Physics.gravity.y * Time.deltaTime;
+			}
 			distance.y = vertVelocity * Time.deltaTime;
 			cc.Move (distance);
 		}

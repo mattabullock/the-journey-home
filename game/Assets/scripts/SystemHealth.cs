@@ -8,10 +8,13 @@ public class SystemHealth : Photon.MonoBehaviour {
 	public float healthBarLength;
 	float currHealthBarLength;
 	GameObject lights;
-	bool down;
+	public bool down;
 	Transform t;
 	Vector3 realPosition = Vector3.zero;
 	Quaternion realRotation = Quaternion.identity;
+
+	const float flickerOn = 7;
+	const float flickerOff = 8;
 	
 	// Use this for initialization
 	void Start () {
@@ -22,14 +25,15 @@ public class SystemHealth : Photon.MonoBehaviour {
 	}
 
 	void Update() {
-		if (photonView.isMine) {
-
-		} else {
+		if (down && lights.activeSelf) {
+			lights.SetActive (false);
+		} else if(!down && !lights.activeSelf) {
+			lights.SetActive(true);
+		}
+		
+		if (!photonView.isMine) {
 			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
 			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 0.1f);
-			if (down && lights.activeSelf) {
-				lights.SetActive (false);
-			}
 		}
 	}
 
@@ -58,10 +62,9 @@ public class SystemHealth : Photon.MonoBehaviour {
 			return;	
 		} else if (currentHitPoints + amt > hitPoints) {
 			currentHitPoints = hitPoints;
-		} else if (currentHitPoints + amt > 50) {
+		} else if (currentHitPoints + amt > 50 && down) {
 			currentHitPoints += amt;
-			lights.SetActive (true);
-			down = false;
+			StartCoroutine (flickerLights(flickerOn));
 		} else {
 			currentHitPoints += amt;
 		}
@@ -76,25 +79,25 @@ public class SystemHealth : Photon.MonoBehaviour {
 			return;
 		} else if (currentHitPoints - amt <= 0) {
 			currentHitPoints = 0;
-			photonView.RPC ("SystemDown", PhotonTargets.All);
+			StartCoroutine (flickerLights(flickerOff));
 		} else {
-			lights.SetActive(false);
-			StartCoroutine (flickerLights());
+			StartCoroutine (flickerLights(flickerOn));
 			currentHitPoints -= amt;
 		}	
 
 		currHealthBarLength = healthBarLength * (currentHitPoints / hitPoints);
 	}
 
-	IEnumerator flickerLights() {
-		yield return new WaitForSeconds(.2f);
-		lights.SetActive (true);
-	}
-	
-	[RPC]
-	void SystemDown() {
-		down = true;
-		Debug.Log ("The system is down.");
+	IEnumerator flickerLights(float times) {
+		bool curr = false;
+		float i = 0f;
+		float start = times / 100f;
+		while (i < times) {
+			yield return new WaitForSeconds (start - (i * .01f));
+			down = curr;
+			curr = !curr;
+			i++;
+		}
 	}
 
 }
