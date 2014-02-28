@@ -5,6 +5,7 @@ public class Interaction : MonoBehaviour {
 	
 	public float delay = .1f; 
 	public float cooldown = 0f;
+	public float repairDistance = 5;
 
 	// Update is called once per frame
 	void Update () {
@@ -29,7 +30,7 @@ public class Interaction : MonoBehaviour {
 			var dist = go.transform.position - position;
 			var absDist = dist.sqrMagnitude;
 			
-			if(absDist < 50) {
+			if(absDist < repairDistance) {
 				var component = hit.transform.GetComponent<SystemHealth>();
 				component.GetComponent<PhotonView>().RPC ("repair", PhotonTargets.All, 1f);
 			}

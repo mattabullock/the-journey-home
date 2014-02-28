@@ -8,13 +8,15 @@ public class SystemHealth : Photon.MonoBehaviour {
 	public float healthBarLength;
 	float currHealthBarLength;
 	GameObject lights;
-	public bool down;
+	bool down;
+	bool belowThresh = false;
 	Transform t;
 	Vector3 realPosition = Vector3.zero;
 	Quaternion realRotation = Quaternion.identity;
+	public float threshold = 50f;
 
-	const float flickerOn = 7;
-	const float flickerOff = 8;
+	const float flickerOn = 7f;
+	const float flickerOff = 8f;
 	
 	// Use this for initialization
 	void Start () {
@@ -62,8 +64,9 @@ public class SystemHealth : Photon.MonoBehaviour {
 			return;	
 		} else if (currentHitPoints + amt > hitPoints) {
 			currentHitPoints = hitPoints;
-		} else if (currentHitPoints + amt > 50 && down) {
+		} else if (currentHitPoints + amt > threshold && down) {
 			currentHitPoints += amt;
+			belowThresh = false;
 			StartCoroutine (flickerLights(flickerOn));
 		} else {
 			currentHitPoints += amt;
@@ -79,9 +82,14 @@ public class SystemHealth : Photon.MonoBehaviour {
 			return;
 		} else if (currentHitPoints - amt <= 0) {
 			currentHitPoints = 0;
-			StartCoroutine (flickerLights(flickerOff));
+			if(!belowThresh) {
+				StartCoroutine (flickerLights(flickerOff));
+				belowThresh = true;
+			}
 		} else {
-			StartCoroutine (flickerLights(flickerOn));
+			if(!belowThresh) {
+				StartCoroutine (flickerLights(flickerOn));
+			}
 			currentHitPoints -= amt;
 		}	
 

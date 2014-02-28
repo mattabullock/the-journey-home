@@ -36,6 +36,11 @@ public class Health : Photon.MonoBehaviour {
 	
 	[RPC]
 	public void TakeDamage(float amt) {
+		if (currentHitPoints <= 0) {
+			currentHitPoints = 0;
+			return;
+		}
+
 		currentHitPoints -= amt;
 		
 		if(currentHitPoints <= 0) {
@@ -64,7 +69,9 @@ public class Health : Photon.MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("Health")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
-		myPlayerGO.transform.FindChild("Main Camera").gameObject.SetActive(true);
+		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
+		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
+		((AudioListener) myPlayerGO.transform.FindChild ("Main Camera").gameObject.GetComponent ("AudioListener")).enabled = true;
 		
 	}
 }
