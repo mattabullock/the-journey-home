@@ -20,8 +20,6 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	public GameObject gun;
 	Animator gunAnim;
 
-	public float yVel;
-
 	bool gotFirstUpdate = false;
 
 	// Use this for initialization
@@ -42,7 +40,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			else if(Input.GetButtonUp ("Sprint"))
 				sprinting = false;
 			float speed = maxSpeed;
-			yVel = Input.GetAxis ("Vertical") * speed;
+			float yVel = Input.GetAxis ("Vertical") * speed;
 			if (sprinting && sprintTimer > 0 && yVel > 0) {
 				sprintTimer -= Time.deltaTime;
 			}

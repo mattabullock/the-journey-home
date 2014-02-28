@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
@@ -35,7 +35,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	void OnCreatedRoom() {
-		PhotonNetwork.Instantiate ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0);
+		PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0, null);
 	}
 	
 	void OnJoinedRoom() {
