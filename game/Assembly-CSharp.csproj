@@ -80,6 +80,7 @@
      <Compile Include="Assets\_IMPORTED\Photon Unity Networking\UtilityScripts\TestDontDestroyOnLoad.cs" />
      <Compile Include="Assets\_IMPORTED\Photon Unity Networking\UtilityScripts\TimeKeeper.cs" />
      <Compile Include="Assets\_IMPORTED\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\scripts\Crosshair.cs" />
      <Compile Include="Assets\scripts\FXManager.cs" />
      <Compile Include="Assets\scripts\Follow.cs" />
      <Compile Include="Assets\scripts\Health.cs" />

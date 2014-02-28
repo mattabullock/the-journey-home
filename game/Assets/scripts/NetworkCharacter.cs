@@ -23,9 +23,9 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		gunAnim = gun.GetComponent<Animator> ();
 	}
 
-	void OnGUI(){
-		GUI.Box (new Rect(Screen.width/2,Screen.height/2, .5f, .5f),GUIContent.none);   	
-	}
+//	void OnGUI(){
+//		GUI.Box (new Rect(Screen.width/2,Screen.height/2, .5f, .5f),GUIContent.none);   	
+//	}
 
 	// Update is called once per frame
 	void Update () {
@@ -35,10 +35,11 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 				yVel = minSpeed;
 			direction = transform.rotation * new Vector3(Input.GetAxis("Horizontal") * speed, 0, yVel);
 			anim.SetFloat("Speed", yVel);
+			if(gunAnim == null) {
+				gunAnim = gun.GetComponent<Animator>();
+			}
 			gunAnim.SetFloat ("Speed", yVel);
-//			if(direction.magnitude > 1f) {
-//				direction = direction.normalized;
-//			}
+			//normalize vector??
 			if(cc.isGrounded && Input.GetButton("Jump")) {
 				vertVelocity = jumpSpeed;
 			}

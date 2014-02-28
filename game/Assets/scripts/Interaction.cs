@@ -20,11 +20,9 @@ public class Interaction : MonoBehaviour {
 			return;
 		}
 
-//		var fwd = transform.TransformDirection (Vector3.forward);
 		RaycastHit hit;
 		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 10000);
-//		Physics.Raycast (transform.position, fwd, out hit);
-		
+
 		if (Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 10000) && hit.transform.gameObject.tag == "interactive") {
 			var go = hit.transform.gameObject;
 			var position = transform.position;

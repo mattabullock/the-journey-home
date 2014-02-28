@@ -44,7 +44,6 @@ public class PlayerShooting : MonoBehaviour {
 		}
 
 		if(hitTransform != null) {
-//			Debug.Log ("We hit: " + hitTransform.name);
 			if(hitTransform.tag == "interactive" || hitTransform.tag == "enemy") {
 				Health h = hitTransform.GetComponent<Health>();
 				

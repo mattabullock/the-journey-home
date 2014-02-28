@@ -53,7 +53,6 @@ public class NetworkManager : MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("Health")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
-//		((MonoBehaviour) myPlayerGO.GetComponent ("NetworkCharacter")).enabled = true;
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
 		((AudioListener) myPlayerGO.transform.FindChild ("Main Camera").gameObject.GetComponent ("AudioListener")).enabled = true;
 		

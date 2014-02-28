@@ -774,6 +774,7 @@ GameObject:
   - 4: {fileID: 400098}
   - 114: {fileID: 11400004}
   - 95: {fileID: 9500006}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: M4A1
   m_TagString: Untagged
@@ -1727,6 +1728,19 @@ MonoBehaviour:
   fovIn: 35
   gunAim: 0
   playerCam: {fileID: 100000}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c952c28a7f03b45758af7bbbcbef6a19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshairTexture: {fileID: 2800000, guid: cf30480931380b94ea126c3b2df07cbb, type: 3}
+  isOn: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
