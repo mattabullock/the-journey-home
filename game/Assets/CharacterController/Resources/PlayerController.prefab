@@ -1794,6 +1794,7 @@ MonoBehaviour:
   fovIn: 35
   gunAim: 0
   playerCam: {fileID: 100000}
+  gunCam: {fileID: 100100}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1844,7 +1845,6 @@ MonoBehaviour:
   maxSprint: 5
   anim: {fileID: 9500002}
   gun: {fileID: 100098}
-  yVel: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

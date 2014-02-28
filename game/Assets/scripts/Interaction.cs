@@ -10,7 +10,7 @@ public class Interaction : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		cooldown -= Time.deltaTime;
-		if (Input.GetButton ("Interact") && !Input.GetButton ("Fire1")) {
+		if (Input.GetButton ("Interact") && !Input.GetButton ("Shoot")) {
 			interact();
 		}
 	}

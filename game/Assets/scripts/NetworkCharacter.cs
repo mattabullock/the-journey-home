@@ -35,9 +35,9 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine) {
-			if(Input.GetButtonDown("Sprint"))
+			if(Input.GetButtonDown("Sprint") && !Input.GetButton ("Scope"))
 				sprinting = true;
-			else if(Input.GetButtonUp ("Sprint"))
+			else if(Input.GetButtonUp ("Sprint") || Input.GetButtonDown ("Scope"))
 				sprinting = false;
 			float speed = maxSpeed;
 			float yVel = Input.GetAxis ("Vertical") * speed;

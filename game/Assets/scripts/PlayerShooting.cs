@@ -20,7 +20,7 @@ public class PlayerShooting : MonoBehaviour {
 	void Update () {
 		cooldown -= Time.deltaTime;
 		
-		if(Input.GetButton("Fire1") && !Input.GetButton ("Interact")) {
+		if(Input.GetButton("Shoot") && !Input.GetButton ("Interact")) {
 			Fire ();
 			gunAnim.SetTrigger("Shoot");
 		}

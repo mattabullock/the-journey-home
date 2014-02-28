@@ -8,6 +8,7 @@ public class Scope : MonoBehaviour {
 	public float fovIn = 0f;
 	public bool gunAim = false;
 	public GameObject playerCam;
+	public GameObject gunCam;
 	GameObject gunModel;
 	string scopeInAnim;
 	string scopeOutAnim;
@@ -21,21 +22,23 @@ public class Scope : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetMouseButtonDown(1)){
+		if(Input.GetButtonDown ("Scope")) {
 			anim.SetBool ("Zoom", true);
 			gunAim = true;
 		}
-		if(Input.GetMouseButtonUp(1)){
+		if(Input.GetButtonUp("Scope")) {
 			anim.SetBool("Zoom", false);
 			gunAim = false;
 		}
 
 		if(gunAim){
 			playerCam.camera.fieldOfView = Mathf.Lerp(playerCam.camera.fieldOfView, fovIn, fovSpeed * Time.deltaTime);
+			gunCam.camera.fieldOfView = Mathf.Lerp(gunCam.camera.fieldOfView, fovIn, fovSpeed * Time.deltaTime);
 		}
 		
 		if(!gunAim){
 			playerCam.camera.fieldOfView = Mathf.Lerp(playerCam.camera.fieldOfView, defaultFOV, fovSpeed * Time.deltaTime);
+			gunCam.camera.fieldOfView = Mathf.Lerp(gunCam.camera.fieldOfView, defaultFOV, fovSpeed * Time.deltaTime);
 		}
 	}
 }
