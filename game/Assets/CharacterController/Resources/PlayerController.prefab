@@ -1838,8 +1838,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99cc924ea78fc4eccaa0f5a3f09f470a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5.66800022
+  jumpSpeed: 5
+  sprintMultiplier: 1.75
+  maxSprint: 5
   anim: {fileID: 9500002}
   gun: {fileID: 100098}
+  yVel: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1885,6 +1890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: .100000001
   cooldown: 0
+  repairDistance: 5
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

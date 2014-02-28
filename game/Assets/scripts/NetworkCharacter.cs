@@ -5,15 +5,22 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 	Vector3 realPosition = Vector3.zero;
 	Quaternion realRotation = Quaternion.identity;
-	float speed = 5.668f;
+	public float maxSpeed = 5.668f;
 	float minSpeed = -2f;
 	float vertVelocity = 0f;
-	float jumpSpeed = 5f;
+	public float jumpSpeed = 5f;
+	public float sprintMultiplier = 2f;
+	float sprintTimer = 0f;
+	public float maxSprint = 5f;
+	bool sprinting = false;
+
 	Vector3 direction = Vector3.zero;
 	CharacterController cc;
 	public Animator anim;
 	public GameObject gun;
 	Animator gunAnim;
+
+	public float yVel;
 
 	bool gotFirstUpdate = false;
 
@@ -30,9 +37,23 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine) {
-			float yVel = Input.GetAxis ("Vertical") * speed;
+			if(Input.GetButtonDown("Sprint"))
+				sprinting = true;
+			else if(Input.GetButtonUp ("Sprint"))
+				sprinting = false;
+			float speed = maxSpeed;
+			yVel = Input.GetAxis ("Vertical") * speed;
+			if (sprinting && sprintTimer > 0 && yVel > 0) {
+				sprintTimer -= Time.deltaTime;
+			}
+			else if(sprintTimer < maxSprint) {
+				sprinting = false;
+				sprintTimer += Time.deltaTime;
+			}
 			if(yVel < minSpeed)
 				yVel = minSpeed;
+			else if(yVel > 0 && sprinting && sprintTimer > 0)
+				yVel = maxSpeed * sprintMultiplier;
 			direction = transform.rotation * new Vector3(Input.GetAxis("Horizontal") * speed, 0, yVel);
 			anim.SetFloat("Speed", yVel);
 			if(gunAnim == null) {
