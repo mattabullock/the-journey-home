@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class NetworkManager : MonoBehaviour {
+public class NetworkManager : Photon.MonoBehaviour {
 	
-	public GameObject levelCam;
+//	public GameObject levelCam;
 	public static SpawnSpot[] spawnSpots;
 	
 	
@@ -11,42 +11,19 @@ public class NetworkManager : MonoBehaviour {
 	void Start () {
 		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
 		Screen.lockCursor = true;
-		Connect ();
-	}
-
-	void Update() {
-		//something about updating respawns should go here?!
-	}
-	
-	void Connect() {
-		PhotonNetwork.ConnectUsingSettings ("v005");
+		if (PhotonNetwork.isMasterClient) {
+			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0, null);
+		}
+		spawnPlayer ();
 	}
 	
 	void OnGUI() {
 		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString ());
 	}
 	
-	void OnJoinedLobby() {
-		PhotonNetwork.JoinRandomRoom ();
-	}
-	
-	void OnPhotonRandomJoinFailed() {
-		PhotonNetwork.CreateRoom (null);
-	}
-
-	void OnCreatedRoom() {
-		PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0, null);
-	}
-	
-	void OnJoinedRoom() {
-		spawnPlayer ();
-	}
-	
 	public void spawnPlayer() {
 		
 		SpawnSpot mySpawn = spawnSpots [Random.Range (0, spawnSpots.Length)];
-		
-		levelCam.SetActive (false);
 		
 		GameObject myPlayerGO = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawn.transform.position, mySpawn.transform.rotation, 0);
 		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
