@@ -31,7 +31,7 @@ public class Interaction : MonoBehaviour {
 			var absDist = dist.sqrMagnitude;
 			
 			if(absDist < repairDistance) {
-				var component = hit.transform.GetComponent<SystemHealth>();
+				var component = hit.transform.GetComponent<SystemBase>();
 				component.GetComponent<PhotonView>().RPC ("repair", PhotonTargets.All, 1f);
 			}
 		}

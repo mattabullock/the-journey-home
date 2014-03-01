@@ -53,7 +53,7 @@ public class PlayerShooting : MonoBehaviour {
 				}
 
 				if(h == null) {
-					SystemHealth sh = hitTransform.GetComponent<SystemHealth>();
+					SystemBase sh = hitTransform.GetComponent<SystemBase>();
 					if(sh != null) {
 						PhotonView pv = sh.GetComponent<PhotonView>();
 						if(pv==null) {

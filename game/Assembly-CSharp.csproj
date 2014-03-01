@@ -92,7 +92,9 @@
      <Compile Include="Assets\scripts\RemoveAfterTime.cs" />
      <Compile Include="Assets\scripts\Scope.cs" />
      <Compile Include="Assets\scripts\SpawnSpot.cs" />
-     <Compile Include="Assets\scripts\SystemHealth.cs" />
+     <Compile Include="Assets\scripts\Systems\HealthBay.cs" />
+     <Compile Include="Assets\scripts\Systems\LightSystem.cs" />
+     <Compile Include="Assets\scripts\Systems\SystemBase.cs" />
      <None Include="Assets\Plugins\release_history.txt" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\_IMPORTED\Photon Unity Networking\readme.txt" />

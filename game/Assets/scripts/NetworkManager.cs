@@ -3,17 +3,17 @@ using System.Collections;
 
 public class NetworkManager : Photon.MonoBehaviour {
 	
-//	public GameObject levelCam;
 	public static SpawnSpot[] spawnSpots;
 	
 	
 	// Use this for initialization
 	void Start () {
-		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
 		Screen.lockCursor = true;
 		if (PhotonNetwork.isMasterClient) {
 			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0, null);
+			PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(-24.76163f, 2.014818f, 45.2649f), Quaternion.identity, 0, null);
 		}
+		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
 		spawnPlayer ();
 	}
 	
@@ -22,7 +22,6 @@ public class NetworkManager : Photon.MonoBehaviour {
 	}
 	
 	public void spawnPlayer() {
-		
 		SpawnSpot mySpawn = spawnSpots [Random.Range (0, spawnSpots.Length)];
 		
 		GameObject myPlayerGO = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawn.transform.position, mySpawn.transform.rotation, 0);

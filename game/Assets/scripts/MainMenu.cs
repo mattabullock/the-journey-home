@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour {
 	}
 	
 	void Connect() {
-		PhotonNetwork.ConnectUsingSettings ("v005");
+		PhotonNetwork.ConnectUsingSettings ("v006");
 	}
 
 	void OnGUI() {
