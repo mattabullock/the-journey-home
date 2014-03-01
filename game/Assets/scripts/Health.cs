@@ -7,24 +7,29 @@ public class Health : Photon.MonoBehaviour {
 	public float currentHitPoints;
 	public Animator anim;
 	public bool dead = false;
-	public bool notSpawned = false;
+	public bool spawned = true;
 	public float respawnTimer = 0f;
 	float respawn = 5f;
 	float healthBarLength = 60f;
-	
+	HealthBay hBay;
+
 	// Use this for initialization
 	void Start () {
+		hBay = GameObject.FindObjectOfType<HealthBay> ();
 		currentHitPoints = hitPoints;
 	}
 
 	void Update() {
-		if (dead || notSpawned) {
-			respawnTimer += Time.deltaTime;
-			if(respawnTimer >= respawn && dead) {
+		if (dead) {
+			if(!hBay.isDown()) {
+				respawnTimer += Time.deltaTime;
+			} else {
+				respawnTimer = 0f;
+			}
+			if(respawnTimer >= respawn) {
 				dead = false;
 				anim.SetBool("Dead", false);
 				respawnTimer = 0;
-				Die();
 				spawn ();
 			}
 		}
@@ -46,32 +51,19 @@ public class Health : Photon.MonoBehaviour {
 		if(currentHitPoints <= 0) {
 			anim.SetBool("Dead", true);
 			dead = true;
+			Die();
 		}
 	}
 
 	void Die() {
-		if( GetComponent<PhotonView>().instantiationId==0 ) {
-			Destroy(gameObject);
-		}
-		else {
-			if( photonView.isMine ) {
-				PhotonNetwork.Destroy(gameObject);
-			}
-		}
+		gameObject.SetActive(false);
 	}
 
 	void spawn() {
-		
 		SpawnSpot mySpawn = NetworkManager.spawnSpots [Random.Range (0, NetworkManager.spawnSpots.Length)];
 
-		GameObject myPlayerGO = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawn.transform.position, mySpawn.transform.rotation, 0);
-		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
-		((MonoBehaviour) myPlayerGO.GetComponent ("Health")).enabled = true;
-		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
-		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
-		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
-		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
-		((AudioListener) myPlayerGO.transform.FindChild ("Main Camera").gameObject.GetComponent ("AudioListener")).enabled = true;
-		
+		GetComponent<Transform>().position = mySpawn.transform.position;
+		GetComponent<Transform> ().rotation = mySpawn.transform.rotation;
+		gameObject.SetActive(true);
 	}
 }

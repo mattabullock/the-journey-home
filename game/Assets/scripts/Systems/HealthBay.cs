@@ -29,10 +29,10 @@ public class HealthBay : SystemBase {
 		}
 	}
 	
-	protected override void OnGUI() {
-		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,10, currHealthBarLength, 20), GUIContent.none);
-		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,10, healthBarLength, 20), currentHitPoints + "/" + hitPoints);
-	}
+//	protected override void OnGUI() {
+//		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,40, currHealthBarLength, 20), GUIContent.none);
+//		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,40, healthBarLength, 20), currentHitPoints + "/" + hitPoints);
+//	}
 	
 	[RPC]
 	protected override void repair (float amt) {
@@ -41,6 +41,7 @@ public class HealthBay : SystemBase {
 		} else if (currentHitPoints + amt > hitPoints) {
 			currentHitPoints = hitPoints;
 		} else if (currentHitPoints + amt > threshold && down) {
+			down = false;
 			currentHitPoints += amt;
 			belowThresh = false;
 			trigger();
@@ -60,6 +61,7 @@ public class HealthBay : SystemBase {
 			currentHitPoints = 0;
 			if(!belowThresh) {
 				trigger();
+				down = true;
 				belowThresh = true;
 			}
 		} else {
@@ -74,6 +76,14 @@ public class HealthBay : SystemBase {
 	
 	protected void trigger() {
 		Debug.Log ("Something is happening to the med bay!");
+	}
+
+	public HealthBay getHealthBay() {
+		return this;
+	}
+
+	public bool isDown() {
+		return down;
 	}
 	
 }

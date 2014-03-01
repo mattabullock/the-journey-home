@@ -31,8 +31,7 @@ public class NetworkManager : Photon.MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
-		((AudioListener) myPlayerGO.transform.FindChild ("Main Camera").gameObject.GetComponent ("AudioListener")).enabled = true;
-		
+
 	}
 	
 }

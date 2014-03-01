@@ -1671,7 +1671,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!92 &9200000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1860,7 +1860,7 @@ MonoBehaviour:
   currentHitPoints: 0
   anim: {fileID: 9500002}
   dead: 0
-  notSpawned: 0
+  spawned: 1
   respawnTimer: 0
 --- !u!114 &11400014
 MonoBehaviour:
