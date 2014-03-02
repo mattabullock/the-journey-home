@@ -1,12 +1,18 @@
 using UnityEngine;
 using System.Collections;
 
-public class NetworkManager : Photon.MonoBehaviour {
+public class SpawnManager : Photon.MonoBehaviour {
 
 	public static SpawnSpot[] spawnSpots;
-	public static bool spawned = false;
-	
-	
+	public static bool spawned = true;
+	bool firstSpawn = true;
+	HealthBay hBay;
+	public static bool dead = false;
+	float respawnTimer = 0f;
+	public float respawn = 5f;
+	public Camera respawnCam;
+	bool respawnCamEnabled = false;
+
 	// Use this for initialization
 	void Start () {
 		Screen.lockCursor = true;
@@ -14,14 +20,42 @@ public class NetworkManager : Photon.MonoBehaviour {
 			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0, null);
 			PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(-24.76163f, 2.014818f, 45.2649f), Quaternion.identity, 0, null);
 		}
-
+		hBay = GameObject.FindObjectOfType<HealthBay> ();
 		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
 	}
 
 	void Update() {
-		if (!spawned && photonView.isMine) {
+		if (hBay == null) {
+			hBay = GameObject.FindObjectOfType<HealthBay> ();
+		}
+		if (dead) {
+			if(!respawnCamEnabled) {
+				respawnCam.gameObject.SetActive(true);
+				respawnCamEnabled = true;
+			}
+			if(!hBay.isDown()) {
+				respawnTimer += Time.deltaTime;
+			} else {
+				respawnTimer = 0f;
+			}
+			if(respawnTimer >= respawn) {
+				dead = false;
+				spawned = false;
+				respawnTimer = 0;
+			}
+		}
+		if (!spawned) {
 			spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
 			if (spawnSpots.Length != 0) {
+				spawned = true;
+				respawnCamEnabled = false;
+				respawnCam.gameObject.SetActive(false);
+				spawnPlayer ();
+			}
+		} else if (firstSpawn) {
+			spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
+			if (spawnSpots.Length != 0) {
+				firstSpawn = false;
 				spawned = true;
 				spawnPlayer ();
 			}
@@ -29,7 +63,11 @@ public class NetworkManager : Photon.MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString ());
+		if (!respawnCamEnabled) {
+			GUILayout.Label (PhotonNetwork.connectionStateDetailed.ToString ());
+		} else {
+			GUILayout.Label("You will respawn in " + Mathf.Ceil(respawn - respawnTimer) + " seconds.");
+		}
 	}
 
 	public void spawnPlayer() {

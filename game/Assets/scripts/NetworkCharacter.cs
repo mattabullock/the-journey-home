@@ -71,16 +71,14 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 	//Called once per physics loop, do movement here
 	void FixedUpdate() {
-		if (! gameObject.GetComponent<Health> ().dead) {
-			Vector3 distance = direction * Time.deltaTime;
-			if(cc.isGrounded && vertVelocity < 0) {
-				vertVelocity = Physics.gravity.y * Time.deltaTime;
-			} else {
-				vertVelocity += Physics.gravity.y * Time.deltaTime;
-			}
-			distance.y = vertVelocity * Time.deltaTime;
-			cc.Move (distance);
+		Vector3 distance = direction * Time.deltaTime;
+		if(cc.isGrounded && vertVelocity < 0) {
+			vertVelocity = Physics.gravity.y * Time.deltaTime;
+		} else {
+			vertVelocity += Physics.gravity.y * Time.deltaTime;
 		}
+		distance.y = vertVelocity * Time.deltaTime;
+		cc.Move (distance);
 	}
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
