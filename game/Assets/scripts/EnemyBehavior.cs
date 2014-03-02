@@ -9,7 +9,11 @@ public class EnemyBehavior : MonoBehaviour {
 	public GameObject goalDoor;
 	public int shortestPathSoFar = int.MaxValue;
 	float waitToStart = 5;
-	float currentMoveSpeed = 4;
+	float currentMoveSpeed = 5;
+	float maxMoveSpeed = 6;
+	float minMoveSpeed = 1;
+	float speedRecover = 1;
+	float speedDamage = 0.1f;
 
 	bool randomizedCourse = false;
 	Vector3 randomizeCourseVector;
@@ -71,6 +75,15 @@ public class EnemyBehavior : MonoBehaviour {
 			currentCell = c.gameObject;
 			randomizedCourse = false;
 			calculatedNewRandomizeCourseVector = false;
+		}
+	}
+
+	void OnTriggerStay(Collider c){
+		if(c.tag == "Enemy" && c.gameObject != gameObject){
+			if(currentMoveSpeed > minMoveSpeed){
+				currentMoveSpeed -= speedDamage;
+			}
+			transform.position += (transform.position - c.transform.position).normalized * 0.1f;
 		}
 	}
 
