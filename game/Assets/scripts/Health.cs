@@ -20,22 +20,22 @@ public class Health : Photon.MonoBehaviour {
 	}
 
 	void Update() {
-		if (dead) {
-			if(!hBay.isDown()) {
-				respawnTimer += Time.deltaTime;
-			} else {
-				respawnTimer = 0f;
-			}
-			if(respawnTimer >= respawn) {
-				dead = false;
-				anim.SetBool("Dead", false);
-				respawnTimer = 0;
-				if (photonView.isMine) {
-					GameObject.FindGameObjectWithTag ("RespawnCam").SetActive (false);
-				}
-				spawn ();
-			}
-		}
+//		if (dead) {
+//			if(!hBay.isDown()) {
+//				respawnTimer += Time.deltaTime;
+//			} else {
+//				respawnTimer = 0f;
+//			}
+//			if(respawnTimer >= respawn) {
+//				dead = false;
+//				anim.SetBool("Dead", false);
+//				respawnTimer = 0;
+//				if (photonView.isMine) {
+//					GameObject.FindGameObjectWithTag ("RespawnCam").SetActive (false);
+//				}
+//				spawn ();
+//			}
+//		}
 	}
 
 	void OnGUI() {
@@ -61,13 +61,18 @@ public class Health : Photon.MonoBehaviour {
 		yield return new WaitForSeconds (5);
 		dead = true;
 		Die();
-		if (photonView.isMine) {
-			GameObject.FindGameObjectWithTag ("RespawnCam").SetActive (true);
-		}
+		NetworkManager.spawned = false;
+//		spawn ();
+//		if (photonView.isMine) {
+//			GameObject.FindGameObjectWithTag ("RespawnCam").SetActive (true);
+//		}
 	}
 
 	void Die() {
-		gameObject.SetActive(false);
+		if( photonView.isMine ) {
+			PhotonNetwork.Destroy(gameObject);
+		}
+		//		gameObject.SetActive(false);
 	}
 
 	void spawn() {

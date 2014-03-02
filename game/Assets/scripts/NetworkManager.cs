@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class NetworkManager : Photon.MonoBehaviour {
-	
+
 	public static SpawnSpot[] spawnSpots;
-	bool spawned = false;
+	public static bool spawned = false;
 	
 	
 	// Use this for initialization
