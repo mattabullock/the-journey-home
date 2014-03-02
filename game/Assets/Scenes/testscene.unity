@@ -2148,9 +2148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43f8904649184e2aacc81598b5cbbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTimer: 0
+  respawn: 5
   respawnCam: {fileID: 1244002175}
-  respawnCamEnabled: 0
 --- !u!114 &1858082990
 MonoBehaviour:
   m_ObjectHideFlags: 0
