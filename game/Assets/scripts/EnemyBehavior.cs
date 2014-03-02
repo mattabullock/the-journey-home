@@ -13,7 +13,7 @@ public class EnemyBehavior : MonoBehaviour {
 	float maxMoveSpeed = 6;
 	float minMoveSpeed = 1;
 	float speedRecover = 1;
-	float speedDamage = 0.1f;
+	float speedDamage = 2;
 
 	bool randomizedCourse = false;
 	Vector3 randomizeCourseVector;
@@ -68,6 +68,13 @@ public class EnemyBehavior : MonoBehaviour {
 
 		if (targetCell == currentCell)
 			transform.position += (targetTransform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+
+		if(currentMoveSpeed < maxMoveSpeed){
+			currentMoveSpeed += speedRecover*Time.deltaTime;
+		}
+		if(currentMoveSpeed > maxMoveSpeed){
+			currentMoveSpeed = maxMoveSpeed;
+		}
 	}
 
 	void OnTriggerEnter(Collider c){
@@ -79,7 +86,7 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider c){
-		if(c.tag == "Enemy" && c.gameObject != gameObject){
+		if((c.tag == "Enemy" || c.tag == "Player") && c.gameObject != gameObject){
 			if(currentMoveSpeed > minMoveSpeed){
 				currentMoveSpeed -= speedDamage;
 			}
