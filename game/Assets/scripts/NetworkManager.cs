@@ -19,7 +19,7 @@ public class NetworkManager : Photon.MonoBehaviour {
 	}
 
 	void Update() {
-		if (!spawned) {
+		if (!spawned && photonView.isMine) {
 			spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
 			if (spawnSpots.Length != 0) {
 				spawned = true;
