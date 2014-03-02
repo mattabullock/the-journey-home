@@ -16,6 +16,7 @@ public class EnemyBehavior : MonoBehaviour {
 	bool calculatedNewRandomizeCourseVector = false;
 
 	void Awake(){
+		shortestPathSoFar = int.MaxValue;
 		target = GameObject.FindWithTag ("Player").GetComponent<PlayerMovement>();
 		targetTransform = GameObject.FindWithTag ("Player").transform;
 		waitToStart = 5;
@@ -23,7 +24,7 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 
 	void Update(){
-		if(waitToStart <= 0){
+		if (waitToStart <= 0){
 			targetCell = target.currentCell;
 			foreach(GameObject doorCheckingNow in currentCell.GetComponent<AIPathCell>().doors){
 				for(int i = 0; i < doorCheckingNow.GetComponent<AIPathDoor>().cells.Count; i++){
@@ -37,41 +38,32 @@ public class EnemyBehavior : MonoBehaviour {
 			}
 			shortestPathSoFar = int.MaxValue;
 		}
-		waitToStart -= Time.deltaTime;
-
-		if(targetCell == null){
-			goalDoor = null;
-			randomizedCourse = false;
-		}
-
-		if(!calculatedNewRandomizeCourseVector){
+		waitToStart -= 1;
+		
+		if (!calculatedNewRandomizeCourseVector){
 			randomizeCourseVector = FindSpotInCell();
 			calculatedNewRandomizeCourseVector = true;
 		}
 
 		if(currentCell != targetCell || targetCell == null){
-			if(randomizedCourse && goalDoor){
-				transform.position += (goalDoor.transform.position - transform.position).normalized*currentMoveSpeed*Time.deltaTime;
+			if(randomizedCourse){
+				transform.position += (goalDoor.transform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
 			}
-			if(!randomizedCourse){
-				transform.position += (randomizeCourseVector-transform.position).normalized*currentMoveSpeed*Time.deltaTime;
-				if(Vector3.Distance(transform.position, randomizeCourseVector) < transform.localScale.x){
-					if(goalDoor){
+			if (!randomizedCourse){
+				transform.position += (randomizeCourseVector - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+				if (Vector3.Distance(transform.position, randomizeCourseVector) < transform.localScale.x){
+					if (goalDoor){
 						randomizedCourse = true;
 					}
-					if(goalDoor == null){
+					if (goalDoor == null){
 						calculatedNewRandomizeCourseVector = false;
 					}
 				}
 			}
 		}
 
-		if(goalDoor && currentCell != targetCell){
-			transform.position += (goalDoor.transform.position - transform.position).normalized*currentMoveSpeed*Time.deltaTime;
-		}
-		else if(targetCell == currentCell){
-			transform.position += (targetTransform.position - transform.position).normalized*currentMoveSpeed*Time.deltaTime;
-		}
+		if (targetCell == currentCell)
+			transform.position += (targetTransform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
 	}
 
 	void OnTriggerEnter(Collider c){
