@@ -30,6 +30,9 @@ public class Health : Photon.MonoBehaviour {
 				dead = false;
 				anim.SetBool("Dead", false);
 				respawnTimer = 0;
+				if (photonView.isMine) {
+					GameObject.FindGameObjectWithTag ("RespawnCam").SetActive (false);
+				}
 				spawn ();
 			}
 		}
@@ -50,8 +53,16 @@ public class Health : Photon.MonoBehaviour {
 		
 		if(currentHitPoints <= 0) {
 			anim.SetBool("Dead", true);
-			dead = true;
-			Die();
+			StartCoroutine(dieAnim ());
+		}
+	}
+
+	IEnumerator dieAnim() {
+		yield return new WaitForSeconds (5);
+		dead = true;
+		Die();
+		if (photonView.isMine) {
+			GameObject.FindGameObjectWithTag ("RespawnCam").SetActive (true);
 		}
 	}
 

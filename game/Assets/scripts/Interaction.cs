@@ -5,7 +5,7 @@ public class Interaction : MonoBehaviour {
 	
 	public float delay = .1f; 
 	public float cooldown = 0f;
-	public float repairDistance = 5;
+	public float repairDistance = 5f;
 
 	// Update is called once per frame
 	void Update () {
@@ -25,9 +25,9 @@ public class Interaction : MonoBehaviour {
 		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 10000);
 
 		if (Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 10000) && hit.transform.gameObject.tag == "interactive") {
-			var go = hit.transform.gameObject;
+			var go = hit.point;
 			var position = transform.position;
-			var dist = go.transform.position - position;
+			var dist = go - position;
 			var absDist = dist.sqrMagnitude;
 			
 			if(absDist < repairDistance) {
