@@ -38,65 +38,71 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 	void Update(){
 		if (photonView.isMine) {
-			if (!isInstantiated) {
-				if(GameObject.FindWithTag ("Player") != null) {
-					isInstantiated = true;
-					target = GameObject.FindWithTag ("Player").GetComponent<NetworkCharacter> ();
-					targetTransform = target.transform;
-				} else { 
-					return;
-				}
-			}
-			if (waitToStart <= 0){
-				targetCell = target.currentCell;
-				foreach(GameObject doorCheckingNow in currentCell.GetComponent<AIPathCell>().doors){
-					for(int i = 0; i < doorCheckingNow.GetComponent<AIPathDoor>().cells.Count; i++){
-						if(doorCheckingNow.GetComponent<AIPathDoor>().cells[i] == targetCell){
-							if(doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i] < shortestPathSoFar){
-								goalDoor = doorCheckingNow;
-								shortestPathSoFar = doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i];
-							}
-						}
-					}
-				}
-				shortestPathSoFar = int.MaxValue;
-			}
-			waitToStart -= 1;
-			
-			if (!calculatedNewRandomizeCourseVector){
-				randomizeCourseVector = FindSpotInCell();
-				calculatedNewRandomizeCourseVector = true;
-			}
-
-			if(currentCell != targetCell || targetCell == null){
-				if(randomizedCourse){
-					transform.position += (goalDoor.transform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
-				}
-				if (!randomizedCourse){
-					transform.position += (randomizeCourseVector - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
-					if (Vector3.Distance(transform.position, randomizeCourseVector) < transform.localScale.x){
-						if (goalDoor){
-							randomizedCourse = true;
-						}
-						if (goalDoor == null){
-							calculatedNewRandomizeCourseVector = false;
-						}
-					}
-				}
-			}
-
-			if (targetCell == currentCell)
-				transform.position += (targetTransform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
-
-			if(currentMoveSpeed < maxMoveSpeed){
-				currentMoveSpeed += speedRecover*Time.deltaTime;
-			}
-			if(currentMoveSpeed > maxMoveSpeed){
-				currentMoveSpeed = maxMoveSpeed;
-			}
+			Debug.Log ("poop");
+			Move ();
 		} else {
+			Debug.Log ("why me?");
 			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
 			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 0.1f);
+		}
+	}
+
+	void Move() {
+		if (!isInstantiated) {
+			if(GameObject.FindWithTag ("Player") != null) {
+				isInstantiated = true;
+				target = GameObject.FindWithTag ("Player").GetComponent<NetworkCharacter> ();
+				targetTransform = target.transform;
+			} else { 
+				return;
+			}
+		}
+		if (waitToStart <= 0){
+			targetCell = target.currentCell;
+			foreach(GameObject doorCheckingNow in currentCell.GetComponent<AIPathCell>().doors){
+				for(int i = 0; i < doorCheckingNow.GetComponent<AIPathDoor>().cells.Count; i++){
+					if(doorCheckingNow.GetComponent<AIPathDoor>().cells[i] == targetCell){
+						if(doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i] < shortestPathSoFar){
+							goalDoor = doorCheckingNow;
+							shortestPathSoFar = doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i];
+						}
+					}
+				}
+			}
+			shortestPathSoFar = int.MaxValue;
+		}
+		waitToStart -= 1;
+		
+		if (!calculatedNewRandomizeCourseVector){
+			randomizeCourseVector = FindSpotInCell();
+			calculatedNewRandomizeCourseVector = true;
+		}
+		
+		if(currentCell != targetCell || targetCell == null){
+			if(randomizedCourse){
+				transform.position += (goalDoor.transform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+			}
+			if (!randomizedCourse){
+				transform.position += (randomizeCourseVector - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+				if (Vector3.Distance(transform.position, randomizeCourseVector) < transform.localScale.x){
+					if (goalDoor){
+						randomizedCourse = true;
+					}
+					if (goalDoor == null){
+						calculatedNewRandomizeCourseVector = false;
+					}
+				}
+			}
+		}
+		
+		if (targetCell == currentCell)
+			transform.position += (targetTransform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+		
+		if(currentMoveSpeed < maxMoveSpeed){
+			currentMoveSpeed += speedRecover*Time.deltaTime;
+		}
+		if(currentMoveSpeed > maxMoveSpeed){
+			currentMoveSpeed = maxMoveSpeed;
 		}
 	}
 
