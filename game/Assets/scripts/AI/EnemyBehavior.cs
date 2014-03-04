@@ -38,13 +38,61 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 	void Update(){
 		if (PhotonNetwork.isMasterClient) {
-			Debug.Log ("poop");
 			Move ();
 		} else {
-			Debug.Log ("why me?");
 			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
 			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 0.1f);
 		}
+	}
+
+	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+		Debug.Log ("asdfasdf");
+		if (stream.isWriting) {
+			Debug.Log ("writing");
+			stream.SendNext (transform.position);
+			stream.SendNext (transform.rotation);
+		} else if(stream.isReading) {
+			Debug.Log("reading");
+			realPosition = (Vector3)stream.ReceiveNext();
+			realRotation = (Quaternion)stream.ReceiveNext();
+			
+			if(gotFirstUpdate == false) {
+				transform.position = realPosition;
+				transform.rotation = realRotation;
+				gotFirstUpdate = true;
+			}
+		}
+	}
+
+	GameObject FindTarget() {
+		return GameObject.FindWithTag ("Player");
+	}
+
+	void OnTriggerEnter(Collider c){
+		if(c.tag == "AIPathCell"){
+			currentCell = c.gameObject;
+			randomizedCourse = false;
+			calculatedNewRandomizeCourseVector = false;
+		}
+		haveCell = true;
+	}
+
+	void OnTriggerStay(Collider c){
+		if((c.tag == "Enemy" || c.tag == "Player") && c.gameObject != gameObject){
+			if(currentMoveSpeed > minMoveSpeed){
+				currentMoveSpeed -= speedDamage;
+			}
+			transform.position += (transform.position - c.transform.position).normalized * 0.1f;
+		}
+	}
+
+	Vector3 FindSpotInCell(){
+		if (!haveCell)
+			return transform.position;
+		return currentCell.transform.position + (currentCell.transform.rotation * new Vector3(
+			Random.Range(currentCell.transform.localScale.x*(-0.5F), currentCell.transform.localScale.x*(0.5F)), 0, 
+			Random.Range(currentCell.transform.localScale.z*(-0.5F), currentCell.transform.localScale.z*(0.5F))));
+
 	}
 
 	void Move() {
@@ -106,52 +154,4 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		}
 	}
 
-	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
-		if (stream.isWriting) {
-			Debug.Log ("writing");
-			stream.SendNext (transform.position);
-			stream.SendNext (transform.rotation);
-		} else if(stream.isReading) {
-			Debug.Log("reading");
-			realPosition = (Vector3)stream.ReceiveNext();
-			realRotation = (Quaternion)stream.ReceiveNext();
-			
-			if(gotFirstUpdate == false) {
-				transform.position = realPosition;
-				transform.rotation = realRotation;
-				gotFirstUpdate = true;
-			}
-		}
-	}
-
-	GameObject FindTarget() {
-		return GameObject.FindWithTag ("Player");
-	}
-
-	void OnTriggerEnter(Collider c){
-		if(c.tag == "AIPathCell"){
-			currentCell = c.gameObject;
-			randomizedCourse = false;
-			calculatedNewRandomizeCourseVector = false;
-		}
-		haveCell = true;
-	}
-
-	void OnTriggerStay(Collider c){
-		if((c.tag == "Enemy" || c.tag == "Player") && c.gameObject != gameObject){
-			if(currentMoveSpeed > minMoveSpeed){
-				currentMoveSpeed -= speedDamage;
-			}
-			transform.position += (transform.position - c.transform.position).normalized * 0.1f;
-		}
-	}
-
-	Vector3 FindSpotInCell(){
-		if (!haveCell)
-			return transform.position;
-		return currentCell.transform.position + (currentCell.transform.rotation * new Vector3(
-			Random.Range(currentCell.transform.localScale.x*(-0.5F), currentCell.transform.localScale.x*(0.5F)), 0, 
-			Random.Range(currentCell.transform.localScale.z*(-0.5F), currentCell.transform.localScale.z*(0.5F))));
-
-	}
 }

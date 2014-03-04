@@ -107,11 +107,11 @@ MonoBehaviour:
   ownerId: 0
   group: 0
   prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
+  observed: {fileID: 11400000}
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
-  instantiationId: 0
+  instantiationId: -1
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
