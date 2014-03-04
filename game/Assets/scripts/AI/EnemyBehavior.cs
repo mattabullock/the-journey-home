@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyBehavior : MonoBehaviour {
+public class EnemyBehavior : Photon.MonoBehaviour {
 	public GameObject currentCell;
 	public NetworkCharacter target;
 	public Transform targetTransform;
@@ -19,6 +19,9 @@ public class EnemyBehavior : MonoBehaviour {
 	bool calculatedNewRandomizeCourseVector = false;
 	bool isInstantiated = false;
 	bool haveCell = false;
+	float realPosition;
+	float realRotation;
+	bool gotFirstUpdate = false;
 
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
@@ -34,62 +37,82 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 
 	void Update(){
-		Debug.Log (isInstantiated);
-		if (!isInstantiated) {
-			if(GameObject.FindWithTag ("Player") != null) {
-				isInstantiated = true;
-				target = GameObject.FindWithTag ("Player").GetComponent<NetworkCharacter> ();
-				targetTransform = target.transform;
-			} else { 
-				return;
+		if (photonView.isMine) {
+			if (!isInstantiated) {
+				if(GameObject.FindWithTag ("Player") != null) {
+					isInstantiated = true;
+					target = GameObject.FindWithTag ("Player").GetComponent<NetworkCharacter> ();
+					targetTransform = target.transform;
+				} else { 
+					return;
+				}
 			}
-		}
-		if (waitToStart <= 0){
-			targetCell = target.currentCell;
-			foreach(GameObject doorCheckingNow in currentCell.GetComponent<AIPathCell>().doors){
-				for(int i = 0; i < doorCheckingNow.GetComponent<AIPathDoor>().cells.Count; i++){
-					if(doorCheckingNow.GetComponent<AIPathDoor>().cells[i] == targetCell){
-						if(doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i] < shortestPathSoFar){
-							goalDoor = doorCheckingNow;
-							shortestPathSoFar = doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i];
+			if (waitToStart <= 0){
+				targetCell = target.currentCell;
+				foreach(GameObject doorCheckingNow in currentCell.GetComponent<AIPathCell>().doors){
+					for(int i = 0; i < doorCheckingNow.GetComponent<AIPathDoor>().cells.Count; i++){
+						if(doorCheckingNow.GetComponent<AIPathDoor>().cells[i] == targetCell){
+							if(doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i] < shortestPathSoFar){
+								goalDoor = doorCheckingNow;
+								shortestPathSoFar = doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i];
+							}
+						}
+					}
+				}
+				shortestPathSoFar = int.MaxValue;
+			}
+			waitToStart -= 1;
+			
+			if (!calculatedNewRandomizeCourseVector){
+				randomizeCourseVector = FindSpotInCell();
+				calculatedNewRandomizeCourseVector = true;
+			}
+
+			if(currentCell != targetCell || targetCell == null){
+				if(randomizedCourse){
+					transform.position += (goalDoor.transform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+				}
+				if (!randomizedCourse){
+					transform.position += (randomizeCourseVector - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+					if (Vector3.Distance(transform.position, randomizeCourseVector) < transform.localScale.x){
+						if (goalDoor){
+							randomizedCourse = true;
+						}
+						if (goalDoor == null){
+							calculatedNewRandomizeCourseVector = false;
 						}
 					}
 				}
 			}
-			shortestPathSoFar = int.MaxValue;
-		}
-		waitToStart -= 1;
-		
-		if (!calculatedNewRandomizeCourseVector){
-			randomizeCourseVector = FindSpotInCell();
-			calculatedNewRandomizeCourseVector = true;
-		}
 
-		if(currentCell != targetCell || targetCell == null){
-			if(randomizedCourse){
-				transform.position += (goalDoor.transform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+			if (targetCell == currentCell)
+				transform.position += (targetTransform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+
+			if(currentMoveSpeed < maxMoveSpeed){
+				currentMoveSpeed += speedRecover*Time.deltaTime;
 			}
-			if (!randomizedCourse){
-				transform.position += (randomizeCourseVector - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
-				if (Vector3.Distance(transform.position, randomizeCourseVector) < transform.localScale.x){
-					if (goalDoor){
-						randomizedCourse = true;
-					}
-					if (goalDoor == null){
-						calculatedNewRandomizeCourseVector = false;
-					}
-				}
+			if(currentMoveSpeed > maxMoveSpeed){
+				currentMoveSpeed = maxMoveSpeed;
 			}
+		} else {
+			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
+			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 0.1f);
 		}
+	}
 
-		if (targetCell == currentCell)
-			transform.position += (targetTransform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+		if (stream.isWriting) {
 
-		if(currentMoveSpeed < maxMoveSpeed){
-			currentMoveSpeed += speedRecover*Time.deltaTime;
-		}
-		if(currentMoveSpeed > maxMoveSpeed){
-			currentMoveSpeed = maxMoveSpeed;
+		} else if(stream.isReading) {
+			realPosition = (Vector3)stream.ReceiveNext();
+			realRotation = (Quaternion)stream.ReceiveNext();
+			gameObject.GetComponent<Health>().currentHitPoints = (float)stream.ReceiveNext();
+			
+			if(gotFirstUpdate == false) {
+				transform.position = realPosition;
+				transform.rotation = realRotation;
+				gotFirstUpdate = true;
+			}
 		}
 	}
 
