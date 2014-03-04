@@ -22,10 +22,18 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 	bool gotFirstUpdate = false;
 
+	public GameObject currentCell;
+
 	// Use this for initialization
 	void Start () {
 		cc = GetComponent<CharacterController> ();
 		gunAnim = gun.GetComponent<Animator> ();
+	}
+
+	void OnTriggerStay(Collider c){
+		if(c.tag == "AIPathCell"){
+			currentCell = c.gameObject;
+		}
 	}
 
 //	void OnGUI(){

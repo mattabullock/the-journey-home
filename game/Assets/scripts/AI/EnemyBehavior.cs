@@ -3,12 +3,12 @@ using System.Collections;
 
 public class EnemyBehavior : MonoBehaviour {
 	public GameObject currentCell;
-	public PlayerMovement target;
+	public NetworkCharacter target;
 	public Transform targetTransform;
 	public GameObject targetCell;
 	public GameObject goalDoor;
 	public int shortestPathSoFar;
-	float waitToStart = 5;
+	float waitToStart = 10;
 	float currentMoveSpeed = 5;
 	float maxMoveSpeed = 6;
 	float minMoveSpeed = 1;
@@ -17,16 +17,33 @@ public class EnemyBehavior : MonoBehaviour {
 	Vector3 randomizeCourseVector;
 	bool randomizedCourse = false;
 	bool calculatedNewRandomizeCourseVector = false;
+	bool isInstantiated = false;
+	bool haveCell = false;
 
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
-		target = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
-		targetTransform = GameObject.FindWithTag("Player").transform;
-		waitToStart = 5;
+		if (GameObject.FindWithTag ("Player") != null) {
+			GameObject currTarget = FindTarget();
+			target = currTarget.GetComponent<NetworkCharacter> ();
+			targetTransform = currTarget.transform;
+			isInstantiated = true;
+		}
 		randomizeCourseVector = transform.position;
+
+
 	}
 
 	void Update(){
+		Debug.Log (isInstantiated);
+		if (!isInstantiated) {
+			if(GameObject.FindWithTag ("Player") != null) {
+				isInstantiated = true;
+				target = GameObject.FindWithTag ("Player").GetComponent<NetworkCharacter> ();
+				targetTransform = target.transform;
+			} else { 
+				return;
+			}
+		}
 		if (waitToStart <= 0){
 			targetCell = target.currentCell;
 			foreach(GameObject doorCheckingNow in currentCell.GetComponent<AIPathCell>().doors){
@@ -76,12 +93,17 @@ public class EnemyBehavior : MonoBehaviour {
 		}
 	}
 
+	GameObject FindTarget() {
+		return GameObject.FindWithTag ("Player");
+	}
+
 	void OnTriggerEnter(Collider c){
 		if(c.tag == "AIPathCell"){
 			currentCell = c.gameObject;
 			randomizedCourse = false;
 			calculatedNewRandomizeCourseVector = false;
 		}
+		haveCell = true;
 	}
 
 	void OnTriggerStay(Collider c){
@@ -94,6 +116,8 @@ public class EnemyBehavior : MonoBehaviour {
 	}
 
 	Vector3 FindSpotInCell(){
+		if (!haveCell)
+			return transform.position;
 		return currentCell.transform.position + (currentCell.transform.rotation * new Vector3(
 			Random.Range(currentCell.transform.localScale.x*(-0.5F), currentCell.transform.localScale.x*(0.5F)), 0, 
 			Random.Range(currentCell.transform.localScale.z*(-0.5F), currentCell.transform.localScale.z*(0.5F))));

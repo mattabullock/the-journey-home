@@ -28,7 +28,7 @@ public class MainMenu : Photon.MonoBehaviour {
 	}
 	
 	void Connect() {
-		PhotonNetwork.ConnectUsingSettings ("v007");
+		PhotonNetwork.ConnectUsingSettings ("v008");
 		PhotonNetwork.player.name = PlayerPrefs.GetString ("Username", "");
 	}
 
@@ -228,7 +228,7 @@ public class MainMenu : Photon.MonoBehaviour {
 
 	[RPC]
 	void loadScene() {
-		PhotonNetwork.LoadLevel ("testscene");
+		PhotonNetwork.LoadLevel ("Ship");
 	}
 		
 	void StartGame() {

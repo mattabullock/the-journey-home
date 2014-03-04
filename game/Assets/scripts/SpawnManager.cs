@@ -17,8 +17,12 @@ public class SpawnManager : Photon.MonoBehaviour {
 	void Start () {
 		Screen.lockCursor = true;
 		if (PhotonNetwork.isMasterClient) {
-			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(6.5f, .668f, 15.83f), Quaternion.identity, 0, null);
-			PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(-24.76163f, 2.014818f, 45.2649f), Quaternion.identity, 0, null);
+			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(40.48185f, 0.51f, 19.66377f), Quaternion.identity, 0, null);
+			PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
+			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
 		}
 		hBay = GameObject.FindObjectOfType<HealthBay> ();
 		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
@@ -58,6 +62,12 @@ public class SpawnManager : Photon.MonoBehaviour {
 				firstSpawn = false;
 				spawned = true;
 				spawnPlayer ();
+			}
+			if (PhotonNetwork.isMasterClient) {
+				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
 			}
 		}
 	}
