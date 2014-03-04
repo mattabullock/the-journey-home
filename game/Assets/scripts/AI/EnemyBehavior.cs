@@ -19,8 +19,8 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	bool calculatedNewRandomizeCourseVector = false;
 	bool isInstantiated = false;
 	bool haveCell = false;
-	float realPosition;
-	float realRotation;
+	Vector3 realPosition;
+	Quaternion realRotation;
 	bool gotFirstUpdate = false;
 
 	void Awake(){
