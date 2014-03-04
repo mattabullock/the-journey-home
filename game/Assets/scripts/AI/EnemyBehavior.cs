@@ -37,7 +37,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	}
 
 	void Update(){
-		if (photonView.isMine) {
+		if (PhotonNetwork.isMasterClient) {
 			Debug.Log ("poop");
 			Move ();
 		} else {
