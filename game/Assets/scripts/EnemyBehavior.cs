@@ -7,22 +7,21 @@ public class EnemyBehavior : MonoBehaviour {
 	public Transform targetTransform;
 	public GameObject targetCell;
 	public GameObject goalDoor;
-	public int shortestPathSoFar = int.MaxValue;
+	public int shortestPathSoFar;
 	float waitToStart = 5;
 	float currentMoveSpeed = 5;
 	float maxMoveSpeed = 6;
 	float minMoveSpeed = 1;
 	float speedRecover = 1;
 	float speedDamage = 2;
-
-	bool randomizedCourse = false;
 	Vector3 randomizeCourseVector;
+	bool randomizedCourse = false;
 	bool calculatedNewRandomizeCourseVector = false;
 
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
-		target = GameObject.FindWithTag ("Player").GetComponent<PlayerMovement>();
-		targetTransform = GameObject.FindWithTag ("Player").transform;
+		target = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+		targetTransform = GameObject.FindWithTag("Player").transform;
 		waitToStart = 5;
 		randomizeCourseVector = transform.position;
 	}

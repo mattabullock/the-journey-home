@@ -5,7 +5,7 @@
       <File FileName="Assets\scripts\PlayerMovement.cs" Line="7" Column="33" />
       <File FileName="Assets\scripts\AIPathCell.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\AIPathDoor.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\EnemyBehavior.cs" Line="16" Column="23" />
+      <File FileName="Assets\scripts\EnemyBehavior.cs" Line="18" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
