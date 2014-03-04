@@ -37,7 +37,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	}
 
 	void Update(){
-		if (PhotonNetwork.isMasterClient) {
+		if (photonView.isMine) {
 			Move ();
 		} else {
 			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
@@ -46,13 +46,10 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	}
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
-		Debug.Log ("asdfasdf");
 		if (stream.isWriting) {
-			Debug.Log ("writing");
 			stream.SendNext (transform.position);
 			stream.SendNext (transform.rotation);
 		} else if(stream.isReading) {
-			Debug.Log("reading");
 			realPosition = (Vector3)stream.ReceiveNext();
 			realRotation = (Quaternion)stream.ReceiveNext();
 			
