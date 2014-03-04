@@ -108,9 +108,11 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
 		if (stream.isWriting) {
+			Debug.Log ("writing");
 			stream.SendNext (transform.position);
 			stream.SendNext (transform.rotation);
 		} else if(stream.isReading) {
+			Debug.Log("reading");
 			realPosition = (Vector3)stream.ReceiveNext();
 			realRotation = (Quaternion)stream.ReceiveNext();
 			
