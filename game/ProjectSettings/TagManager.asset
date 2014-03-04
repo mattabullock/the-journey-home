@@ -9,9 +9,12 @@ TagManager:
   - Light System
   - Health Bay
   - RespawnCam
+  - Player
+  - Enemy
+  - Level Parts
   - 
-  - 
-  - 
+  - AIPathCell
+  - AIPathDoor
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -22,7 +25,7 @@ TagManager:
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: Weapons
-  User Layer 9: 
+  User Layer 9: NavMesh
   User Layer 10: 
   User Layer 11: 
   User Layer 12: 
