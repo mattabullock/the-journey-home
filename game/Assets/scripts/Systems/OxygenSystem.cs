@@ -25,16 +25,16 @@ public class OxygenSystem : SystemBase {
 		base.Update ();
 		timer += Time.deltaTime;
 		if (down && timer >= delay) {
-			GetComponent<PhotonView>().RPC ("depleteOxygen", PhotonTargets.All);
+			GetComponent<PhotonView>().RPC ("depleteOxygen", PhotonTargets.MasterClient);
 		}
 	}
 	
 	protected override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
 		base.OnPhotonSerializeView (stream, info);
 		if (stream.isWriting) {
-			
+			stream.SendNext(oxygenSupply);
 		} else if (stream.isReading) {
-			
+			oxygenSupply = (float) stream.ReceiveNext();
 		}
 	}
 
