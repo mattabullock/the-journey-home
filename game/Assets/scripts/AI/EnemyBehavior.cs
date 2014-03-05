@@ -7,7 +7,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	public Transform targetTransform;
 	public GameObject targetCell;
 	public GameObject goalDoor;
-	public int shortestPathSoFar;
+	public int shortestPathSoFar = int.MaxValue;
 	float waitToStart = 10;
 	float currentMoveSpeed = 5;
 	float maxMoveSpeed = 6;
@@ -37,8 +37,6 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			isInstantiated = true;
 		}
 		randomizeCourseVector = transform.position;
-
-
 	}
 
 	void Update(){
@@ -72,8 +70,10 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	}
 
 	void AttackTarget() {
-		if(Vector3.Distance(transform.position, currTarget.transform.position) < 1) {
-			currTarget.GetComponent<Health>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+		if(currTarget != null){
+			if(Vector3.Distance(transform.position, currTarget.transform.position) < 1) {
+				currTarget.GetComponent<Health>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+			}
 		}
 	}
 
@@ -91,7 +91,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			if(currentMoveSpeed > minMoveSpeed){
 				currentMoveSpeed -= speedDamage;
 			}
-			transform.position += (transform.position - c.transform.position).normalized * 1f;
+			transform.position += (transform.position - c.transform.position).normalized;
 		}
 	}
 
@@ -101,7 +101,6 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		return currentCell.transform.position + (currentCell.transform.rotation * new Vector3(
 			Random.Range(currentCell.transform.localScale.x*(-0.5F), currentCell.transform.localScale.x*(0.5F)), 0, 
 			Random.Range(currentCell.transform.localScale.z*(-0.5F), currentCell.transform.localScale.z*(0.5F))));
-
 	}
 
 	void Move() {
@@ -110,7 +109,8 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 				isInstantiated = true;
 				target = GameObject.FindWithTag ("Player").GetComponent<NetworkCharacter> ();
 				targetTransform = target.transform;
-			} else { 
+			} 
+			else { 
 				return;
 			}
 		}
@@ -128,7 +128,9 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			}
 			shortestPathSoFar = int.MaxValue;
 		}
-		waitToStart -= 1;
+		else{
+			waitToStart -= 1;
+		}
 		
 		if (!calculatedNewRandomizeCourseVector){
 			randomizeCourseVector = FindSpotInCell();
@@ -152,8 +154,9 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			}
 		}
 		
-		if (targetCell == currentCell)
+		if (targetCell == currentCell){
 			transform.position += (targetTransform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+		}
 		
 		if(currentMoveSpeed < maxMoveSpeed){
 			currentMoveSpeed += speedRecover*Time.deltaTime;

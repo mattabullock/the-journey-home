@@ -12,9 +12,17 @@ public class PlayerShooting : MonoBehaviour {
 	public GameObject gun;
 	Animator gunAnim;
 
+	public int NavMeshLayer;
+	public int NavMeshMask;
+	public int FinalMask;
+
 	void Start() {
 		gunAnim = gun.GetComponent<Animator> ();
 		fx = GameObject.FindObjectOfType<FXManager>();
+
+		NavMeshLayer = 9;
+		NavMeshMask = 1 << NavMeshLayer;
+		FinalMask = ~NavMeshMask;
 	}
 
 	void Update () {
@@ -34,7 +42,7 @@ public class PlayerShooting : MonoBehaviour {
 		fx.GetComponent<PhotonView>().RPC ("AssaultBulletFX", PhotonTargets.All, Camera.main.transform.position);
 		RaycastHit hit;
 
-		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 1000000);
+		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 1000000, FinalMask);
 
 		Transform hitTransform = hit.transform;
 
