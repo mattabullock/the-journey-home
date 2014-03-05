@@ -25,7 +25,8 @@ public class OxygenSystem : SystemBase {
 		base.Update ();
 		timer += Time.deltaTime;
 		if (down && timer >= delay) {
-			GetComponent<PhotonView>().RPC ("depleteOxygen", PhotonTargets.MasterClient);
+			timer = 0;
+			oxygenSupply--;
 		}
 	}
 	
@@ -37,13 +38,6 @@ public class OxygenSystem : SystemBase {
 			oxygenSupply = (float) stream.ReceiveNext();
 		}
 	}
-
-	[RPC]
-	public void depleteOxygen() {
-		timer = 0;
-		oxygenSupply--;
-	}
-
 	
 	[RPC]
 	protected override void repair (float amt) {
