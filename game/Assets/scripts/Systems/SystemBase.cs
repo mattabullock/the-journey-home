@@ -42,10 +42,6 @@ public class SystemBase : Photon.MonoBehaviour {
 		}
 	}
 
-	protected virtual void OnGUI() {
-
-	}
-	
 	[RPC]
 	protected virtual void repair(float amt) {
 		

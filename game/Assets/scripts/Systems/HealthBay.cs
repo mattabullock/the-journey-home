@@ -3,11 +3,6 @@ using System.Collections;
 
 public class HealthBay : SystemBase {
 	
-	GameObject lights;
-	
-	const float flickerOn = 7f;
-	const float flickerOff = 8f;
-	
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
@@ -29,7 +24,7 @@ public class HealthBay : SystemBase {
 		}
 	}
 	
-//	protected override void OnGUI() {
+//	protected void OnGUI() {
 //		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,40, currHealthBarLength, 20), GUIContent.none);
 //		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,40, healthBarLength, 20), currentHitPoints + "/" + hitPoints);
 //	}

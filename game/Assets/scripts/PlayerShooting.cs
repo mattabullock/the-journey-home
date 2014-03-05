@@ -44,7 +44,7 @@ public class PlayerShooting : MonoBehaviour {
 		}
 
 		if(hitTransform != null) {
-//			if(hitTransform.tag == "interactive" || hitTransform.tag == "enemy") {
+			if(hitTransform.tag == "interactive" || hitTransform.tag == "enemy") {
 				Health h = hitTransform.GetComponent<Health>();
 				
 				while(h == null && hitTransform.parent) {
@@ -73,7 +73,7 @@ public class PlayerShooting : MonoBehaviour {
 						h.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
 					}	
 				}
-//			}
+			}
 			
 		}
 		

@@ -448,7 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 100
   currentHitPoints: 0
-  healthBarLength: 0
+  healthBarLength: 200
   threshold: 50
 --- !u!114 &11400004
 MonoBehaviour:

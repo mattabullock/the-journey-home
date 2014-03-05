@@ -17,7 +17,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 	void Start () {
 		Screen.lockCursor = true;
 		if (PhotonNetwork.isMasterClient) {
-			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(40.48185f, 0.51f, 19.66377f), Quaternion.identity, 0, null);
+			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(39.28933f, 7.594366e-18f, 19.38437f), Quaternion.identity, 0, null);
 			PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
 			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
 			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
