@@ -31,6 +31,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		cc = GetComponent<CharacterController> ();
 		gunAnim = gun.GetComponent<Animator> ();
 		systems = GameObject.FindGameObjectsWithTag ("interactive");
+
 	}
 
 	void OnTriggerStay(Collider c){
@@ -47,6 +48,8 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.healthBarLength, 20), s.currentHitPoints + "/" + s.hitPoints);
 			count += 30f;
 		}
+//		GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.currentHitPoints*s.healthBarLength/s.hitPoints, 20), GUIContent.none);
+//		GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.healthBarLength, 20), s.currentHitPoints + "/" + s.hitPoints);
 	}
 
 	// Update is called once per frame
