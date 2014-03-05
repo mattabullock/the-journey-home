@@ -14,7 +14,7 @@ public class Health : Photon.MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Box (new Rect(Screen.width - 10 - healthBarLength, 70, healthBarLength, 20), currentHitPoints + "/" + hitPoints);
+		GUI.Box (new Rect(Screen.width - 10 - healthBarLength, 70, healthBarLength, 20), Mathf.Floor(currentHitPoints) + "/" + hitPoints);
 	}
 	
 	[RPC]

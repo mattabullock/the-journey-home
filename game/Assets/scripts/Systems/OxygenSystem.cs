@@ -7,6 +7,11 @@ public class OxygenSystem : SystemBase {
 	
 	const float flickerOn = 7f;
 	const float flickerOff = 8f;
+
+	float timer = 0f;
+	public float delay = 3f;
+
+	public float oxygenSupply = 100f;
 	
 	// Use this for initialization
 	protected override void Start () {
@@ -18,21 +23,27 @@ public class OxygenSystem : SystemBase {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update ();
+		timer += Time.deltaTime;
+		if (down && timer >= delay) {
+			GetComponent<PhotonView>().RPC ("depleteOxygen", PhotonTargets.MasterClient);
+		}
 	}
 	
 	protected override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
 		base.OnPhotonSerializeView (stream, info);
 		if (stream.isWriting) {
-			
+			stream.SendNext(oxygenSupply);
 		} else if (stream.isReading) {
-			
+			oxygenSupply = (float) stream.ReceiveNext();
 		}
 	}
-	
-	//	protected override void OnGUI() {
-	//		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,40, currHealthBarLength, 20), GUIContent.none);
-	//		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,40, healthBarLength, 20), currentHitPoints + "/" + hitPoints);
-	//	}
+
+	[RPC]
+	public void depleteOxygen() {
+		timer = 0;
+		oxygenSupply--;
+	}
+
 	
 	[RPC]
 	protected override void repair (float amt) {
@@ -60,20 +71,20 @@ public class OxygenSystem : SystemBase {
 		} else if (currentHitPoints - amt <= 0) {
 			currentHitPoints = 0;
 			if(!belowThresh) {
-				trigger();
 				down = true;
 				belowThresh = true;
 			}
 		} else {
 			if(!belowThresh) {
-				trigger();
+
 			}
 			currentHitPoints -= amt;
 		}	
 		
 		currHealthBarLength = healthBarLength * (currentHitPoints / hitPoints);
 	}
-	
+
+	[RPC]
 	protected void trigger() {
 		Debug.Log ("Oxygen oh no!!");
 	}
