@@ -18,13 +18,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 	void Start () {
 		Screen.lockCursor = true;
 		if (PhotonNetwork.isMasterClient) {
-			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(19.18432f, 0.5094447f, -20.10653f), Quaternion.identity, 0, null);
-			PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
-			PhotonNetwork.InstantiateSceneObject ("OxygenSystem", new Vector3(39.28933f, 7.594366e-18f, 19.38437f), Quaternion.identity, 0, null);
-			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+			spawnStuff ();
 		}
 
 		hBay = GameObject.FindObjectOfType<HealthBay> ();
@@ -84,6 +78,12 @@ public class SpawnManager : Photon.MonoBehaviour {
 		} else {
 			GUILayout.Label("You will respawn in " + Mathf.Ceil(respawn - respawnTimer) + " seconds.");
 		}
+	}
+
+	void spawnStuff() {
+		PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(19.18432f, 0.5094447f, -20.10653f), Quaternion.identity, 0, null);
+		PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
+		PhotonNetwork.InstantiateSceneObject ("OxygenSystem", new Vector3(39.28933f, 7.594366e-18f, 19.38437f), Quaternion.identity, 0, null);
 	}
 
 	public void spawnPlayer() {
