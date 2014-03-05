@@ -1448,13 +1448,13 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: .498039216, g: .568627477, b: .407843143, a: .0196078438}
+  m_BackGroundColor: {r: .0294117928, g: .0294117928, b: .0294117928, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
-    width: .300000012
-    height: .300000012
+    width: .200000003
+    height: .200000003
   near clip plane: .300000012
   far clip plane: 50
   field of view: 60
