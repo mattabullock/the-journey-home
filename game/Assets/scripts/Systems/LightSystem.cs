@@ -35,11 +35,6 @@ public class LightSystem : SystemBase {
 		}
 	}
 
-//	protected void OnGUI() {
-//		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,10, currHealthBarLength, 20), GUIContent.none);
-//		GUI.Box (new Rect(Screen.width - 10 - healthBarLength,10, healthBarLength, 20), currentHitPoints + "/" + hitPoints);
-//	}
-
 	[RPC]
 	protected override void repair (float amt) {
 		if (currentHitPoints >= hitPoints) {
