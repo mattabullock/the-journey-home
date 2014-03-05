@@ -22,11 +22,16 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	Vector3 realPosition;
 	Quaternion realRotation;
 	bool gotFirstUpdate = false;
+	GameObject currTarget;
+	float damage = .1f;
+
+	public float delay = 2f; 
+	float cooldown = 0f;
 
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
 		if (GameObject.FindWithTag ("Player") != null) {
-			GameObject currTarget = FindTarget();
+			currTarget = FindTarget();
 			target = currTarget.GetComponent<NetworkCharacter> ();
 			targetTransform = currTarget.transform;
 			isInstantiated = true;
@@ -39,6 +44,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	void Update(){
 		if (photonView.isMine) {
 			Move ();
+			AttackTarget();
 		} else {
 			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
 			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 0.1f);
@@ -65,6 +71,12 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		return GameObject.FindWithTag ("Player");
 	}
 
+	void AttackTarget() {
+		if(Vector3.Distance(transform.position, currTarget.transform.position) < 1) {
+			currTarget.GetComponent<Health>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+		}
+	}
+
 	void OnTriggerEnter(Collider c){
 		if(c.tag == "AIPathCell"){
 			currentCell = c.gameObject;
@@ -79,7 +91,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			if(currentMoveSpeed > minMoveSpeed){
 				currentMoveSpeed -= speedDamage;
 			}
-			transform.position += (transform.position - c.transform.position).normalized * 0.1f;
+			transform.position += (transform.position - c.transform.position).normalized * 1f;
 		}
 	}
 
@@ -150,5 +162,4 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			currentMoveSpeed = maxMoveSpeed;
 		}
 	}
-
 }
