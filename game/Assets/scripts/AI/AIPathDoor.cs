@@ -7,7 +7,7 @@ public class AIPathDoor : MonoBehaviour {
 	public List<int> doorsToCells = new List<int>();
 	public List<GameObject> immediateCells = new List<GameObject>();
 	public bool testForCells = true;
-	public float waitToTest = 2;
+	public float waitToTest = 10;
 	public int stage = 1;
 
 	void Awake () {
@@ -18,9 +18,6 @@ public class AIPathDoor : MonoBehaviour {
 		for(int i = 0; i < cells.Count; i++){
 			doorsToCells.Add(int.MaxValue);
 		}
-		testForCells = true;
-		waitToTest = 2;
-		stage = 1;
 	}
 
 	void OnTriggerEnter(Collider c){
@@ -56,6 +53,8 @@ public class AIPathDoor : MonoBehaviour {
 			}
 			testForCells = false;
 		}
-		waitToTest -= Time.deltaTime;
+		else{
+			waitToTest -= Time.deltaTime;
+		}
 	}
 }

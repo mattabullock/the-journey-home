@@ -154,7 +154,7 @@ GameObject:
   - 4: {fileID: 36394695}
   - 108: {fileID: 36394696}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ GameObject:
   - 4: {fileID: 61318036}
   - 108: {fileID: 61318037}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -607,7 +607,7 @@ GameObject:
   - 4: {fileID: 91662486}
   - 108: {fileID: 91662487}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -979,7 +979,7 @@ GameObject:
   - 4: {fileID: 150850849}
   - 108: {fileID: 150850850}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1042,8 +1042,8 @@ GameObject:
   - 33: {fileID: 154479945}
   - 65: {fileID: 154479944}
   - 23: {fileID: 154479943}
-  - 54: {fileID: 154479946}
   - 114: {fileID: 154479947}
+  - 54: {fileID: 154479946}
   m_Layer: 9
   m_Name: AIPathCell 01
   m_TagString: AIPathCell
@@ -1460,8 +1460,8 @@ GameObject:
   - 33: {fileID: 273776921}
   - 65: {fileID: 273776920}
   - 23: {fileID: 273776919}
-  - 54: {fileID: 273776922}
   - 114: {fileID: 273776923}
+  - 54: {fileID: 273776922}
   m_Layer: 9
   m_Name: AIPathDoor 01
   m_TagString: AIPathDoor
@@ -1662,8 +1662,8 @@ GameObject:
   - 33: {fileID: 301639868}
   - 65: {fileID: 301639867}
   - 23: {fileID: 301639866}
-  - 54: {fileID: 301639865}
   - 114: {fileID: 301639864}
+  - 54: {fileID: 301639865}
   m_Layer: 9
   m_Name: AIPathDoor 16
   m_TagString: AIPathDoor
@@ -1796,7 +1796,7 @@ GameObject:
   - 4: {fileID: 306744284}
   - 108: {fileID: 306744285}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2127,11 +2127,23 @@ GameObject:
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
+<<<<<<< HEAD
   - 4: {fileID: 348576191}
   - 108: {fileID: 348576192}
   m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
+=======
+  - 4: {fileID: 383225628}
+  - 33: {fileID: 383225631}
+  - 65: {fileID: 383225630}
+  - 23: {fileID: 383225629}
+  - 114: {fileID: 383225633}
+  - 54: {fileID: 383225632}
+  m_Layer: 9
+  m_Name: AIPathCell 09
+  m_TagString: AIPathCell
+>>>>>>> ce3b1f97a1a330f5b9995d890e6ac991593f27f6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2492,7 +2504,7 @@ GameObject:
   - 4: {fileID: 412977532}
   - 108: {fileID: 412977533}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2795,8 +2807,8 @@ GameObject:
   - 33: {fileID: 525414748}
   - 65: {fileID: 525414747}
   - 23: {fileID: 525414746}
-  - 54: {fileID: 525414749}
   - 114: {fileID: 525414750}
+  - 54: {fileID: 525414749}
   m_Layer: 9
   m_Name: AIPathCell 03
   m_TagString: AIPathCell
@@ -2893,8 +2905,8 @@ GameObject:
   - 33: {fileID: 533873581}
   - 65: {fileID: 533873580}
   - 23: {fileID: 533873579}
-  - 54: {fileID: 533873582}
   - 114: {fileID: 533873583}
+  - 54: {fileID: 533873582}
   m_Layer: 9
   m_Name: AIPathCell 12
   m_TagString: AIPathCell
@@ -3116,7 +3128,7 @@ GameObject:
   - 4: {fileID: 594962591}
   - 108: {fileID: 594962592}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3660,7 +3672,7 @@ GameObject:
   - 4: {fileID: 680829513}
   - 108: {fileID: 680829514}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3793,8 +3805,8 @@ GameObject:
   - 33: {fileID: 717277098}
   - 65: {fileID: 717277097}
   - 23: {fileID: 717277096}
-  - 54: {fileID: 717277099}
   - 114: {fileID: 717277100}
+  - 54: {fileID: 717277099}
   m_Layer: 9
   m_Name: AIPathDoor 10
   m_TagString: AIPathDoor
@@ -3896,8 +3908,8 @@ GameObject:
   - 33: {fileID: 737362643}
   - 65: {fileID: 737362642}
   - 23: {fileID: 737362641}
-  - 54: {fileID: 737362644}
   - 114: {fileID: 737362645}
+  - 54: {fileID: 737362644}
   m_Layer: 9
   m_Name: AIPathDoor 03
   m_TagString: AIPathDoor
@@ -3999,8 +4011,8 @@ GameObject:
   - 33: {fileID: 738784166}
   - 65: {fileID: 738784165}
   - 23: {fileID: 738784164}
-  - 54: {fileID: 738784167}
   - 114: {fileID: 738784168}
+  - 54: {fileID: 738784167}
   m_Layer: 9
   m_Name: AIPathDoor 14
   m_TagString: AIPathDoor
@@ -4234,8 +4246,8 @@ GameObject:
   - 33: {fileID: 743623813}
   - 65: {fileID: 743623812}
   - 23: {fileID: 743623811}
-  - 54: {fileID: 743623814}
   - 114: {fileID: 743623815}
+  - 54: {fileID: 743623814}
   m_Layer: 9
   m_Name: AIPathCell 06
   m_TagString: AIPathCell
@@ -4401,7 +4413,7 @@ GameObject:
   - 4: {fileID: 750752799}
   - 108: {fileID: 750752800}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4462,7 +4474,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 756469437}
   - 132: {fileID: 756469436}
-  - 114: {fileID: 756469435}
   m_Layer: 0
   m_Name: GUI Text
   m_TagString: Untagged
@@ -4470,17 +4481,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &756469435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 756469434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6e766c909878e4f953f7ce57cae3dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!132 &756469436
 GUIText:
   m_ObjectHideFlags: 0
@@ -4589,7 +4589,7 @@ GameObject:
   - 4: {fileID: 778847330}
   - 108: {fileID: 778847331}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4652,8 +4652,8 @@ GameObject:
   - 33: {fileID: 780528513}
   - 65: {fileID: 780528512}
   - 23: {fileID: 780528511}
-  - 54: {fileID: 780528514}
   - 114: {fileID: 780528515}
+  - 54: {fileID: 780528514}
   m_Layer: 9
   m_Name: AIPathCell 05
   m_TagString: AIPathCell
@@ -4749,7 +4749,7 @@ GameObject:
   - 4: {fileID: 784644187}
   - 108: {fileID: 784644188}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5353,7 +5353,7 @@ GameObject:
   - 4: {fileID: 854409155}
   - 108: {fileID: 854409156}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5648,8 +5648,8 @@ GameObject:
   - 33: {fileID: 894749442}
   - 65: {fileID: 894749441}
   - 23: {fileID: 894749440}
-  - 54: {fileID: 894749443}
   - 114: {fileID: 894749444}
+  - 54: {fileID: 894749443}
   m_Layer: 9
   m_Name: AIPathDoor 15
   m_TagString: AIPathDoor
@@ -5750,7 +5750,7 @@ GameObject:
   - 4: {fileID: 899453787}
   - 108: {fileID: 899453788}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5944,7 +5944,7 @@ GameObject:
   - 4: {fileID: 956633596}
   - 108: {fileID: 956633597}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6145,8 +6145,8 @@ GameObject:
   - 33: {fileID: 986271486}
   - 65: {fileID: 986271485}
   - 23: {fileID: 986271484}
-  - 54: {fileID: 986271487}
   - 114: {fileID: 986271488}
+  - 54: {fileID: 986271487}
   m_Layer: 9
   m_Name: AIPathCell 04
   m_TagString: AIPathCell
@@ -6312,7 +6312,7 @@ GameObject:
   - 4: {fileID: 1018091052}
   - 108: {fileID: 1018091053}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6403,7 +6403,7 @@ GameObject:
   - 4: {fileID: 1028695820}
   - 108: {fileID: 1028695819}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6610,8 +6610,8 @@ GameObject:
   - 33: {fileID: 1041655416}
   - 65: {fileID: 1041655415}
   - 23: {fileID: 1041655414}
-  - 54: {fileID: 1041655417}
   - 114: {fileID: 1041655418}
+  - 54: {fileID: 1041655417}
   m_Layer: 9
   m_Name: AIPathCell 11
   m_TagString: AIPathCell
@@ -6708,8 +6708,8 @@ GameObject:
   - 33: {fileID: 1046810662}
   - 65: {fileID: 1046810661}
   - 23: {fileID: 1046810660}
-  - 54: {fileID: 1046810659}
   - 114: {fileID: 1046810658}
+  - 54: {fileID: 1046810659}
   m_Layer: 9
   m_Name: AIPathCell 15
   m_TagString: AIPathCell
@@ -7060,8 +7060,8 @@ GameObject:
   - 33: {fileID: 1092106333}
   - 65: {fileID: 1092106332}
   - 23: {fileID: 1092106331}
-  - 54: {fileID: 1092106334}
   - 114: {fileID: 1092106335}
+  - 54: {fileID: 1092106334}
   m_Layer: 9
   m_Name: AIPathDoor 09
   m_TagString: AIPathDoor
@@ -7163,8 +7163,8 @@ GameObject:
   - 33: {fileID: 1094625732}
   - 65: {fileID: 1094625731}
   - 23: {fileID: 1094625730}
-  - 54: {fileID: 1094625733}
   - 114: {fileID: 1094625734}
+  - 54: {fileID: 1094625733}
   m_Layer: 9
   m_Name: AIPathDoor 07
   m_TagString: AIPathDoor
@@ -7427,8 +7427,8 @@ GameObject:
   - 33: {fileID: 1145387521}
   - 65: {fileID: 1145387520}
   - 23: {fileID: 1145387519}
-  - 54: {fileID: 1145387522}
   - 114: {fileID: 1145387523}
+  - 54: {fileID: 1145387522}
   m_Layer: 9
   m_Name: AIPathDoor 11
   m_TagString: AIPathDoor
@@ -7732,8 +7732,8 @@ GameObject:
   - 33: {fileID: 1167785012}
   - 65: {fileID: 1167785011}
   - 23: {fileID: 1167785010}
-  - 54: {fileID: 1167785013}
   - 114: {fileID: 1167785014}
+  - 54: {fileID: 1167785013}
   m_Layer: 9
   m_Name: AIPathDoor 13
   m_TagString: AIPathDoor
@@ -7897,8 +7897,8 @@ GameObject:
   - 33: {fileID: 1228710349}
   - 65: {fileID: 1228710348}
   - 23: {fileID: 1228710347}
-  - 54: {fileID: 1228710351}
   - 114: {fileID: 1228710352}
+  - 54: {fileID: 1228710351}
   m_Layer: 9
   m_Name: AIPathDoor 08
   m_TagString: AIPathDoor
@@ -8280,8 +8280,8 @@ GameObject:
   - 33: {fileID: 1247693551}
   - 65: {fileID: 1247693550}
   - 23: {fileID: 1247693549}
-  - 54: {fileID: 1247693552}
   - 114: {fileID: 1247693553}
+  - 54: {fileID: 1247693552}
   m_Layer: 9
   m_Name: AIPathCell 02
   m_TagString: AIPathCell
@@ -8984,8 +8984,8 @@ GameObject:
   - 33: {fileID: 1376259040}
   - 65: {fileID: 1376259039}
   - 23: {fileID: 1376259038}
-  - 54: {fileID: 1376259041}
   - 114: {fileID: 1376259042}
+  - 54: {fileID: 1376259041}
   m_Layer: 9
   m_Name: AIPathCell 13
   m_TagString: AIPathCell
@@ -9221,7 +9221,7 @@ GameObject:
   - 4: {fileID: 1396728965}
   - 108: {fileID: 1396728966}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9284,8 +9284,8 @@ GameObject:
   - 33: {fileID: 1399928634}
   - 65: {fileID: 1399928633}
   - 23: {fileID: 1399928632}
-  - 54: {fileID: 1399928635}
   - 114: {fileID: 1399928636}
+  - 54: {fileID: 1399928635}
   m_Layer: 9
   m_Name: AIPathDoor 06
   m_TagString: AIPathDoor
@@ -9387,8 +9387,8 @@ GameObject:
   - 33: {fileID: 1410183360}
   - 65: {fileID: 1410183359}
   - 23: {fileID: 1410183358}
-  - 54: {fileID: 1410183361}
   - 114: {fileID: 1410183362}
+  - 54: {fileID: 1410183361}
   m_Layer: 9
   m_Name: AIPathDoor 02
   m_TagString: AIPathDoor
@@ -9956,8 +9956,8 @@ GameObject:
   - 33: {fileID: 1469897744}
   - 65: {fileID: 1469897743}
   - 23: {fileID: 1469897742}
-  - 54: {fileID: 1469897745}
   - 114: {fileID: 1469897746}
+  - 54: {fileID: 1469897745}
   m_Layer: 9
   m_Name: AIPathDoor 12
   m_TagString: AIPathDoor
@@ -10216,7 +10216,7 @@ GameObject:
   - 4: {fileID: 1483710219}
   - 108: {fileID: 1483710220}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10691,8 +10691,8 @@ GameObject:
   - 33: {fileID: 1518983720}
   - 65: {fileID: 1518983719}
   - 23: {fileID: 1518983718}
-  - 54: {fileID: 1518983721}
   - 114: {fileID: 1518983722}
+  - 54: {fileID: 1518983721}
   m_Layer: 9
   m_Name: AIPathCell 08
   m_TagString: AIPathCell
@@ -11604,7 +11604,7 @@ GameObject:
   - 4: {fileID: 1601654583}
   - 108: {fileID: 1601654584}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11737,8 +11737,8 @@ GameObject:
   - 33: {fileID: 1615427040}
   - 65: {fileID: 1615427039}
   - 23: {fileID: 1615427038}
-  - 54: {fileID: 1615427041}
   - 114: {fileID: 1615427042}
+  - 54: {fileID: 1615427041}
   m_Layer: 9
   m_Name: AIPathCell 07
   m_TagString: AIPathCell
@@ -12420,7 +12420,7 @@ GameObject:
   - 4: {fileID: 1726615597}
   - 108: {fileID: 1726615598}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13053,7 +13053,7 @@ GameObject:
   - 4: {fileID: 1878353486}
   - 108: {fileID: 1878353487}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13456,8 +13456,8 @@ GameObject:
   - 33: {fileID: 1936690286}
   - 65: {fileID: 1936690285}
   - 23: {fileID: 1936690284}
-  - 54: {fileID: 1936690287}
   - 114: {fileID: 1936690288}
+  - 54: {fileID: 1936690287}
   m_Layer: 9
   m_Name: AIPathCell 14
   m_TagString: AIPathCell
@@ -13693,7 +13693,7 @@ GameObject:
   - 4: {fileID: 1954181426}
   - 108: {fileID: 1954181427}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: Hall light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13756,8 +13756,8 @@ GameObject:
   - 33: {fileID: 1981462934}
   - 65: {fileID: 1981462933}
   - 23: {fileID: 1981462932}
-  - 54: {fileID: 1981462935}
   - 114: {fileID: 1981462936}
+  - 54: {fileID: 1981462935}
   m_Layer: 9
   m_Name: AIPathCell 10
   m_TagString: AIPathCell
@@ -14008,8 +14008,8 @@ GameObject:
   - 33: {fileID: 2019336304}
   - 65: {fileID: 2019336303}
   - 23: {fileID: 2019336302}
-  - 54: {fileID: 2019336305}
   - 114: {fileID: 2019336306}
+  - 54: {fileID: 2019336305}
   m_Layer: 9
   m_Name: AIPathDoor 05
   m_TagString: AIPathDoor
@@ -14210,8 +14210,8 @@ GameObject:
   - 33: {fileID: 2066892007}
   - 65: {fileID: 2066892006}
   - 23: {fileID: 2066892005}
-  - 54: {fileID: 2066892008}
   - 114: {fileID: 2066892009}
+  - 54: {fileID: 2066892008}
   m_Layer: 9
   m_Name: AIPathDoor 04
   m_TagString: AIPathDoor
