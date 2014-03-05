@@ -3,30 +3,36 @@ using System.Collections;
 
 public class EnemyBehavior : Photon.MonoBehaviour {
 	public GameObject currentCell;
+	public GameObject targetCell;
+
 	public NetworkCharacter target;
 	public Transform targetTransform;
-	public GameObject targetCell;
+	GameObject currTarget;
+
 	public GameObject goalDoor;
 	public int shortestPathSoFar = int.MaxValue;
+
 	float waitToStart = 10;
 	float currentMoveSpeed = 5;
 	float maxMoveSpeed = 6;
 	float minMoveSpeed = 1;
 	float speedRecover = 1;
 	float speedDamage = 2;
+
+	float damage = .1f;
+	float delay = 2f; 
+	float cooldown = 0f;
+
 	Vector3 randomizeCourseVector;
+	Vector3 realPosition;
+	Vector3 lastPosition;
+	Quaternion realRotation;
+
 	bool randomizedCourse = false;
 	bool calculatedNewRandomizeCourseVector = false;
 	bool isInstantiated = false;
 	bool haveCell = false;
-	Vector3 realPosition;
-	Quaternion realRotation;
 	bool gotFirstUpdate = false;
-	GameObject currTarget;
-	float damage = .1f;
-
-	public float delay = 2f; 
-	float cooldown = 0f;
 
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
@@ -47,6 +53,9 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
 			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 0.1f);
 		}
+
+		transform.rotation = Quaternion.LookRotation(transform.position - lastPosition);
+		lastPosition = transform.position;
 	}
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
@@ -99,8 +108,9 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		if (!haveCell)
 			return transform.position;
 		return currentCell.transform.position + (currentCell.transform.rotation * new Vector3(
-			Random.Range(currentCell.transform.localScale.x*(-0.5F), currentCell.transform.localScale.x*(0.5F)), 0, 
-			Random.Range(currentCell.transform.localScale.z*(-0.5F), currentCell.transform.localScale.z*(0.5F))));
+			Random.Range(currentCell.transform.localScale.x * -0.5f, currentCell.transform.localScale.x * 0.5f),
+			0,
+			Random.Range(currentCell.transform.localScale.z * -0.5f,currentCell.transform.localScale.z * 0.5f)));
 	}
 
 	void Move() {

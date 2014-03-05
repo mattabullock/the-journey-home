@@ -32,4 +32,5 @@ MonoBehaviour:
   - SystemDown
   - AssaultBulletFX
   - loadScene
+  - trigger
   DisableAutoOpenWizard: 0
