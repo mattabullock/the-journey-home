@@ -8,7 +8,7 @@ public class HealthBase : Photon.MonoBehaviour {
 	protected float healthBarLength = 60f;
 	
 	// Use this for initialization
-	protected void Start () {
+	protected virtual void Start () {
 		currentHitPoints = hitPoints;
 	}
 	

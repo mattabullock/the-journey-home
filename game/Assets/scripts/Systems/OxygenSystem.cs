@@ -2,11 +2,6 @@
 using System.Collections;
 
 public class OxygenSystem : SystemBase {
-	
-	GameObject lights;
-	
-	const float flickerOn = 7f;
-	const float flickerOff = 8f;
 
 	float timer = 0f;
 	public float delay = 3f;
@@ -70,7 +65,7 @@ public class OxygenSystem : SystemBase {
 			}
 		} else {
 			if(!belowThresh) {
-
+				trigger ();
 			}
 			currentHitPoints -= amt;
 		}	

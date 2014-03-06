@@ -6,7 +6,7 @@ public class PlayerHealth : HealthBase {
 	public Animator anim;
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
 		base.Start ();
 	}
 	

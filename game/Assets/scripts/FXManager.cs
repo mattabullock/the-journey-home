@@ -7,7 +7,8 @@ public class FXManager : MonoBehaviour {
 
 	[RPC]
 	void AssaultBulletFX(Vector3 startPos) {
-		AudioSource.PlayClipAtPoint (AssaultBulletSFX, startPos);
+		Debug.Log ("Boom.");
+//		AudioSource.PlayClipAtPoint (AssaultBulletSFX, startPos);
 	}
 
 }

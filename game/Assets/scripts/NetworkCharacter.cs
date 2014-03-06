@@ -31,7 +31,6 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		cc = GetComponent<CharacterController> ();
 		gunAnim = gun.GetComponent<Animator> ();
 		systems = GameObject.FindGameObjectsWithTag ("interactive");
-
 	}
 
 	void OnTriggerStay(Collider c){
@@ -47,6 +46,16 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.currentHitPoints*s.healthBarLength/s.hitPoints, 20), GUIContent.none);
 			GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.healthBarLength, 20), s.currentHitPoints + "/" + s.hitPoints);
 			count += 30f;
+		}
+
+		Vector2 targetPos;
+		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Player")) {
+			if(g != gameObject) {
+				targetPos = Camera.main.WorldToScreenPoint (transform.position);
+				float currHP = g.GetComponent<HealthBase>().currentHitPoints;
+				float maxHP = g.GetComponent<HealthBase>().hitPoints;
+				GUI.Box(new Rect(targetPos.x, Screen.height- targetPos.y, 60, 20), currHP + "/" + maxHP);
+			}
 		}
 //		GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.currentHitPoints*s.healthBarLength/s.hitPoints, 20), GUIContent.none);
 //		GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.healthBarLength, 20), s.currentHitPoints + "/" + s.hitPoints);

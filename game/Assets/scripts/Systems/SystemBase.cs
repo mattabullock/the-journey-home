@@ -5,7 +5,7 @@ public class SystemBase : Photon.MonoBehaviour {
 	
 	public float hitPoints = 100f;
 	public float currentHitPoints;
-	public float healthBarLength;
+	public float healthBarLength = 200f;
 	protected float currHealthBarLength;
 	protected bool down;
 	protected bool belowThresh = false;
