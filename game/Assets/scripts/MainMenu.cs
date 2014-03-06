@@ -28,7 +28,7 @@ public class MainMenu : Photon.MonoBehaviour {
 	}
 	
 	void Connect() {
-		PhotonNetwork.ConnectUsingSettings ("v008");
+		PhotonNetwork.ConnectUsingSettings ("v009");
 		PhotonNetwork.player.name = PlayerPrefs.GetString ("Username", "");
 	}
 
@@ -232,6 +232,7 @@ public class MainMenu : Photon.MonoBehaviour {
 	}
 		
 	void StartGame() {
+		PhotonNetwork.room.open = false;
 		loadScene ();
 	}
 }
