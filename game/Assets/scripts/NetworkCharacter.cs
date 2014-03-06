@@ -19,8 +19,6 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	public Animator anim;
 	public GameObject gun;
 	Animator gunAnim;
-	GameObject[] systems;
-
 
 	bool gotFirstUpdate = false;
 
@@ -30,7 +28,6 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	void Start () {
 		cc = GetComponent<CharacterController> ();
 		gunAnim = gun.GetComponent<Animator> ();
-		systems = GameObject.FindGameObjectsWithTag ("interactive");
 	}
 
 	void OnTriggerStay(Collider c){
@@ -40,25 +37,41 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	}
 
 	void OnGUI(){
-		float count = 10f;
-		foreach (GameObject g in systems) {
-			SystemBase s = g.GetComponent<SystemBase>();
-			GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.currentHitPoints*s.healthBarLength/s.hitPoints, 20), GUIContent.none);
-			GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.healthBarLength, 20), s.currentHitPoints + "/" + s.hitPoints);
-			count += 30f;
-		}
-
-		Vector2 targetPos;
-		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Player")) {
-			if(g != gameObject) {
-				targetPos = GetComponent<Camera>().WorldToScreenPoint (g.transform.position);
-				float currHP = g.GetComponent<HealthBase>().currentHitPoints;
-				float maxHP = g.GetComponent<HealthBase>().hitPoints;
-				GUI.Box(new Rect(targetPos.x, Screen.height- targetPos.y, 60, 20), currHP + "/" + maxHP);
+		GameObject[] systems = GameObject.FindGameObjectsWithTag("interactive");
+		foreach(GameObject g in systems) {
+			Vector3 transformPoint = g.transform.position;
+			transformPoint.y += 2.2f;
+			Vector3 groundPoint = transformPoint;
+			groundPoint.y = 0;
+			Vector3 pGroundPoint = transform.position;
+			pGroundPoint.y = 0;
+			Vector3 screenPoint = Camera.main.WorldToScreenPoint(transformPoint);
+			screenPoint.x -= Screen.width/35;
+			if (screenPoint.z > 0f && (pGroundPoint - groundPoint).magnitude < 10f 
+			    && (pGroundPoint - groundPoint).magnitude > 0) {
+				float currHP = g.GetComponent<SystemBase>().currentHitPoints;
+				float maxHP = g.GetComponent<SystemBase>().hitPoints;
+				GUI.Box(new Rect(screenPoint.x, Screen.height - screenPoint.y, 60, 20), Mathf.Floor(currHP) + "/" + maxHP);
 			}
 		}
-//		GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.currentHitPoints*s.healthBarLength/s.hitPoints, 20), GUIContent.none);
-//		GUI.Box (new Rect(Screen.width - 10 - s.healthBarLength,count, s.healthBarLength, 20), s.currentHitPoints + "/" + s.hitPoints);
+
+		GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
+		foreach(GameObject g in gos) {
+			Vector3 transformPoint = g.transform.position;
+			transformPoint.y += 2.2f; //puts it above their heads
+			Vector3 groundPoint = transformPoint;
+			groundPoint.y = 0;
+			Vector3 pGroundPoint = transform.position;
+			pGroundPoint.y = 0;
+			Vector3 screenPoint = Camera.main.WorldToScreenPoint(transformPoint);
+			screenPoint.x -= Screen.width/35; //mostly centers it
+			if (screenPoint.z > 0f && (pGroundPoint - groundPoint).magnitude < 10f 
+			    && (pGroundPoint - groundPoint).magnitude > 0) {
+				float currHP = g.GetComponent<HealthBase>().currentHitPoints;
+				float maxHP = g.GetComponent<HealthBase>().hitPoints;
+				GUI.Box(new Rect(screenPoint.x, Screen.height - screenPoint.y, 60, 20), Mathf.Floor(currHP) + "/" + maxHP);
+			}
+		}
 	}
 
 	// Update is called once per frame
