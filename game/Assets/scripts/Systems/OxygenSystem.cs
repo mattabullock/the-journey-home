@@ -24,8 +24,8 @@ public class OxygenSystem : SystemBase {
 		if (down && timer >= delay) {
 			timer = 0;
 			oxygenSupply--;
-			if(oxygenSupply <= 0 && !SpawnManager.gameOver) {
-				SpawnManager.gameOver = true;
+			if(oxygenSupply <= 0 && !SpawnManager.isGameOver) {
+				SpawnManager.isGameOver = true;
 			}
 		}
 	}
