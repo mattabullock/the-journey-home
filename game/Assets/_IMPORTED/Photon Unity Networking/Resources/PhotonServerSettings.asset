@@ -33,4 +33,5 @@ MonoBehaviour:
   - AssaultBulletFX
   - loadScene
   - trigger
+  - depleteOxygen
   DisableAutoOpenWizard: 0
