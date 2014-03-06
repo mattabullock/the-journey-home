@@ -62,7 +62,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 				GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 				foreach(GameObject o in players){
-					RaycastHit[] hits = Physics.SphereCastAll(transform.position, transform.localScale.x/3, o.transform.position - transform.position, Vector3.Distance(transform.position, o.transform.position));
+					RaycastHit[] hits = Physics.RaycastAll(transform.position, o.transform.position - transform.position, Vector3.Distance(transform.position, o.transform.position));
 					foreach(RaycastHit hit in hits){
 						if(hit.transform.tag == "Level Part")
 							anyHit = true;
