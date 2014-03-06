@@ -19,6 +19,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	float speedRecover = 1;
 	float speedDamage = 2;
 
+	public float Health = 10;
 	float damage = .1f;
 	float delay = 2f; 
 	float cooldown = 0f;
@@ -80,7 +81,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 	void AttackTarget() {
 		if(currTarget != null){
-			if(Vector3.Distance(transform.position, currTarget.transform.position) < 1) {
+			if(Vector3.Distance(transform.position, currTarget.transform.position) <= 2) {
 				currTarget.GetComponent<Health>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
 			}
 		}
@@ -165,7 +166,9 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		}
 		
 		if (targetCell == currentCell){
-			transform.position += (targetTransform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+			if(Vector3.Distance(targetTransform.position, transform.position) > 2){
+				transform.position += (targetTransform.position - transform.position + new Vector3(0f,.5f, 0f)).normalized * currentMoveSpeed * Time.deltaTime;
+			}
 		}
 		
 		if(currentMoveSpeed < maxMoveSpeed){

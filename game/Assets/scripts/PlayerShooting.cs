@@ -52,7 +52,7 @@ public class PlayerShooting : MonoBehaviour {
 		}
 
 		if(hitTransform != null) {
-			if(hitTransform.tag == "interactive" || hitTransform.tag == "enemy") {
+			if(hitTransform.tag == "interactive" || hitTransform.tag == "Enemy") {
 				Health h = hitTransform.GetComponent<Health>();
 				
 				while(h == null && hitTransform.parent) {
