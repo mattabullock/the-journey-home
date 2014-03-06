@@ -83,7 +83,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 	void spawnStuff() {
 		PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(19.18432f, 0.5094447f, -20.10653f), Quaternion.identity, 0, null);
 		PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
-		PhotonNetwork.InstantiateSceneObject ("OxygenSystem", new Vector3(39.28933f, 7.594366e-18f, 19.38437f), Quaternion.identity, 0, null);
+		PhotonNetwork.InstantiateSceneObject ("OxygenSystem", new Vector3(39.28933f, .5f, 19.38437f), Quaternion.identity, 0, null);
 	}
 
 	public void spawnPlayer() {

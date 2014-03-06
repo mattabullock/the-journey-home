@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyBehavior : Photon.MonoBehaviour {
 	public GameObject currentCell;
 	public GameObject targetCell;
 
-	public NetworkCharacter target;
+	public GameObject target;
 	public Transform targetTransform;
-	GameObject currTarget;
 
 	public GameObject goalDoor;
 	public int shortestPathSoFar = int.MaxValue;
@@ -18,11 +18,10 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	float minMoveSpeed = 1;
 	float speedRecover = 1;
 	float speedDamage = 2;
+	float attackDistance = 2.5f;
 
 	public float Health = 10;
 	float damage = .1f;
-	float delay = 2f; 
-	float cooldown = 0f;
 
 	Vector3 randomizeCourseVector;
 	Vector3 realPosition;
@@ -37,22 +36,25 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
-		if (GameObject.FindWithTag ("Player") != null) {
-			currTarget = FindTarget();
-			target = currTarget.GetComponent<NetworkCharacter> ();
-			targetTransform = currTarget.transform;
-			isInstantiated = true;
-		}
+
 		randomizeCourseVector = transform.position;
 	}
 
 	void Update(){
 		if (photonView.isMine) {
+			if(target == null){
+				FindTarget();
+			}
+			if(target != null){
+				if(target.tag != "Player" && target.GetComponent<SystemBase>().currentHitPoints == 0){
+					FindTarget();
+				}
+			}
 			Move ();
 			AttackTarget();
 		} else {
-			transform.position = Vector3.Lerp (transform.position, realPosition, 0.1f);
-			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 0.1f);
+			transform.position = Vector3.Lerp (transform.position, realPosition, 10*Time.deltaTime);
+			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 10*Time.deltaTime);
 		}
 
 		transform.rotation = Quaternion.LookRotation(transform.position - lastPosition);
@@ -75,14 +77,53 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		}
 	}
 
-	GameObject FindTarget() {
-		return GameObject.FindWithTag ("Player");
+	void FindTarget() {
+		List<GameObject> targets = new List<GameObject>();
+
+		GameObject[] systems = GameObject.FindGameObjectsWithTag("interactive");
+		foreach(GameObject o in systems){
+			if(o.GetComponent<SystemBase>().currentHitPoints > 0)
+				targets.Add(o);
+		}
+		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		foreach(GameObject o in players){
+			targets.Add(o);
+		}
+
+		if(targets.Count == 0){
+			target = null;
+			return;
+		}
+		target = targets[0];
+		targetTransform = target.transform;
+		if(target.tag == "Player"){
+			targetCell = target.GetComponent<NetworkCharacter>().currentCell;
+		}
+		else {
+			targetCell = target.GetComponent<SystemBase>().currentCell;
+		}
+		float dist = Vector3.Distance(target.transform.position, transform.position);
+		foreach(GameObject o in targets){
+			float tmpDist = Vector3.Distance(o.transform.position, transform.position);
+			if(tmpDist < dist){
+				target = o;
+				targetTransform = target.transform;
+				dist = tmpDist;
+			}
+		}
+
+		isInstantiated = true;
 	}
 
 	void AttackTarget() {
-		if(currTarget != null){
-			if(Vector3.Distance(transform.position, currTarget.transform.position) <= 2) {
-				currTarget.GetComponent<HealthBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+		if(target != null){
+			if(Vector3.Distance(transform.position, target.transform.position) <= attackDistance) {
+				if(target.tag == "Player"){
+					target.GetComponent<HealthBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+				}
+				else{
+					target.GetComponent<SystemBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+				}
 			}
 		}
 	}
@@ -109,24 +150,28 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		if (!haveCell)
 			return transform.position;
 		return currentCell.transform.position + (currentCell.transform.rotation * new Vector3(
-			Random.Range(currentCell.transform.localScale.x * -0.5f, currentCell.transform.localScale.x * 0.5f),
+			Random.Range(Mathf.Min(currentCell.transform.localScale.x * -0.5f, 3), Mathf.Min(currentCell.transform.localScale.x * 0.5f, 3)),
 			0,
-			Random.Range(currentCell.transform.localScale.z * -0.5f,currentCell.transform.localScale.z * 0.5f)));
+			Random.Range(Mathf.Min(currentCell.transform.localScale.z * -0.5f, 3), Mathf.Min(currentCell.transform.localScale.z * 0.5f, 3))));
 	}
 
 	void Move() {
 		if (!isInstantiated) {
-			if(GameObject.FindWithTag ("Player") != null) {
-				isInstantiated = true;
-				target = GameObject.FindWithTag ("Player").GetComponent<NetworkCharacter> ();
-				targetTransform = target.transform;
-			} 
-			else { 
-				return;
-			}
+			return;
 		}
 		if (waitToStart <= 0){
-			targetCell = target.currentCell;
+			if(target == null){
+				targetCell = currentCell;
+				targetTransform = transform;
+			}
+			else{
+				if(target.tag == "Player"){
+					targetCell = target.GetComponent<NetworkCharacter>().currentCell;
+				}
+				else {
+					targetCell = target.GetComponent<SystemBase>().currentCell;
+				}
+			}
 			foreach(GameObject doorCheckingNow in currentCell.GetComponent<AIPathCell>().doors){
 				for(int i = 0; i < doorCheckingNow.GetComponent<AIPathDoor>().cells.Count; i++){
 					if(doorCheckingNow.GetComponent<AIPathDoor>().cells[i] == targetCell){
@@ -166,7 +211,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		}
 		
 		if (targetCell == currentCell){
-			if(Vector3.Distance(targetTransform.position, transform.position) > 2){
+			if(Vector3.Distance(targetTransform.position, transform.position) > attackDistance){
 				transform.position += (targetTransform.position - transform.position + new Vector3(0f,.5f, 0f)).normalized * currentMoveSpeed * Time.deltaTime;
 			}
 		}

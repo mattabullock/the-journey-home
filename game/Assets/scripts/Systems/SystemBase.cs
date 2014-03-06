@@ -13,12 +13,19 @@ public class SystemBase : Photon.MonoBehaviour {
 	protected Vector3 realPosition = Vector3.zero;
 	protected Quaternion realRotation = Quaternion.identity;
 	public float threshold = 50f;
+	public GameObject currentCell;
 	
 	// Use this for initialization
 	protected virtual void Start () {
 		t = GetComponent<Transform> ();
 		currentHitPoints = hitPoints;
 		currHealthBarLength = healthBarLength;
+	}
+
+	void OnTriggerEnter(Collider c){
+		if(c.tag == "AIPathCell"){
+			currentCell = c.gameObject;
+		}
 	}
 	
 	protected virtual void Update() {
