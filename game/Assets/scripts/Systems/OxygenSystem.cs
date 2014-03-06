@@ -4,7 +4,7 @@ using System.Collections;
 public class OxygenSystem : SystemBase {
 
 	float timer = 0f;
-	public float delay = 3f;
+	public float delay = .5f;
 
 	public float oxygenSupply;
 	public float maxOxygenSupply = 100f;
