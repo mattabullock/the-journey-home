@@ -19,6 +19,9 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	public Animator anim;
 	public GameObject gun;
 	Animator gunAnim;
+	OxygenSystem oSys;
+
+	PlayerHealth pHealth;
 
 	bool gotFirstUpdate = false;
 
@@ -28,6 +31,8 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	void Start () {
 		cc = GetComponent<CharacterController> ();
 		gunAnim = gun.GetComponent<Animator> ();
+		pHealth = GetComponent<PlayerHealth> ();
+		oSys = GameObject.FindObjectOfType<OxygenSystem> ();
 	}
 
 	void OnTriggerStay(Collider c){
@@ -37,6 +42,14 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	}
 
 	void OnGUI(){
+		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 10, 
+		                   	pHealth.currentHitPoints*pHealth.healthBarLength/pHealth.hitPoints, 20), 
+		         			Mathf.Floor (pHealth.currentHitPoints) + "/" + pHealth.hitPoints);
+
+		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 40, 
+		                   	oSys.currentHitPoints*pHealth.healthBarLength/oSys.hitPoints, 20), 
+		         			Mathf.Floor (oSys.currentHitPoints) + "/" + oSys.hitPoints);
+
 		GameObject[] systems = GameObject.FindGameObjectsWithTag("interactive");
 		foreach(GameObject g in systems) {
 			Vector3 transformPoint = g.transform.position;
