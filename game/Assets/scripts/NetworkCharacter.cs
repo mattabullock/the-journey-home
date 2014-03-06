@@ -43,12 +43,12 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 	void OnGUI(){
 		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 10, 
-		                   	pHealth.currentHitPoints*pHealth.healthBarLength/pHealth.hitPoints, 20), 
+		                   	pHealth.healthBarLength, 20), 
 		         			Mathf.Floor (pHealth.currentHitPoints) + "/" + pHealth.hitPoints);
 
 		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 40, 
-		                   	oSys.currentHitPoints*pHealth.healthBarLength/oSys.hitPoints, 20), 
-		         			Mathf.Floor (oSys.currentHitPoints) + "/" + oSys.hitPoints);
+		                   	pHealth.healthBarLength, 20), 
+		         			Mathf.Floor (oSys.oxygenSupply) + "/" + oSys.hitPoints);
 
 		GameObject[] systems = GameObject.FindGameObjectsWithTag("interactive");
 		foreach(GameObject g in systems) {
