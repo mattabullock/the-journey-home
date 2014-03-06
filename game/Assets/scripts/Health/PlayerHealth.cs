@@ -9,6 +9,10 @@ public class PlayerHealth : HealthBase {
 	protected override void Start () {
 		base.Start ();
 	}
+
+	protected void OnGUI() {
+		GUI.Box (new Rect (Screen.width - healthBarLength - 10, 10, healthBarLength, 20), Mathf.Floor (currentHitPoints) + "/" + hitPoints);
+	}
 	
 	[RPC]
 	public override void TakeDamage(float amt) {

@@ -42,10 +42,6 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	}
 
 	void OnGUI(){
-		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 10, 
-		                   	pHealth.healthBarLength, 20), 
-		         			Mathf.Floor (pHealth.currentHitPoints) + "/" + pHealth.hitPoints);
-
 		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 40, 
 		                   	pHealth.healthBarLength, 20), 
 		         			Mathf.Floor (oSys.oxygenSupply) + "/" + oSys.hitPoints);

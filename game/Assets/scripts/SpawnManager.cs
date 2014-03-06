@@ -14,6 +14,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 	public Camera respawnCam;
 	bool respawnCamEnabled = false;
 	public static bool isGameOver = false;
+	public static bool win = false;
 
 	// Use this for initialization
 	void Start () {
@@ -67,18 +68,17 @@ public class SpawnManager : Photon.MonoBehaviour {
 				spawned = true;
 				spawnPlayer ();
 			}
-			if (PhotonNetwork.isMasterClient) {
-				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-			}
 		}
 	}
 
 	void OnGUI() {
+
 		if (!respawnCamEnabled) {
 			GUILayout.Label (PhotonNetwork.connectionStateDetailed.ToString ());
+			if(win) {
+				GUI.Box (new Rect(Screen.width/2, Screen.height/2, 100, 30), "YOU WIN!");
+				StartCoroutine(winFunction());
+			}
 		} else if(isGameOver) {
 			GUILayout.Label("GAME OVER.");
 		}else {
@@ -91,6 +91,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 		PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(19.18432f, 0.5094447f, -20.10653f), Quaternion.identity, 0, null);
 		PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
 		PhotonNetwork.InstantiateSceneObject ("OxygenSystem", new Vector3(39.28933f, .5f, 19.38437f), Quaternion.identity, 0, null);
+		PhotonNetwork.InstantiateSceneObject ("EngineSystem", new Vector3 (0.9676633f, 1.648776f, 39.82158f), Quaternion.identity, 0, null);
 	}
 
 	public void spawnPlayer() {
@@ -107,8 +108,14 @@ public class SpawnManager : Photon.MonoBehaviour {
 
 	}
 
+	IEnumerator winFunction() {
+		yield return new WaitForSeconds (5);
+		Application.Quit ();
+	}
+
 	IEnumerator gameOver() {
 		yield return new WaitForSeconds (5);
+		respawnCam.gameObject.SetActive(true);
 		foreach(PlayerHealth p in FindObjectsOfType<PlayerHealth>()) {
 			p.Die();
 		}

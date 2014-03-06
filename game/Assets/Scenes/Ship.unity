@@ -6648,6 +6648,7 @@ GameObject:
   - 114: {fileID: 1030553582}
   - 114: {fileID: 1030553581}
   - 114: {fileID: 1030553584}
+  - 114: {fileID: 1030553585}
   m_Layer: 0
   m_Name: _SCRIPTS
   m_TagString: Untagged
@@ -6711,6 +6712,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AssaultBulletSFX: {fileID: 8300000, guid: 6eb8422e82fcf4bf99d65c70df814527, type: 3}
+--- !u!114 &1030553585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1030553580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd23db086198440797f5f1b10c46677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  spawnDelay: 3
 --- !u!1 &1035576002
 GameObject:
   m_ObjectHideFlags: 0
