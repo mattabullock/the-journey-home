@@ -28,6 +28,9 @@ public class OxygenSystem : SystemBase {
 				SpawnManager.isGameOver = true;
 			}
 		}
+		if(oxygenSupply > 0) {
+			oxygenSupply = 0;
+		}
 	}
 	
 	protected override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {

@@ -28,7 +28,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 
 	void Update() {
 		if (isGameOver) {
-			gameOver();
+			StartCoroutine(gameOver());
 		}
 		if (hBay == null) {
 			hBay = GameObject.FindObjectOfType<HealthBay> ();
