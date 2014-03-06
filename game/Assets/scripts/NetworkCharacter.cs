@@ -105,13 +105,13 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		if (stream.isWriting) {
 			stream.SendNext (transform.position);
 			stream.SendNext (transform.rotation);
-			stream.SendNext (gameObject.GetComponent<Health>().currentHitPoints);
+			stream.SendNext (gameObject.GetComponent<HealthBase>().currentHitPoints);
 			stream.SendNext (anim.GetFloat("Speed"));
 			stream.SendNext (anim.GetBool("Dead"));
 		} else {
 			realPosition = (Vector3)stream.ReceiveNext();
 			realRotation = (Quaternion)stream.ReceiveNext();
-			gameObject.GetComponent<Health>().currentHitPoints = (float)stream.ReceiveNext();
+			gameObject.GetComponent<HealthBase>().currentHitPoints = (float)stream.ReceiveNext();
 			anim.SetFloat ("Speed", (float)stream.ReceiveNext());
 			anim.SetBool ("Dead", (bool)stream.ReceiveNext());
 

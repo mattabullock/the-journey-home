@@ -18,13 +18,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 	void Start () {
 		Screen.lockCursor = true;
 		if (PhotonNetwork.isMasterClient) {
-			PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(19.18432f, 0.5094447f, -20.10653f), Quaternion.identity, 0, null);
-			PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
-			PhotonNetwork.InstantiateSceneObject ("OxygenSystem", new Vector3(39.28933f, 7.594366e-18f, 19.38437f), Quaternion.identity, 0, null);
-			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
-			PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+			spawnStuff ();
 		}
 
 		hBay = GameObject.FindObjectOfType<HealthBay> ();
@@ -86,12 +80,18 @@ public class SpawnManager : Photon.MonoBehaviour {
 		}
 	}
 
+	void spawnStuff() {
+		PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(19.18432f, 0.5094447f, -20.10653f), Quaternion.identity, 0, null);
+		PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
+		PhotonNetwork.InstantiateSceneObject ("OxygenSystem", new Vector3(39.28933f, 7.594366e-18f, 19.38437f), Quaternion.identity, 0, null);
+	}
+
 	public void spawnPlayer() {
 		SpawnSpot mySpawn = spawnSpots [Random.Range (0, spawnSpots.Length)];
 		
 		GameObject myPlayerGO = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawn.transform.position, mySpawn.transform.rotation, 0);
 		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
-		((MonoBehaviour) myPlayerGO.GetComponent ("Health")).enabled = true;
+		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerHealth")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);

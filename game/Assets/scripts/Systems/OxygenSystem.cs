@@ -33,9 +33,9 @@ public class OxygenSystem : SystemBase {
 	protected override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
 		base.OnPhotonSerializeView (stream, info);
 		if (stream.isWriting) {
-			
+			stream.SendNext(oxygenSupply);
 		} else if (stream.isReading) {
-			
+			oxygenSupply = (float) stream.ReceiveNext();
 		}
 	}
 	
