@@ -7,6 +7,7 @@ public class EngineSystem : SystemBase {
 	protected override void Start () {
 		base.Start ();
 		currentHitPoints = 0;
+		down = true;
 	}
 	
 	
@@ -14,6 +15,11 @@ public class EngineSystem : SystemBase {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update ();
+		if (down && currentHitPoints > 0) {
+			down = false;
+		} else if(!down && currentHitPoints <= 0) {
+			down = true;
+		}
 		if(currentHitPoints >= 100 && !SpawnManager.win) {
 			SpawnManager.win = true;
 		}
