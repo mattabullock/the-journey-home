@@ -13,6 +13,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 	public float respawn = 5f;
 	public Camera respawnCam;
 	bool respawnCamEnabled = false;
+	public static bool gameOver = false;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +27,9 @@ public class SpawnManager : Photon.MonoBehaviour {
 	}
 
 	void Update() {
+		if (gameOver) {
+			gameOver();
+		}
 		if (hBay == null) {
 			hBay = GameObject.FindObjectOfType<HealthBay> ();
 		}
@@ -75,9 +79,12 @@ public class SpawnManager : Photon.MonoBehaviour {
 	void OnGUI() {
 		if (!respawnCamEnabled) {
 			GUILayout.Label (PhotonNetwork.connectionStateDetailed.ToString ());
-		} else {
+		} else if(gameOver) {
+			GUILayout("GAME OVER");
+		}else {
 			GUILayout.Label("You will respawn in " + Mathf.Ceil(respawn - respawnTimer) + " seconds.");
 		}
+
 	}
 
 	void spawnStuff() {
@@ -98,6 +105,16 @@ public class SpawnManager : Photon.MonoBehaviour {
 		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Minimap").gameObject.SetActive (true);
 
+	}
+
+	IEnumerator gameOver() {
+		yield return new WaitForSeconds (5);
+		foreach(PlayerHealth p in FindObjectsOfType<PlayerHealth>()) {
+			p.Die();
+			SpawnManager.gameOver = true;
+		}
+		yield return new WaitForSeconds (10);
+		Application.Quit ();
 	}
 	
 }

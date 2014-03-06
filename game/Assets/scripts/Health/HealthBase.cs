@@ -29,8 +29,8 @@ public class HealthBase : Photon.MonoBehaviour {
 		}
 	}
 	
-	protected virtual void Die() {
-		if( PhotonNetwork.isMasterClient ) {
+	public virtual void Die() {
+		if( photonView.isMine ) {
 			PhotonNetwork.Destroy(gameObject);
 		}
 	}
