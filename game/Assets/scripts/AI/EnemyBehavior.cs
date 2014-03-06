@@ -72,7 +72,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	void AttackTarget() {
 		if(currTarget != null){
 			if(Vector3.Distance(transform.position, currTarget.transform.position) < 1) {
-				currTarget.GetComponent<Health>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+				currTarget.GetComponent<HealthBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
 			}
 		}
 	}

@@ -45,6 +45,7 @@ public class PlayerShooting : MonoBehaviour {
 		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 1000000, FinalMask);
 
 		Transform hitTransform = hit.transform;
+		Debug.Log ("You hit: " + hit.transform);
 
 		if (hitTransform != null && hitTransform.tag == "Level Part") {
 			Instantiate(decalHitWall,  hit.point + 
@@ -52,12 +53,12 @@ public class PlayerShooting : MonoBehaviour {
 		}
 
 		if(hitTransform != null) {
-			if(hitTransform.tag == "interactive" || hitTransform.tag == "enemy") {
-				Health h = hitTransform.GetComponent<Health>();
+			if(hitTransform.tag == "interactive" || hitTransform.tag == "Enemy") {
+				HealthBase h = hitTransform.GetComponent<HealthBase>();
 				
 				while(h == null && hitTransform.parent) {
 					hitTransform = hitTransform.parent;
-					h = hitTransform.GetComponent<Health>();
+					h = hitTransform.GetComponent<HealthBase>();
 				}
 
 				if(h == null) {

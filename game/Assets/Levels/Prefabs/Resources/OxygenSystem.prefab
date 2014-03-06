@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: OxygenSystem
-  m_TagString: Untagged
+  m_TagString: interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
   synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
-  instantiationId: 0
+  instantiationId: -1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,6 +106,8 @@ MonoBehaviour:
   currentHitPoints: 0
   healthBarLength: 0
   threshold: 50
+  delay: 3
+  oxygenSupply: 100
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

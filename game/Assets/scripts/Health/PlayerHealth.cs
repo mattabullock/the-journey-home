@@ -1,24 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Health : Photon.MonoBehaviour {
-	
-	public float hitPoints = 100f;
-	public float currentHitPoints;
+public class PlayerHealth : HealthBase {
+
 	public Animator anim;
-	float healthBarLength = 60f;
 
 	// Use this for initialization
 	void Start () {
-		currentHitPoints = hitPoints;
-	}
-
-	void OnGUI() {
-		GUI.Box (new Rect(Screen.width - 10 - healthBarLength, 70, healthBarLength, 20), Mathf.Floor(currentHitPoints) + "/" + hitPoints);
+		base.Start ();
 	}
 	
 	[RPC]
-	public void TakeDamage(float amt) {
+	public override void TakeDamage(float amt) {
 		if (currentHitPoints <= 0) {
 			currentHitPoints = 0;
 			return;
@@ -42,10 +35,5 @@ public class Health : Photon.MonoBehaviour {
 			SpawnManager.dead = true;
 		}
 	}
-
-	void Die() {
-		if( photonView.isMine ) {
-			PhotonNetwork.Destroy(gameObject);
-		}
-	}
+	
 }

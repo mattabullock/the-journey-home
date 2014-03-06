@@ -91,7 +91,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 		
 		GameObject myPlayerGO = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawn.transform.position, mySpawn.transform.rotation, 0);
 		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
-		((MonoBehaviour) myPlayerGO.GetComponent ("Health")).enabled = true;
+		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerHealth")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
