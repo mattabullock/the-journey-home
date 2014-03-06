@@ -28,7 +28,7 @@ public class OxygenSystem : SystemBase {
 				SpawnManager.isGameOver = true;
 			}
 		}
-		if(oxygenSupply > 0) {
+		if(oxygenSupply < 0) {
 			oxygenSupply = 0;
 		}
 	}

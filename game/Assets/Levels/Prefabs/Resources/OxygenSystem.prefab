@@ -106,8 +106,10 @@ MonoBehaviour:
   currentHitPoints: 0
   healthBarLength: 200
   threshold: 50
-  delay: 3
+  currentCell: {fileID: 0}
+  delay: .5
   oxygenSupply: 100
+  maxOxygenSupply: 100
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
