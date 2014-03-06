@@ -12,6 +12,8 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	public GameObject goalDoor;
 	public int shortestPathSoFar = int.MaxValue;
 
+	float timer = 0;
+	float timeBetweenSphereCasts = 1;
 	float waitToStart = 10;
 	float currentMoveSpeed = 5;
 	float maxMoveSpeed = 6;
@@ -41,6 +43,8 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	}
 
 	void Update(){
+		timer += Time.deltaTime;
+
 		if (photonView.isMine) {
 			if(target == null){
 				FindTarget();
@@ -50,9 +54,38 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 					FindTarget();
 				}
 			}
+
+			if(timer > timeBetweenSphereCasts){
+				timer = 0;
+				bool anyHit = false;
+				List<GameObject> newTargets = new List<GameObject>();
+
+				GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+				foreach(GameObject o in players){
+					RaycastHit[] hits = Physics.SphereCastAll(transform.position, transform.localScale.x/3, o.transform.position - transform.position, Vector3.Distance(transform.position, o.transform.position));
+					foreach(RaycastHit hit in hits){
+						if(hit.transform.tag == "Level Part")
+							anyHit = true;
+						if(!anyHit)
+							newTargets.Add(o);
+					}
+					if(newTargets.Count > 0){
+						float dist = float.MaxValue;
+						foreach(GameObject p in newTargets){
+							float newDist = Vector3.Distance(transform.position, p.transform.position);
+							if(newDist < dist){
+								target = p;
+								targetTransform = p.transform;
+								dist = newDist;
+							}
+						}
+					}
+				}
+			}
 			Move ();
 			AttackTarget();
-		} else {
+		} 
+		else {
 			transform.position = Vector3.Lerp (transform.position, realPosition, 10*Time.deltaTime);
 			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 10*Time.deltaTime);
 		}
