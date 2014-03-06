@@ -45,7 +45,6 @@ public class PlayerShooting : MonoBehaviour {
 		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 1000000, FinalMask);
 
 		Transform hitTransform = hit.transform;
-		Debug.Log ("You hit: " + hit.transform);
 
 		if (hitTransform != null && hitTransform.tag == "Level Part") {
 			Instantiate(decalHitWall,  hit.point + 
