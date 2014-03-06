@@ -51,7 +51,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		Vector2 targetPos;
 		foreach(GameObject g in GameObject.FindGameObjectsWithTag("Player")) {
 			if(g != gameObject) {
-				targetPos = Camera.main.WorldToScreenPoint (g.transform.position);
+				targetPos = GetComponent<Camera>().WorldToScreenPoint (g.transform.position);
 				float currHP = g.GetComponent<HealthBase>().currentHitPoints;
 				float maxHP = g.GetComponent<HealthBase>().hitPoints;
 				GUI.Box(new Rect(targetPos.x, Screen.height- targetPos.y, 60, 20), currHP + "/" + maxHP);
