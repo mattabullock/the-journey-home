@@ -5,6 +5,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 
 	public static SpawnSpot[] spawnSpots;
 	public static bool spawned = true;
+	public static bool mapEnemy = false;
 	bool firstSpawn = true;
 	HealthBay hBay;
 	OxygenSystem oSys;
@@ -26,6 +27,17 @@ public class SpawnManager : Photon.MonoBehaviour {
 	}
 
 	void Update() {
+
+		if (mapEnemy) {
+			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+			foreach (GameObject obj in tempList) {
+				if (obj.name.Equals ("Map")) {
+					Camera gObj = obj.camera;
+					gObj.cullingMask = (gObj.cullingMask) | (1 << LayerMask.NameToLayer("Enemy"));
+				}
+			}
+		}
+
 		if (hBay == null) {
 			hBay = GameObject.FindObjectOfType<HealthBay> ();
 		}

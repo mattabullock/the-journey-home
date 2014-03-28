@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Test Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ GameObject:
   - 33: {fileID: 3300002}
   - 65: {fileID: 6500000}
   - 23: {fileID: 2300002}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,12 +158,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCell: {fileID: 0}
+  targetCell: {fileID: 0}
   target: {fileID: 0}
   targetTransform: {fileID: 0}
-  targetCell: {fileID: 0}
   goalDoor: {fileID: 0}
   shortestPathSoFar: 2147483647
-  delay: 2
+  Health: 10
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 20
   currentHitPoints: 0
+  healthBarLength: 60
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
