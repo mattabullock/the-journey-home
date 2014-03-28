@@ -14,6 +14,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	public float maxSprint = 5f;
 	bool sprinting = false;
 
+	Vector3 lockCamPos = new Vector3 (20, 65, 20);
 	Vector3 direction = Vector3.zero;
 	CharacterController cc;
 	public Animator anim;
@@ -67,7 +68,6 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 				GUI.Box(new Rect(screenPoint.x, Screen.height - screenPoint.y, 60, 20), Mathf.Floor(currHP) + "/" + maxHP);
 			}
 		}
-
 		GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
 		foreach(GameObject g in gos) {
 			Vector3 transformPoint = g.transform.position;
@@ -89,6 +89,10 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+	//	gameObject.transform.FindChild ("Map Cam").transform.position = lockCamPos;
+	//	gameObject.transform.FindChild ("Map Cam").transform.rotation = Quaternion.Euler (90, 90, 0);
+
 		if (photonView.isMine) {
 			if(Input.GetButtonDown("Sprint") && !Input.GetButton ("Scope"))
 				sprinting = true;

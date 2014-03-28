@@ -96,6 +96,8 @@ public class SpawnManager : Photon.MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
+	//	myPlayerGO.transform.FindChild ("Map Cam").gameObject.SetActive (true);
+	//	myPlayerGO.transform.FindChild ("Map Cam").gameObject.transform.rotation = Quaternion.Euler (90, 90, 0);
 		myPlayerGO.transform.FindChild ("Minimap").gameObject.SetActive (true);
 
 	}
