@@ -90,7 +90,8 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			transform.rotation = Quaternion.Lerp (transform.rotation, realRotation, 10*Time.deltaTime);
 		}
 
-		transform.rotation = Quaternion.LookRotation(transform.position - lastPosition);
+		if(transform.position - lastPosition != Vector3.zero)
+			transform.rotation = Quaternion.LookRotation(transform.position - lastPosition);
 		lastPosition = transform.position;
 	}
 

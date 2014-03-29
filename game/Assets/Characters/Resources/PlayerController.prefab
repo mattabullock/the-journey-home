@@ -1796,7 +1796,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c29ca231ff14793ab0adff9758beaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: .100000001
   cooldown: 0
   repairDistance: 5
 --- !u!114 &11400002

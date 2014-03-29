@@ -10,7 +10,7 @@ public class EnemySpawnManager : MonoBehaviour {
 	void Start () {
 		if (PhotonNetwork.isMasterClient) {
 			for(int i = 0; i < 10; i++) {
-				PhotonNetwork.Instantiate("Test Enemy", new Vector3(1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+				PhotonNetwork.Instantiate("Test Enemy", transform.position, Quaternion.identity, 0, null);
 			}
 		}
 	}
@@ -21,7 +21,7 @@ public class EnemySpawnManager : MonoBehaviour {
 			timer += Time.deltaTime;
 			if (timer > spawnDelay) {
 				timer = 0;
-				PhotonNetwork.Instantiate ("Test Enemy", new Vector3 (1.899121f, 0.5744562f, -3.08994f), Quaternion.identity, 0, null);
+				PhotonNetwork.Instantiate ("Test Enemy", transform.position, Quaternion.identity, 0, null);
 			}
 		}
 	}

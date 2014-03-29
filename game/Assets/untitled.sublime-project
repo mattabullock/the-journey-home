@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "scripts",
+            "file_exclude_patterns": ["*.meta"]
+		}
+	]
+}

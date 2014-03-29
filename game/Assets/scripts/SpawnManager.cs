@@ -15,6 +15,8 @@ public class SpawnManager : Photon.MonoBehaviour {
 	bool respawnCamEnabled = false;
 	public static bool isGameOver = false;
 	public static bool win = false;
+	public static float repairDelay = 0.7f;
+	public static bool mapEnemy = false;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +39,17 @@ public class SpawnManager : Photon.MonoBehaviour {
 		if (oSys == null) {
 			oSys = GameObject.FindObjectOfType<OxygenSystem> ();
 		}
+
+		if (mapEnemy) {
+ 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+ 			foreach (GameObject obj in tempList) {
+ 				if (obj.name.Equals ("Map")) {
+ 					Camera gObj = obj.camera;
+ 					gObj.cullingMask = (gObj.cullingMask) | (1 << LayerMask.NameToLayer("Enemy"));
+ 				}
+ 			}
+ 		}
+
 		if (dead) {
 			if(!respawnCamEnabled) {
 				respawnCam.gameObject.SetActive(true);
@@ -90,8 +103,9 @@ public class SpawnManager : Photon.MonoBehaviour {
 	void spawnStuff() {
 		PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(19.18432f, 0.5094447f, -20.10653f), Quaternion.identity, 0, null);
 		PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
-		PhotonNetwork.InstantiateSceneObject ("OxygenSystem", new Vector3(39.28933f, .5f, 19.38437f), Quaternion.identity, 0, null);
+		PhotonNetwork.InstantiateSceneObject ("EngineeringBay", new Vector3(39.28933f, .5f, 19.38437f), Quaternion.identity, 0, null);
 		PhotonNetwork.InstantiateSceneObject ("EngineSystem", new Vector3 (0.9676633f, 1.648776f, 39.82158f), Quaternion.identity, 0, null);
+		PhotonNetwork.InstantiateSceneObject ("alienspawn", new Vector3 (0.07145321f, 1f, 0.2024408f), new Quaternion(-90,0,0,0), 0, null);
 	}
 
 	public void spawnPlayer() {

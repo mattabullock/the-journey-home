@@ -1,0 +1,478 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ClassBody",
+				"ClassBodyNode"
+			],
+			[
+				"makeClass",
+				"makeClassDeclarationNode"
+			],
+			[
+				"ClassDecl",
+				"ClassDeclarationNode"
+			],
+			[
+				"ClassDe",
+				"ClassDeclarationNode"
+			],
+			[
+				"c",
+				"c"
+			],
+			[
+				"get",
+				"get_or_create"
+			],
+			[
+				"position",
+				"position_choices"
+			],
+			[
+				"ac",
+				"active_members"
+			],
+			[
+				"Male",
+				"Male"
+			],
+			[
+				"sign",
+				"sign_up"
+			],
+			[
+				"gender",
+				"gender_options"
+			],
+			[
+				"cl",
+				"cleaned_data"
+			],
+			[
+				"Model",
+				"ModelForm"
+			],
+			[
+				"vote",
+				"vote_choices"
+			],
+			[
+				"voice_part",
+				"voice_part_choices"
+			],
+			[
+				"goo",
+				"google_oauth2"
+			],
+			[
+				"list",
+				"listjobs"
+			],
+			[
+				"user",
+				"user_compare"
+			],
+			[
+				"challe",
+				"challengerSocket"
+			],
+			[
+				"set",
+				"setAttribute"
+			],
+			[
+				"del_cal",
+				"del_cal_name"
+			],
+			[
+				"cal-",
+				"cal-desciption"
+			],
+			[
+				"data",
+				"dataString"
+			],
+			[
+				"reg",
+				"reg_form"
+			],
+			[
+				"Http",
+				"HttpResponseRedirect"
+			],
+			[
+				"toggle",
+				"toggle_visibility"
+			],
+			[
+				"Fo",
+				"ForeignKey"
+			],
+			[
+				"re",
+				"HttpResponseRedirect"
+			],
+			[
+				"song",
+				"song_name"
+			],
+			[
+				"a",
+				"AutoField"
+			],
+			[
+				"au",
+				"auth"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"install package",
+				"Package Control: Install Package"
+			],
+			[
+				"add repo",
+				"Package Control: Add Repository"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/matt/Documents/games/the-journey-home/game/Assets/untitled.sublime-project",
+		"/Users/matt/Documents/games/the-journey-home/game/Assets/scripts/Systems/EngineSystem.cs",
+		"/Users/matt/Documents/games/the-journey-home/game/Assets/scripts/Systems/EngineeringBay.cs",
+		"/Users/matt/Documents/workspace/Bullock-419742/Labs/3/jmm.cup",
+		"/Users/matt/Dropbox/ta emails",
+		"/Users/matt/Documents/school/cse316/hw4.py",
+		"/Users/matt/Documents/school/cse132ta/lab3b.txt",
+		"/Users/matt/Downloads/MyTabBar/Classes/MyTabBarAppDelegate.m",
+		"/Users/matt/Downloads/MyTabBar/Classes/MyViewController.m",
+		"/Users/matt/Documents/projects/Baseball-GDT-Bot/src/main.py",
+		"/Users/matt/Documents/projects/Baseball-GDT-Bot/src/maintest.py",
+		"/Users/matt/Documents/games/the-journey-home/game/Assets/scripts/Advancedscope.js",
+		"/Users/matt/Downloads/MultiFPS - ep 10/Assets/PlayerStuff/Scripts/PlayerMovement.cs",
+		"/Users/matt/Documents/school/cse436/Bullock-Lab3/Bullock-Lab3/AppDelegate.m",
+		"/Users/matt/Documents/school/cse132ta/lab2b",
+		"/Users/matt/Documents/school/cse132ta/lab3b",
+		"/Users/matt/Documents/school/cse132ta/lab2acomment",
+		"/Users/matt/Downloads/MultiFPS - ep 13/Assets/NetworkManager.cs",
+		"/Users/matt/Downloads/MultiFPS - ep 13/Assets/NetworkCharacter.cs",
+		"/Users/matt/Downloads/MultiFPS - ep 13/Assets/Health.cs",
+		"/Users/matt/Downloads/MyTabBar/Classes/MyTabBarAppDelegate.h",
+		"/Users/matt/Dropbox/Amateurs/Album talkz",
+		"/Users/matt/Documents/school/cse316/homework 2b/nash.py",
+		"/Users/matt/Documents/school/cse316/homework 2b/bad.txt",
+		"/Users/matt/Documents/school/cse316/homework 2b/file5.txt",
+		"/Users/matt/Documents/school/cse316/homework 2b/file.txt",
+		"/Users/matt/Documents/school/cse316/homework 2b/file3.txt",
+		"/Users/matt/Documents/school/cse316/homework 2b/file4.txt",
+		"/Users/matt/Documents/school/cse316/homework 2b/file2.txt",
+		"/Users/matt/Documents/projects/geeklet-scripts/nhl.py",
+		"/Users/matt/Documents/projects/geeklet-scripts/coinbase-ticker.py",
+		"/Users/matt/Desktop/pygaltest.py",
+		"/Users/matt/Downloads/calendar_events.glet",
+		"/Users/matt/Documents/school/cse316/nash.py",
+		"/Users/matt/Documents/school/cse450/videogameprogrammingassignment",
+		"/Users/matt/Desktop/wustlkeys",
+		"/Applications/VLC.app/Contents/MacOS/share/lua/sd/nhl.24.12.Fix.luac",
+		"/Users/matt/Documents/projects/amateurs-website/amateurs/urls.py",
+		"/Users/matt/Documents/projects/amateurs-website/core/templates/core/base.html",
+		"/Users/matt/Documents/projects/amateurs-website/auth/templates/auth/login.html",
+		"/Users/matt/Documents/projects/amateurs-website/auth/views.py",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/templates/auditions/schedule.html",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/views.py",
+		"/Users/matt/Documents/projects/amateurs-website/songboard/views.py",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/templates/auditions/auditionee.html",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/templates/auditions/edit_email.html",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/templates/auditions/import.html",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/templates/auditions/signup.html",
+		"/Users/matt/Documents/projects/amateurs-website/songboard/templates/songboard/edit.html",
+		"/Users/matt/Documents/projects/amateurs-website/members/templates/members/edit_profile.html",
+		"/Users/matt/Documents/projects/amateurs-website/songboard/templates/songboard/index.html",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/urls.py",
+		"/Users/matt/Documents/projects/amateurs-website/songboard/urls.py",
+		"/Users/matt/Documents/projects/amateurs-website/core/urls.py",
+		"/Users/matt/Documents/projects/amateurs-website/members/admin.py",
+		"/Users/matt/Documents/projects/amateurs-website/members/forms.py",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/models.py",
+		"/Users/matt/Documents/projects/amateurs-website/members/urls.py",
+		"/Users/matt/Documents/projects/amateurs-website/members/templates/members/view_profile.html",
+		"/Users/matt/Documents/projects/amateurs-website/members/templates/members/index.html",
+		"/Users/matt/Documents/projects/amateurs-website/core/templates/flatpages/default.html",
+		"/Users/matt/Documents/projects/amateurs-website/amateurs/settings.py",
+		"/Users/matt/Documents/projects/amateurs-website/core/models.py",
+		"/Users/matt/Documents/projects/amateurs-website/amateurs/templates/flatpages/default.html",
+		"/Users/matt/Documents/projects/amateurs-website/members/models.py",
+		"/Users/matt/Documents/projects/amateurs-website/members/views.py",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/forms.py",
+		"/Users/matt/Documents/projects/amateurs-website/core/views.py",
+		"/Users/matt/Documents/projects/amateurs-website/core/admin.py",
+		"/Users/matt/Documents/projects/amateurs-website/songboard/admin.py",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/admin.py",
+		"/Users/matt/Documents/projects/amateurs-website/auditions/templates/auditions/index.html",
+		"/Users/matt/Documents/projects/amateurs-website/auth/forms.py",
+		"/Users/matt/Documents/projects/amateurs-website/core/static/styles.css",
+		"/Users/matt/Documents/projects/amateurs-website/auth/models.py",
+		"/Users/matt/Documents/projects/amateurs-website/songboard/forms.py",
+		"/Users/matt/Documents/projects/amateurs-website/songboard/models.py",
+		"/Users/matt/Documents/projects/amateurs-website/.gitignore",
+		"/Users/matt/Documents/projects/amateurs-website/auth/urls.py",
+		"/Users/matt/Documents/projects/amateurs-website/auth/templates/login.html",
+		"/Users/matt/Documents/projects/amateurs-website/amateurs/auth_backend.py"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"",
+			"/Users/matt/Documents/projects/amateurs-website",
+			"views.py",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"instance",
+			"qualifiedname",
+			"system.out.print",
+			";",
+			"Paul\\tS",
+			"Sam\\tS",
+			"Ben\\tG",
+			"Ben G",
+			"Jared\\tMayron",
+			"Lyall\\tCooper",
+			"Jake\\tGordon",
+			" +",
+			"(Sun|Mon|Wed|Tue) Feb [0-9]{1,2} [0-9]{2}:[0-9]{2}:[0-9]{2} CST 2014",
+			"(Sun|Mon|Wed|Tue) Feb [0-9]{1|2} [0-9]{2}:[0-9]{2}:[0-9]{2} CST 2014",
+			"(Sun|Mon|Wed|Tue) Feb [0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} CST 2014",
+			" +",
+			"(Sun|Mon|Wed|Tue) Feb [0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} CST 2014",
+			"\\s+// *((\\S)([ \\t\\r\\v\\f]*))*",
+			" *\\(\\* -*\\d+ \\*\\)",
+			"\\(\\* -*\\d+ \\*\\)",
+			"    ",
+			"print",
+			"alice",
+			"\\n",
+			"sigma",
+			"\\n",
+			"example.com",
+			"strftime",
+			"get(",
+			"get",
+			"likes_cheese",
+			"core/login",
+			"else",
+			"printf",
+			"printfi",
+			"printf",
+			"sigcont",
+			"sigint",
+			"eval",
+			"waitpid",
+			"kill",
+			"sigint_handler",
+			".",
+			"Fork",
+			"console.log",
+			"appendchild",
+			"game_over",
+			"users_changed",
+			"resetball",
+			"s.emit",
+			"sock",
+			"reg_",
+			"/t"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			",",
+			"PaulS",
+			"SamS",
+			"BenG",
+			"JaredMayron",
+			"LyallCooper",
+			"JakeGordon",
+			"\\t",
+			"",
+			"\\t",
+			"",
+			"  ",
+			";",
+			"    "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "untitled.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"manage.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 202.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Interaction : MonoBehaviour {
 	
-	public float delay = .1f; 
 	public float cooldown = 0f;
 	public float repairDistance = 5f;
 
@@ -13,6 +12,24 @@ public class Interaction : MonoBehaviour {
 		if (Input.GetButton ("Interact") && !Input.GetButton ("Shoot")) {
 			interact();
 		}
+
+		if (Input.GetButton ("Map")) {
+ 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+ 			foreach (Object obj in tempList) {
+ 				if (obj.name.Equals ("Map")) {
+ 					GameObject gObj = (GameObject)obj;
+ 					gObj.SetActive (true);
+ 				}
+ 			}
+ 		} else {
+ 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+ 			foreach (Object obj in tempList) {
+ 				if (obj.name.Equals ("Map")) {
+ 					GameObject gObj = (GameObject)obj;
+ 					gObj.SetActive (false);
+ 				}
+ 			}
+  		}
 	}
 
 	void interact() {
@@ -36,7 +53,7 @@ public class Interaction : MonoBehaviour {
 			}
 		}
 
-		cooldown = delay;
+		cooldown = SpawnManager.repairDelay;
 	}
 }
 	
