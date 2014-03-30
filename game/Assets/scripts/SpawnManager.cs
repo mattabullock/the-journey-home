@@ -19,6 +19,9 @@ public class SpawnManager : Photon.MonoBehaviour {
 	public static bool win = false;
 	public static float repairDelay = 0.7f;
 	public static bool mapEnemy = false;
+	public static bool maskChanged = false;
+	int noEnemyMask;
+	int enemyMask;
 
 	string[] systems = new string[]
 		{
@@ -41,6 +44,17 @@ public class SpawnManager : Photon.MonoBehaviour {
 
 		hBay = GameObject.FindObjectOfType<HealthBay> ();
 		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
+
+
+		Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+ 			foreach (GameObject obj in tempList) {
+ 				if (obj.name.Equals ("Map")) {
+ 					Camera gObj = obj.camera;
+ 					noEnemyMask = gObj.cullingMask;
+ 					enemyMask = (gObj.cullingMask) | (1 << LayerMask.NameToLayer("Enemy"));
+ 					break;
+ 				}
+ 			}
 	}
 
 	void Update() {
@@ -54,12 +68,22 @@ public class SpawnManager : Photon.MonoBehaviour {
 			oSys = GameObject.FindObjectOfType<OxygenSystem> ();
 		}
 
-		if (mapEnemy) {
+		if (mapEnemy && maskChanged) {
  			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
  			foreach (GameObject obj in tempList) {
  				if (obj.name.Equals ("Map")) {
  					Camera gObj = obj.camera;
- 					gObj.cullingMask = (gObj.cullingMask) | (1 << LayerMask.NameToLayer("Enemy"));
+ 					gObj.cullingMask = enemyMask;
+ 					break;
+ 				}
+ 			}
+ 		} else if(!mapEnemy && maskChanged) {
+ 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+ 			foreach (GameObject obj in tempList) {
+ 				if (obj.name.Equals ("Map")) {
+ 					Camera gObj = obj.camera;
+ 					gObj.cullingMask = noEnemyMask;
+ 					break;
  				}
  			}
  		}
