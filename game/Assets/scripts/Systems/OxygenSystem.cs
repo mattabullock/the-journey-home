@@ -17,6 +17,7 @@ public class OxygenSystem : SystemBase {
 		base.Start ();
 		oxygenSupply = maxOxygenSupply;
 		lights = GameObject.FindGameObjectWithTag ("Lights").transform;
+
 	}
 	
 	
@@ -42,11 +43,12 @@ public class OxygenSystem : SystemBase {
 		if(changed) {
 			if(currentHitPoints <= 50) {
 				foreach (Transform child in lights) {
-					child.light.color = Color.red;
+					GameObject.FindObjectOfType<LightSystem>().lightColor = Color.red;
+					
 				}
 			} else {
 				foreach (Transform child in lights) {
-					child.light.color = Color.white;
+					GameObject.FindObjectOfType<LightSystem>().lightColor = Color.white;
 				}
 			}
 			changed = false;

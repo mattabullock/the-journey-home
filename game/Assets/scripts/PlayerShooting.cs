@@ -90,7 +90,7 @@ public class PlayerShooting : MonoBehaviour {
 							Debug.LogError("Freak out!");
 						}
 						else {
-							sh.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
+							pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
 						}
 					}
 				}
@@ -100,11 +100,19 @@ public class PlayerShooting : MonoBehaviour {
 						Debug.LogError("Freak out!");
 					}
 					else {
-						h.GetComponent<PhotonView>().RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
+						pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
 					}	
 				}
+			} else if(hitTransform.tag == "AlienSpawnPoint") {
+				EnemySpawnManager esm = hitTransform.GetComponent<EnemySpawnManager>();
+				PhotonView pv = esm.GetComponent<PhotonView>();
+				if(pv==null) {
+					Debug.LogError("Freak out!");
+				}
+				else {
+					pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
+				}	
 			}
-			
 		}
 		ammo--;
 		cooldown = fireRate;

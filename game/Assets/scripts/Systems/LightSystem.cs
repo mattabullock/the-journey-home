@@ -5,6 +5,7 @@ public class LightSystem : SystemBase {
 
 	Transform lights;
 	bool changed = false;
+	public Color lightColor;
 
 	const float flickerOn = 7f;
 	const float flickerOff = 8f;
@@ -14,6 +15,7 @@ public class LightSystem : SystemBase {
 		base.Start ();
 		currentHitPoints = 0;
 		down = true;
+		lightColor = Color.white;
 		lights = GameObject.FindGameObjectWithTag ("Lights").transform;
 		foreach (Transform child in lights) {
 			child.light.color = Color.white * 0f;
@@ -25,9 +27,10 @@ public class LightSystem : SystemBase {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update ();
+		Debug.Log(lightColor);
 		if(changed) {
 			foreach (Transform child in lights) {
-				child.light.color = Color.white * (currentHitPoints/threshold);
+				child.light.color = lightColor * (currentHitPoints/threshold);
 			}
 			changed = false;
 		}

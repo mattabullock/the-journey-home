@@ -1425,6 +1425,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &186381657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,6 +1874,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &275092094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,6 +2023,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!54 &301639865
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2536,6 +2544,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &394005175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,6 +3212,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &533873577
 GameObject:
   m_ObjectHideFlags: 0
@@ -3298,6 +3314,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &561693916
 GameObject:
   m_ObjectHideFlags: 0
@@ -4141,6 +4161,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &737362639
 GameObject:
   m_ObjectHideFlags: 0
@@ -4244,6 +4266,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &738784162
 GameObject:
   m_ObjectHideFlags: 0
@@ -4347,6 +4371,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &741185041
 GameObject:
   m_ObjectHideFlags: 0
@@ -4515,6 +4541,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &749366489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4933,6 +4963,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &784644186
 GameObject:
   m_ObjectHideFlags: 0
@@ -5881,6 +5915,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &897781071
 GameObject:
   m_ObjectHideFlags: 0
@@ -6567,6 +6603,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &989132036
 GameObject:
   m_ObjectHideFlags: 0
@@ -7095,6 +7135,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &1046810656
 GameObject:
   m_ObjectHideFlags: 0
@@ -7138,6 +7182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!54 &1046810659
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7426,6 +7474,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &1094625728
 GameObject:
   m_ObjectHideFlags: 0
@@ -7529,6 +7579,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &1108575773
 GameObject:
   m_ObjectHideFlags: 0
@@ -7926,6 +7978,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &1145675122
 GameObject:
   m_ObjectHideFlags: 0
@@ -8169,6 +8223,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1001 &1172866719
 Prefab:
   m_ObjectHideFlags: 0
@@ -8378,6 +8434,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &1229543842
 GameObject:
   m_ObjectHideFlags: 0
@@ -8756,6 +8814,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &1247898303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9274,6 +9336,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &1391921884
 GameObject:
   m_ObjectHideFlags: 0
@@ -9579,6 +9645,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &1410183356
 GameObject:
   m_ObjectHideFlags: 0
@@ -9682,6 +9750,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &1412400798
 GameObject:
   m_ObjectHideFlags: 0
@@ -10189,6 +10259,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &1470748617
 GameObject:
   m_ObjectHideFlags: 0
@@ -10919,6 +10991,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &1527265185
 GameObject:
   m_ObjectHideFlags: 0
@@ -11841,6 +11917,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &1620665607
 GameObject:
   m_ObjectHideFlags: 0
@@ -13790,6 +13870,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &1942971036
 GameObject:
   m_ObjectHideFlags: 0
@@ -14153,6 +14237,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  inhabitants: []
+  enemiesInside: 0
+  playersInside: 0
+  hasSpawner: 0
 --- !u!1 &1995134813
 GameObject:
   m_ObjectHideFlags: 0
@@ -14419,6 +14507,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &2041693999
 GameObject:
   m_ObjectHideFlags: 0
@@ -14683,6 +14773,8 @@ MonoBehaviour:
   testForCells: 1
   waitToTest: 2
   stage: 1
+  open: 0
+  health: 0
 --- !u!1 &2092261001
 GameObject:
   m_ObjectHideFlags: 0
