@@ -19,9 +19,11 @@ public class CameraSystem : SystemBase {
         base.Update ();
         if (!down && stateChanged) {
             SpawnManager.mapEnemy = true;
+            SpawnManager.maskChanged = true;
             stateChanged = false;
         } else if(down && stateChanged) {
             SpawnManager.mapEnemy = false;
+            SpawnManager.maskChanged = true;
             stateChanged = false;
         }
     }

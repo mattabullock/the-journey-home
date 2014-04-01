@@ -17,7 +17,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 	bool respawnCamEnabled = false;
 	public static bool isGameOver = false;
 	public static bool win = false;
-	public static float repairDelay = 0.7f;
+	public static float repairDelay = 0.1f;
 	public static bool mapEnemy = false;
 	public static bool maskChanged = false;
 	int noEnemyMask;
@@ -25,12 +25,13 @@ public class SpawnManager : Photon.MonoBehaviour {
 
 	string[] systems = new string[]
 		{
-			"LightSystem",
-			"HealthBay",
-			"EngineeringBay",
-			"EngineSystem",
-			"alienspawn",
 			"OxygenSystem",
+			"EngineSystem",
+			"HealthBay",
+			"alienspawn",
+			"CameraSystem",
+			"EngineeringBay",
+			"LightSystem",
 		};
 
 	// Use this for initialization
@@ -77,6 +78,7 @@ public class SpawnManager : Photon.MonoBehaviour {
  					break;
  				}
  			}
+ 			maskChanged = false;
  		} else if(!mapEnemy && maskChanged) {
  			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
  			foreach (GameObject obj in tempList) {
@@ -86,6 +88,7 @@ public class SpawnManager : Photon.MonoBehaviour {
  					break;
  				}
  			}
+ 			maskChanged = false;
  		}
 
 		if (dead) {
@@ -144,6 +147,9 @@ public class SpawnManager : Photon.MonoBehaviour {
 		systemSpawns.RemoveAt(index);
 		foreach(string s in systems) {
 			PhotonNetwork.InstantiateSceneObject (s, spawn.transform.position, spawn.transform.rotation, 0, null);
+			if(systemSpawns.Count == 0) {
+				break;
+			}
 			index = Random.Range (0, systemSpawns.Count);
 			spawn = systemSpawns[index];
 			systemSpawns.RemoveAt(index);
