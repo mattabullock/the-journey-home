@@ -52,7 +52,7 @@ public class SpawnManager : Photon.MonoBehaviour {
  				if (obj.name.Equals ("Map")) {
  					Camera gObj = obj.camera;
  					noEnemyMask = gObj.cullingMask;
- 					enemyMask = (gObj.cullingMask) | (1 << LayerMask.NameToLayer("Enemy"));
+ 					enemyMask = (gObj.cullingMask) | (1 << LayerMask.NameToLayer("Enemies"));
  					break;
  				}
  			}
