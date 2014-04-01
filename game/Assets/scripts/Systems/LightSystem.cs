@@ -4,7 +4,7 @@ using System.Collections;
 public class LightSystem : SystemBase {
 
 	Transform lights;
-	bool changed = false;
+	public bool changed = false;
 	public Color lightColor;
 
 	const float flickerOn = 7f;
@@ -27,7 +27,6 @@ public class LightSystem : SystemBase {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update ();
-		Debug.Log(lightColor);
 		if(changed) {
 			foreach (Transform child in lights) {
 				child.light.color = lightColor * (currentHitPoints/threshold);

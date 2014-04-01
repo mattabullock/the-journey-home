@@ -25,7 +25,7 @@ public class PlayerHealth : HealthBase {
 			StartCoroutine(hitFlicker ());
 		}
 
-		currentHitPoints -= amt;
+		// currentHitPoints -= amt;
 		
 		if(currentHitPoints <= 0) {
 			anim.SetBool("Dead", true);
