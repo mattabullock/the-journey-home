@@ -3,7 +3,8 @@ using System.Collections;
 
 public class LightSystem : SystemBase {
 
-	GameObject lights;
+	Transform lights;
+	bool changed = false;
 
 	const float flickerOn = 7f;
 	const float flickerOff = 8f;
@@ -13,7 +14,10 @@ public class LightSystem : SystemBase {
 		base.Start ();
 		currentHitPoints = 0;
 		down = true;
-		lights = GameObject.FindGameObjectWithTag ("Lights");
+		lights = GameObject.FindGameObjectWithTag ("Lights").transform;
+		foreach (Transform child in lights) {
+			child.light.color = Color.white * 0f;
+		}
 	}
 
 
@@ -21,10 +25,11 @@ public class LightSystem : SystemBase {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update ();
-		if (down && lights.activeSelf) {
-			lights.SetActive (false);
-		} else if(!down && !lights.activeSelf) {
-			lights.SetActive(true);
+		if(changed) {
+			foreach (Transform child in lights) {
+				child.light.color = Color.white * (currentHitPoints/threshold);
+			}
+			changed = false;
 		}
 	}
 
@@ -43,10 +48,11 @@ public class LightSystem : SystemBase {
 			return;	
 		} else if (currentHitPoints + amt > hitPoints) {
 			currentHitPoints = hitPoints;
-		} else if (currentHitPoints + amt > threshold && down) {
+		} else if (currentHitPoints + amt < threshold) {
 			currentHitPoints += amt;
-			belowThresh = false;
-			StartCoroutine (trigger(flickerOn));
+			changed = true;
+//			belowThresh = false;
+//			StartCoroutine (trigger(flickerOn));
 		} else {
 			currentHitPoints += amt;
 		}
@@ -61,15 +67,18 @@ public class LightSystem : SystemBase {
 			return;
 		} else if (currentHitPoints - amt <= 0) {
 			currentHitPoints = 0;
-			if(!belowThresh) {
-				StartCoroutine (trigger(flickerOff));
-				belowThresh = true;
-			}
+//			if(!belowThresh) {
+//				StartCoroutine (trigger(flickerOff));
+//				belowThresh = true;
+//			}
 		} else {
-			if(!belowThresh) {
-				StartCoroutine (trigger(flickerOn));
-			}
+//			if(!belowThresh) {
+//				StartCoroutine (trigger(flickerOn));
+//			}
 			currentHitPoints -= amt;
+			if(currentHitPoints < threshold) {
+				changed = true;
+			}
 		}	
 		
 		currHealthBarLength = healthBarLength * (currentHitPoints / hitPoints);

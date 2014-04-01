@@ -4,12 +4,13 @@ using System.Collections;
 public class EnemySpawnManager : MonoBehaviour {
 
 	public float timer = 0f;
-	public float spawnDelay = 3f;
+	public float spawnDelay = 200f;
+	public int waveSize = 10;
 
 	// Use this for initialization
 	void Start () {
 		if (PhotonNetwork.isMasterClient) {
-			for(int i = 0; i < 1; i++) {
+			for(int i = 0; i < waveSize; i++) {
 				PhotonNetwork.Instantiate("Test Enemy", transform.position, Quaternion.identity, 0, null);
 			}
 		}
@@ -21,14 +22,10 @@ public class EnemySpawnManager : MonoBehaviour {
 			timer += Time.deltaTime;
 			if (timer > spawnDelay) {
 				timer = 0;
-				PhotonNetwork.Instantiate ("Test Enemy", transform.position, Quaternion.identity, 0, null);
+				for(int i = 0; i < 5; i++) {
+					PhotonNetwork.Instantiate("Test Enemy", transform.position, Quaternion.identity, 0, null);
+				}
 			}
-		}
-	}
-
-	void OnTriggerEnter(Collider c){
-		if(c.tag == "AIPathCell"){
-			c.gameObject.GetComponent<AIPathCell>().hasSpawner = true;
 		}
 	}
 }

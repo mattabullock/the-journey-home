@@ -18,6 +18,17 @@ public class MainMenu : Photon.MonoBehaviour {
 	bool isReady = false;
 	bool lobbyReady = false;
 
+	int listEntry = 0;
+
+	private GUIStyle listStyle = new GUIStyle();
+	private ComboBox comboBoxControl = new ComboBox();
+
+	GUIContent[] levels = new GUIContent[] 
+		{
+			new GUIContent("Ship"),
+			new GUIContent("layout"),
+		};
+
 	// Use this for initialization
 	void Start () {
 		PhotonNetwork.automaticallySyncScene = true;
@@ -129,6 +140,7 @@ public class MainMenu : Photon.MonoBehaviour {
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("Server", GUILayout.MinWidth(areaWidth/3),  GUILayout.MaxWidth(areaWidth/3));
 		GUILayout.Label("Players", GUILayout.MinWidth(areaWidth/6),  GUILayout.MaxWidth(areaWidth/6));
+		GUILayout.Label("Level", GUILayout.MinWidth(areaWidth/6),  GUILayout.MaxWidth(areaWidth/6));
 		GUILayout.EndHorizontal();
 		viewPoint = GUILayout.BeginScrollView(viewPoint, false, true);
 		foreach (RoomInfo room in PhotonNetwork.GetRoomList())
@@ -136,7 +148,8 @@ public class MainMenu : Photon.MonoBehaviour {
 			
 			GUILayout.BeginHorizontal();
 			GUILayout.Label(room.name, GUILayout.MinWidth(areaWidth/3),  GUILayout.MaxWidth(areaWidth/3));
-			GUILayout.Label(room.playerCount + "/" + room.maxPlayers, GUILayout.MinWidth(areaWidth/6),  GUILayout.MaxWidth(areaWidth/3));
+			GUILayout.Label(room.playerCount + "/" + room.maxPlayers, GUILayout.MinWidth(areaWidth/6),  GUILayout.MaxWidth(areaWidth/6));
+			GUILayout.Label((string)room.customProperties["levelName"], GUILayout.MinWidth(areaWidth/6),  GUILayout.MaxWidth(areaWidth/6));
 			if(GUILayout.Button("Connect", GUILayout.MinWidth(areaWidth/4),  GUILayout.MaxWidth(areaWidth/4))) {
 				PhotonNetwork.JoinRoom(room.name);
 			}
@@ -146,8 +159,28 @@ public class MainMenu : Photon.MonoBehaviour {
 		GUILayout.BeginHorizontal ();
 		roomName = GUILayout.TextField (roomName, 20, GUILayout.MinWidth(areaWidth/3),  GUILayout.MaxWidth(areaWidth/3));
 		roomName = Regex.Replace (roomName, "^ +$", "");
+
+		string[] ss = new string[1];
+		ExitGames.Client.Photon.Hashtable h = new ExitGames.Client.Photon.Hashtable();
+
+
+	    listStyle.normal.textColor = Color.white; 
+	    listStyle.onHover.background =
+	    listStyle.hover.background = new Texture2D(2, 2);
+	    listStyle.padding.left =
+	    listStyle.padding.right =
+	    listStyle.padding.top =
+	    listStyle.padding.bottom = 4;
+
+
+
+		listEntry = comboBoxControl.List(new Rect(50, 100, 100, 20), levels[listEntry].text, levels, listStyle );
+		
+		h.Add("levelName", levels[listEntry].text);
+	    ss[0] = "levelName";
+
 		if (GUILayout.Button("Create Room") && roomName != "") {
-			PhotonNetwork.CreateRoom(roomName,true,true,4);
+			PhotonNetwork.CreateRoom(roomName,true,true,4,h,ss);
 			roomName = "";
 		}
 		GUILayout.EndHorizontal ();
@@ -205,14 +238,14 @@ public class MainMenu : Photon.MonoBehaviour {
 			if(lobbyReady) {
 				GUILayout.FlexibleSpace();
 				if(GUILayout.Button("Start Game", GUILayout.MaxWidth(areaWidth/3))) {
-					GetComponent<PhotonView>().RPC ("loadScene", PhotonTargets.AllBuffered);
+					GetComponent<PhotonView>().RPC ("loadScene", PhotonTargets.AllBuffered, (string)PhotonNetwork.room.customProperties["levelName"]);
 				}
 				GUILayout.FlexibleSpace();
 			} else {
 				GUILayout.FlexibleSpace();
 				GUI.enabled = false;
 				if(GUILayout.Button("Start Game", GUILayout.MaxWidth(areaWidth/3))) {
-					GetComponent<PhotonView>().RPC ("loadScene", PhotonTargets.All);
+					GetComponent<PhotonView>().RPC ("loadScene", PhotonTargets.All, (string)PhotonNetwork.room.customProperties["levelName"]);
 				}
 				GUI.enabled = true;
 				GUILayout.FlexibleSpace();
@@ -227,12 +260,12 @@ public class MainMenu : Photon.MonoBehaviour {
 	}
 
 	[RPC]
-	void loadScene() {
-		PhotonNetwork.LoadLevel ("Ship");
+	void loadScene(string level) {
+		PhotonNetwork.LoadLevel (level);
 	}
 		
 	void StartGame() {
 		PhotonNetwork.room.open = false;
-		loadScene ();
+		loadScene ((string)PhotonNetwork.room.customProperties["levelName"]);
 	}
 }

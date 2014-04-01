@@ -12,10 +12,12 @@ TagManager:
   - Player
   - Enemy
   - Level Parts
-  - 
+  - SystemSpawn
   - AIPathCell
   - AIPathDoor
   - Map
+  - AlienSpawnPoint
+  - overlaymapcam
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

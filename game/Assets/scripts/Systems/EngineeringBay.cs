@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EngineeringBay : SystemBase {
 	
-	
+	bool stateChanged = false;
+
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
@@ -16,12 +17,14 @@ public class EngineeringBay : SystemBase {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update ();
-		if (!down && SpawnManager.repairDelay == .1f) {
+		if (!down && stateChanged) {
 			Debug.Log ("repair faster!");
 			SpawnManager.repairDelay = .07f;
-		} else if(down && SpawnManager.repairDelay == .07f) {
+			stateChanged = false;
+		} else if(down && stateChanged) {
 			Debug.Log ("repair slower!");
 			SpawnManager.repairDelay = .1f;
+			stateChanged = false;
 		}
 	}
 	
@@ -42,6 +45,7 @@ public class EngineeringBay : SystemBase {
 			currentHitPoints = hitPoints;
 		} else if (currentHitPoints + amt > threshold && down) {
 			down = false;
+			stateChanged = true;
 			currentHitPoints += amt;
 			belowThresh = false;
 			//			StartCoroutine (trigger(flickerOn));
@@ -61,6 +65,7 @@ public class EngineeringBay : SystemBase {
 			currentHitPoints = 0;
 			if(!belowThresh) {
 				down = true;
+				stateChanged = true;
 				//				StartCoroutine (trigger(flickerOff));
 				belowThresh = true;
 			}

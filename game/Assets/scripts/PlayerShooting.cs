@@ -3,18 +3,25 @@ using System.Collections;
 
 public class PlayerShooting : MonoBehaviour {
 	
-	public float fireRate = 0.5f;
+	public float fireRate = 0.1f;
 	float cooldown = 0;
 	public float damage = 25f;
 	public GameObject decalHitWall;
 	float floatInFrontOfWall = 0.0001f;
+	public float ammo;
+	public float maxAmmo = 20;
+	float reloadCooldown = 3f;
 	FXManager fx;
 	public GameObject gun;
 	Animator gunAnim;
+	bool reloading = false;
+
+	public GameObject muzzleFlash;
 
 	public int NavMeshLayer;
 	public int NavMeshMask;
 	public int FinalMask;
+	Transform bulletSpawn;
 
 	void Start() {
 		gunAnim = gun.GetComponent<Animator> ();
@@ -23,22 +30,37 @@ public class PlayerShooting : MonoBehaviour {
 		NavMeshLayer = 9;
 		NavMeshMask = 1 << NavMeshLayer;
 		FinalMask = ~NavMeshMask;
+		ammo = maxAmmo;
+		bulletSpawn = transform.FindChild("Main Camera").FindChild("Gun Camera").FindChild("M4A1").FindChild("BulletSpawn");
 	}
 
 	void Update () {
 		cooldown -= Time.deltaTime;
-		
-		if(Input.GetButton("Shoot") && !Input.GetButton ("Interact")) {
-			Fire ();
-			gunAnim.SetTrigger("Shoot");
+
+		if(cooldown <= 0) {
+			if(reloading) {
+				ammo = maxAmmo;
+				reloading = false;
+			}
+			if(Input.GetButton("Shoot") && !Input.GetButton ("Interact") && ammo > 0 && !reloading) {
+				Fire ();
+				gunAnim.SetTrigger("Shoot");
+				GameObject holdMuzzleFlash;
+				if(muzzleFlash != null) {
+					holdMuzzleFlash = (GameObject)Instantiate(muzzleFlash, bulletSpawn.position, bulletSpawn.rotation);
+					if(holdMuzzleFlash) {
+						holdMuzzleFlash.transform.parent = transform;
+					}
+				}
+
+			} else if ((Input.GetButton ("Shoot") && !Input.GetButton ("Interact") && ammo <= maxAmmo) || (Input.GetButton ("Reload") && ammo < maxAmmo)){
+				reload();
+			}
 		}
 		
 	}
 	
 	void Fire() {
-		if(cooldown > 0) {
-			return;
-		}
 		fx.GetComponent<PhotonView>().RPC ("AssaultBulletFX", PhotonTargets.All, Camera.main.transform.position);
 		RaycastHit hit;
 
@@ -84,8 +106,13 @@ public class PlayerShooting : MonoBehaviour {
 			}
 			
 		}
-		
+		ammo--;
 		cooldown = fireRate;
+	}
+
+	void reload() {
+		reloading = true;
+		cooldown = reloadCooldown;
 	}
 	
 	Transform FindClosestHitObject(Ray ray, out Vector3 hitPoint) {

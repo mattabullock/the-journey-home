@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpawnManager : Photon.MonoBehaviour {
 
 	public static SpawnSpot[] spawnSpots;
+	public static List<SystemSpawn> systemSpawns;
 	public static bool spawned = true;
 	bool firstSpawn = true;
 	HealthBay hBay;
@@ -18,12 +20,29 @@ public class SpawnManager : Photon.MonoBehaviour {
 	bool respawnCamEnabled = false;
 	public static bool isGameOver = false;
 	public static bool win = false;
-	public static float repairDelay = 0.7f;
+	public static float repairDelay = 0.1f;
 	public static bool mapEnemy = false;
+	public static bool maskChanged = false;
+	int noEnemyMask;
+	int enemyMask;
+
+	string[] systems = new string[]
+		{
+			"OxygenSystem",
+			"LightSystem",
+			"HealthBay",
+			"alienspawn",
+			"CameraSystem",
+			"EngineeringBay",
+			"EngineSystem",
+			
+		};
 
 	// Use this for initialization
 	void Start () {
 		Screen.lockCursor = true;
+		SystemSpawn[] systemSpawnArray = GameObject.FindObjectsOfType<SystemSpawn>();
+		systemSpawns = new List<SystemSpawn>(systemSpawnArray);
 		if (PhotonNetwork.isMasterClient) {
 			spawnStuff ();
 		}
@@ -43,15 +62,16 @@ public class SpawnManager : Photon.MonoBehaviour {
 			oSys = GameObject.FindObjectOfType<OxygenSystem> ();
 		}
 
-		if (mapEnemy) {
- 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
- 			foreach (GameObject obj in tempList) {
- 				if (obj.name.Equals ("Map")) {
- 					Camera gObj = obj.camera;
- 					gObj.cullingMask = (gObj.cullingMask) | (1 << LayerMask.NameToLayer("Enemy"));
- 				}
- 			}
- 		}
+
+		if (mapEnemy && maskChanged) {
+			Camera cam = GameObject.FindGameObjectWithTag ("overlaymapcam").camera;
+			cam.cullingMask |= 1 << LayerMask.NameToLayer("Enemies");
+			maskChanged = false;
+		} else if(!mapEnemy && maskChanged) {
+			Camera cam = GameObject.FindGameObjectWithTag ("overlaymapcam").camera;
+			cam.cullingMask &= ~(1 << LayerMask.NameToLayer("Enemies"));
+			maskChanged = false;
+		}
 
 		if (dead) {
 			if(!respawnCamEnabled) {
@@ -119,11 +139,18 @@ public class SpawnManager : Photon.MonoBehaviour {
 	}
 
 	void spawnStuff() {
-		PhotonNetwork.InstantiateSceneObject ("LightSystem", new Vector3(19.18432f, 0.5094447f, -20.10653f), Quaternion.identity, 0, null);
-		PhotonNetwork.InstantiateSceneObject ("HealthBay", new Vector3(40.51247f, 2.01f, 60.22619f), Quaternion.identity, 0, null);
-		PhotonNetwork.InstantiateSceneObject ("EngineeringBay", new Vector3(39.28933f, .5f, 19.38437f), Quaternion.identity, 0, null);
-		PhotonNetwork.InstantiateSceneObject ("EngineSystem", new Vector3 (0.9676633f, 1.648776f, 39.82158f), Quaternion.identity, 0, null);
-		PhotonNetwork.InstantiateSceneObject ("alienspawn", new Vector3 (0.07145321f, 1f, 0.2024408f), new Quaternion(-90,0,0,0), 0, null);
+		int index = Random.Range (0, systemSpawns.Count);
+		SystemSpawn spawn = systemSpawns[index];
+		systemSpawns.RemoveAt(index);
+		foreach(string s in systems) {
+			PhotonNetwork.InstantiateSceneObject (s, spawn.transform.position, spawn.transform.rotation, 0, null);
+			if(systemSpawns.Count == 0) {
+				break;
+			}
+			index = Random.Range (0, systemSpawns.Count);
+			spawn = systemSpawns[index];
+			systemSpawns.RemoveAt(index);
+		}
 	}
 
 	public void spawnPlayer() {

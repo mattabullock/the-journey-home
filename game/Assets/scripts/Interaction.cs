@@ -14,21 +14,9 @@ public class Interaction : MonoBehaviour {
 		}
 
 		if (Input.GetButton ("Map")) {
- 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
- 			foreach (Object obj in tempList) {
- 				if (obj.name.Equals ("Map")) {
- 					GameObject gObj = (GameObject)obj;
- 					gObj.SetActive (true);
- 				}
- 			}
+			GameObject.FindGameObjectWithTag ("overlaymapcam").camera.depth = 5;
  		} else {
- 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
- 			foreach (Object obj in tempList) {
- 				if (obj.name.Equals ("Map")) {
- 					GameObject gObj = (GameObject)obj;
- 					gObj.SetActive (false);
- 				}
- 			}
+			GameObject.FindGameObjectWithTag ("overlaymapcam").camera.depth = -1;
   		}
 	}
 

@@ -4,7 +4,10 @@ using System.Collections;
 public class OxygenSystem : SystemBase {
 
 	float timer = 0f;
-	public float delay = .5f;
+	public float delay = 1.0f;
+	bool changed = false;
+
+	Transform lights;
 
 	public float oxygenSupply;
 	public float maxOxygenSupply = 100f;
@@ -13,6 +16,7 @@ public class OxygenSystem : SystemBase {
 	protected override void Start () {
 		base.Start ();
 		oxygenSupply = maxOxygenSupply;
+		lights = GameObject.FindGameObjectWithTag ("Lights").transform;
 	}
 	
 	
@@ -27,9 +31,25 @@ public class OxygenSystem : SystemBase {
 			if(oxygenSupply <= 0 && !SpawnManager.isGameOver) {
 				SpawnManager.isGameOver = true;
 			}
+		} else if(!down && timer >= delay && oxygenSupply < maxOxygenSupply) {
+			timer = 0;
+			oxygenSupply++;
 		}
 		if(oxygenSupply < 0) {
 			oxygenSupply = 0;
+		}
+
+		if(changed) {
+			if(currentHitPoints <= 50) {
+				foreach (Transform child in lights) {
+					child.light.color = Color.red;
+				}
+			} else {
+				foreach (Transform child in lights) {
+					child.light.color = Color.white;
+				}
+			}
+			changed = false;
 		}
 	}
 	
@@ -56,6 +76,7 @@ public class OxygenSystem : SystemBase {
 		} else {
 			currentHitPoints += amt;
 		}
+		changed = true;
 		
 		currHealthBarLength = healthBarLength * (currentHitPoints / hitPoints);
 	}
@@ -72,9 +93,11 @@ public class OxygenSystem : SystemBase {
 				belowThresh = true;
 			}
 		} else {
-			if(!belowThresh) {
-				trigger ();
-			}
+//			if(!belowThresh) {
+//				trigger ();
+//			}
+			if(currentHitPoints <= threshold)
+				changed = true;
 			currentHitPoints -= amt;
 		}	
 		
@@ -83,7 +106,7 @@ public class OxygenSystem : SystemBase {
 
 	[RPC]
 	protected void trigger() {
-		Debug.Log ("Oxygen oh no!!");
+//		Debug.Log ("Oxygen oh no!!");
 	}
 	
 	public OxygenSystem getOxygenSystem() {
