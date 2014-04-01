@@ -125,7 +125,7 @@ public class PlayerShooting : MonoBehaviour {
 
 	void reload() {
 		if(reloadSound) {
-			audioSource.PlayOneShot(reloadSound, .3f);
+			audioSource.PlayOneShot(reloadSound, 1f);
 		}
 		reloading = true;
 		cooldown = reloadCooldown;
