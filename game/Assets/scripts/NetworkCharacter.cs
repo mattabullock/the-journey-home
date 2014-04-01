@@ -26,6 +26,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	bool gotFirstUpdate = false;
 
 	public GameObject currentCell;
+	public GameObject prevCell;
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +37,12 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider c){
+		if(currentCell != null){
+			prevCell = currentCell;
+		}
+		else{
+			prevCell = c.gameObject;
+		}
 		if(c.tag == "AIPathCell"){
 			currentCell = c.gameObject;
 		}
@@ -47,11 +54,11 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		}
 	}
 
-	void OnTriggerExit(Collider c){
-		if(c.tag == "AIPathCell"){
-			c.gameObject.GetComponent<AIPathCell>().exit(this.gameObject);
-		}
-	}
+	// void OnTriggerExit(Collider c){
+	// 	if(c.tag == "AIPathCell"){
+	// 		c.gameObject.GetComponent<AIPathCell>().exit(this.gameObject);
+	// 	}
+	// }
 
 	void OnGUI(){
 //		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 40, 

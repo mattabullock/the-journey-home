@@ -16,7 +16,9 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	Quaternion realRotation;
 
 	public float Health = 10f;
-	float damage = 0f;
+	float damage = 5f;
+	float attackTimer;
+	float timeBetweenAttacks = 1f;
 	float attackDistance = 2.5f;
 	float maxVelocity = 0.1f;
 	float maxForce = 0.1f;
@@ -33,6 +35,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
 		currentVelocity = new Vector3(0f,0f,0f);
+		attackTimer = 0f;
 	}
 
 	void Update(){
@@ -164,11 +167,17 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	void AttackTarget() {
 		if(target != null){
 			if(Vector3.Distance(transform.position, target.transform.position) <= attackDistance) {
-				if(target.tag == "Player"){
-					target.GetComponent<HealthBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+				if(attackTimer >= timeBetweenAttacks){
+					if(target.tag == "Player"){
+						target.GetComponent<HealthBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+					}
+					else{
+						target.GetComponent<SystemBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+					}
+					attackTimer = 0f;
 				}
 				else{
-					target.GetComponent<SystemBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
+					attackTimer += Time.deltaTime;
 				}
 			}
 		}
@@ -222,7 +231,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 	void steer(Vector3 pos){
 		Vector3 desiredVelocity = (pos - transform.position);
-		desiredVelocity.y = 0;
+		desiredVelocity.y = 0f;
 		desiredVelocity = desiredVelocity.normalized * maxVelocity;
 
 		Vector3 steering = desiredVelocity - currentVelocity;
