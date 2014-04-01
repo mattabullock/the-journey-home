@@ -6926,6 +6926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AssaultBulletSFX: {fileID: 8300000, guid: 6eb8422e82fcf4bf99d65c70df814527, type: 3}
+  volume: .200000003
 --- !u!1 &1035576002
 GameObject:
   m_ObjectHideFlags: 0
