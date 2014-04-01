@@ -41,6 +41,18 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter(Collider c){
+		if(c.tag == "AIPathCell"){
+			c.gameObject.GetComponent<AIPathCell>().enter(this.gameObject);
+		}
+	}
+
+	void OnTriggerExit(Collider c){
+		if(c.tag == "AIPathCell"){
+			c.gameObject.GetComponent<AIPathCell>().exit(this.gameObject);
+		}
+	}
+
 	void OnGUI(){
 //		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 40, 
 //		                   	pHealth.healthBarLength, 20), 

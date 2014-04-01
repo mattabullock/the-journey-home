@@ -10,6 +10,9 @@ public class AIPathDoor : MonoBehaviour {
 	public float waitToTest = 10;
 	public int stage = 1;
 
+	public bool open;
+	public float health;
+
 	void Awake () {
 		GameObject[] tmp = GameObject.FindGameObjectsWithTag("AIPathCell");
 		foreach(GameObject o in tmp){
@@ -18,6 +21,9 @@ public class AIPathDoor : MonoBehaviour {
 		for(int i = 0; i < cells.Count; i++){
 			doorsToCells.Add(int.MaxValue);
 		}
+
+		open = true;
+		health = 100;
 	}
 
 	void OnTriggerEnter(Collider c){

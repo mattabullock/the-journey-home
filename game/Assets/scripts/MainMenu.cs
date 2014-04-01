@@ -228,7 +228,7 @@ public class MainMenu : Photon.MonoBehaviour {
 
 	[RPC]
 	void loadScene() {
-		PhotonNetwork.LoadLevel ("layout");
+		PhotonNetwork.LoadLevel ("Ship");
 	}
 		
 	void StartGame() {

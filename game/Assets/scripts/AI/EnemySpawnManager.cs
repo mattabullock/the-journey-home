@@ -9,7 +9,7 @@ public class EnemySpawnManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (PhotonNetwork.isMasterClient) {
-			for(int i = 0; i < 10; i++) {
+			for(int i = 0; i < 1; i++) {
 				PhotonNetwork.Instantiate("Test Enemy", transform.position, Quaternion.identity, 0, null);
 			}
 		}
@@ -23,6 +23,12 @@ public class EnemySpawnManager : MonoBehaviour {
 				timer = 0;
 				PhotonNetwork.Instantiate ("Test Enemy", transform.position, Quaternion.identity, 0, null);
 			}
+		}
+	}
+
+	void OnTriggerEnter(Collider c){
+		if(c.tag == "AIPathCell"){
+			c.gameObject.GetComponent<AIPathCell>().hasSpawner = true;
 		}
 	}
 }

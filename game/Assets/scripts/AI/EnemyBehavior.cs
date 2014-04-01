@@ -5,41 +5,34 @@ using System.Collections.Generic;
 public class EnemyBehavior : Photon.MonoBehaviour {
 	public GameObject currentCell;
 	public GameObject targetCell;
-
 	public GameObject target;
-	public Transform targetTransform;
-
 	public GameObject goalDoor;
 	public int shortestPathSoFar = int.MaxValue;
+
+	public Transform targetTransform;
+	Vector3 realPosition;
+	Vector3 lastPosition;
+	Vector3 currentVelocity;
+	Quaternion realRotation;
+
+	public float Health = 10f;
+	float damage = 0f;
+	float attackDistance = 2.5f;
+	float maxVelocity = 0.1f;
+	float maxForce = 0.1f;
+	float mass = 30f;
 
 	float timer = 0;
 	float timeBetweenSphereCasts = 1;
 	float waitToStart = 10;
-	float currentMoveSpeed = 5;
-	float maxMoveSpeed = 6;
-	float minMoveSpeed = 1;
-	float speedRecover = 1;
-	float speedDamage = 2;
-	float attackDistance = 2.5f;
-
-	public float Health = 10;
-	float damage = .1f;
-
-	Vector3 randomizeCourseVector;
-	Vector3 realPosition;
-	Vector3 lastPosition;
-	Quaternion realRotation;
-
-	bool randomizedCourse = false;
-	bool calculatedNewRandomizeCourseVector = false;
 	bool isInstantiated = false;
 	bool haveCell = false;
 	bool gotFirstUpdate = false;
+	bool go = false;
 
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
-
-		randomizeCourseVector = transform.position;
+		currentVelocity = new Vector3(0f,0f,0f);
 	}
 
 	void Update(){
@@ -92,6 +85,11 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 		if(transform.position - lastPosition != Vector3.zero)
 			transform.rotation = Quaternion.LookRotation(transform.position - lastPosition);
+		else{
+			Vector3 tmp = targetTransform.position - transform.position;
+			tmp.y = 0;
+			transform.rotation = Quaternion.LookRotation(tmp);
+		}
 		lastPosition = transform.position;
 	}
 
@@ -108,6 +106,20 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 				transform.rotation = realRotation;
 				gotFirstUpdate = true;
 			}
+		}
+	}
+
+	void OnTriggerEnter(Collider c){
+		if(c.tag == "AIPathCell"){
+			currentCell = c.gameObject;
+			c.gameObject.GetComponent<AIPathCell>().enter(this.gameObject);
+		}
+		haveCell = true;
+	}
+
+	void OnTriggerExit(Collider c){
+		if(c.tag == "AIPathCell"){
+			c.gameObject.GetComponent<AIPathCell>().exit(this.gameObject);
 		}
 	}
 
@@ -162,33 +174,6 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider c){
-		if(c.tag == "AIPathCell"){
-			currentCell = c.gameObject;
-			randomizedCourse = false;
-			calculatedNewRandomizeCourseVector = false;
-		}
-		haveCell = true;
-	}
-
-	void OnTriggerStay(Collider c){
-		if((c.tag == "Enemy" || c.tag == "Player") && c.gameObject != gameObject){
-			if(currentMoveSpeed > minMoveSpeed){
-				currentMoveSpeed -= speedDamage;
-			}
-			transform.position += (transform.position - c.transform.position).normalized;
-		}
-	}
-
-	Vector3 FindSpotInCell(){
-		if (!haveCell)
-			return transform.position;
-		return currentCell.transform.position + (currentCell.transform.rotation * new Vector3(
-			Random.Range(Mathf.Min(currentCell.transform.localScale.x * -0.5f, 3), Mathf.Min(currentCell.transform.localScale.x * 0.5f, 3)),
-			0,
-			Random.Range(Mathf.Min(currentCell.transform.localScale.z * -0.5f, 3), Mathf.Min(currentCell.transform.localScale.z * 0.5f, 3))));
-	}
-
 	void Move() {
 		if (!isInstantiated) {
 			return;
@@ -211,6 +196,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 					if(doorCheckingNow.GetComponent<AIPathDoor>().cells[i] == targetCell){
 						if(doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i] < shortestPathSoFar){
 							goalDoor = doorCheckingNow;
+							go = true;
 							shortestPathSoFar = doorCheckingNow.GetComponent<AIPathDoor>().doorsToCells[i];
 						}
 					}
@@ -222,39 +208,49 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 			waitToStart -= 1;
 		}
 		
-		if (!calculatedNewRandomizeCourseVector){
-			randomizeCourseVector = FindSpotInCell();
-			calculatedNewRandomizeCourseVector = true;
-		}
-		
-		if(currentCell != targetCell || targetCell == null){
-			if(randomizedCourse){
-				transform.position += (goalDoor.transform.position - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
+		if(go){
+			if(currentCell != targetCell){
+				steer(goalDoor.transform.position);
 			}
-			if (!randomizedCourse){
-				transform.position += (randomizeCourseVector - transform.position).normalized * currentMoveSpeed * Time.deltaTime;
-				if (Vector3.Distance(transform.position, randomizeCourseVector) < transform.localScale.x){
-					if (goalDoor){
-						randomizedCourse = true;
-					}
-					if (goalDoor == null){
-						calculatedNewRandomizeCourseVector = false;
-					}
+			else if (targetCell == currentCell){
+				if(Vector3.Distance(transform.position, targetTransform.position) > attackDistance){
+					steer(targetTransform.position);
 				}
 			}
 		}
-		
-		if (targetCell == currentCell){
-			if(Vector3.Distance(targetTransform.position, transform.position) > attackDistance){
-				transform.position += (targetTransform.position - transform.position + new Vector3(0f,.5f, 0f)).normalized * currentMoveSpeed * Time.deltaTime;
-			}
+	}
+
+	void steer(Vector3 pos){
+		Vector3 desiredVelocity = (pos - transform.position);
+		desiredVelocity.y = 0;
+		desiredVelocity = desiredVelocity.normalized * maxVelocity;
+
+		Vector3 steering = desiredVelocity - currentVelocity;
+
+		if(steering.magnitude > maxForce){
+			steering = steering.normalized * maxForce;
 		}
-		
-		if(currentMoveSpeed < maxMoveSpeed){
-			currentMoveSpeed += speedRecover*Time.deltaTime;
+		steering = steering / mass;
+
+		currentVelocity = currentVelocity + steering;
+		if(currentVelocity.magnitude > maxVelocity){
+			currentVelocity = currentVelocity.normalized * maxVelocity;
 		}
-		if(currentMoveSpeed > maxMoveSpeed){
-			currentMoveSpeed = maxMoveSpeed;
+
+		RaycastHit r = new RaycastHit();
+		if(Physics.Raycast(transform.position, currentVelocity, out r, attackDistance, ~(1 << 9))){
+			Vector3 avoidance = r.normal;
+			avoidance.y = 0f;
+			avoidance = avoidance.normalized;
+
+			float scalarProjection = Vector3.Dot(avoidance, currentVelocity);
+			Vector3 avoidanceVelocity = avoidance * scalarProjection;
+			avoidanceVelocity = currentVelocity - avoidanceVelocity;
+
+			currentVelocity = Vector3.Lerp(currentVelocity, avoidanceVelocity, r.distance/attackDistance).normalized * maxVelocity;
+			
 		}
+		 
+		transform.position = transform.position + currentVelocity;
 	}
 }

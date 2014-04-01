@@ -10,6 +10,9 @@ public class SpawnManager : Photon.MonoBehaviour {
 	OxygenSystem oSys;
 	public static bool dead = false;
 	float respawnTimer = 0f;
+	float newSpawnerTimer = 0f;
+	float newSpawner = 10f;
+	int enemiesNeededForNewSpawner = 4;
 	public float respawn = 5f;
 	public Camera respawnCam;
 	bool respawnCamEnabled = false;
@@ -82,6 +85,21 @@ public class SpawnManager : Photon.MonoBehaviour {
 				spawnPlayer ();
 			}
 		}
+		if(newSpawnerTimer >= newSpawner){
+			GameObject[] rooms = GameObject.FindGameObjectsWithTag("AIPathCell");
+			foreach(GameObject o in rooms){
+				AIPathCell c = o.gameObject.GetComponent<AIPathCell>();
+				if(c.playersInside == 0 && c.enemiesInside >= enemiesNeededForNewSpawner && !c.hasSpawner){
+					PhotonNetwork.InstantiateSceneObject ("alienspawn", o.transform.position + new Vector3(2f,0f,2f), new Quaternion(-90,0,0,0), 0, null);
+				}
+			}
+
+			newSpawnerTimer = 0f;
+		}
+		else{
+			newSpawnerTimer += Time.deltaTime;
+		}
+
 	}
 
 	void OnGUI() {
