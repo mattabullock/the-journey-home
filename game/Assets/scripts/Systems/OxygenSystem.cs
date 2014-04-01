@@ -42,11 +42,11 @@ public class OxygenSystem : SystemBase {
 
 		if(changed) {
 			if(currentHitPoints <= 50) {
-				GameObject lightSystem = GameObject.FindObjectOfType<LightSystem>();
+				LightSystem lightSystem = GameObject.FindObjectOfType<LightSystem>();
 				lightSystem.lightColor = Color.red;
 				lightSystem.changed = true;
 			} else {
-				GameObject lightSystem = GameObject.FindObjectOfType<LightSystem>();
+				LightSystem lightSystem = GameObject.FindObjectOfType<LightSystem>();
 				lightSystem.lightColor = Color.white;
 				lightSystem.changed = true;
 			}

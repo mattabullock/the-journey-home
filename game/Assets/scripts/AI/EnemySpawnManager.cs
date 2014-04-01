@@ -13,11 +13,11 @@ public class EnemySpawnManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentHitPoints = maxHealth;
-		if (PhotonNetwork.isMasterClient) {
-			for(int i = 0; i < startSize; i++) {
-				PhotonNetwork.Instantiate("Test Enemy", transform.position, Quaternion.identity, 0, null);
-			}
-		}
+		// if (PhotonNetwork.isMasterClient) {
+		// 	for(int i = 0; i < startSize; i++) {
+		// 		PhotonNetwork.Instantiate("Test Enemy", transform.position, Quaternion.identity, 0, null);
+		// 	}
+		// }
 	}
 	
 	// Update is called once per frame
