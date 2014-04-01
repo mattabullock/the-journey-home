@@ -65,7 +65,7 @@ public class HealthBay : SystemBase {
 	}
 	
 	protected void trigger() {
-		Debug.Log ("Something is happening to the med bay!");
+//		Debug.Log ("Something is happening to the med bay!");
 	}
 
 	public HealthBay getHealthBay() {

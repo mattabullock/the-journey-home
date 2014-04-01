@@ -21,6 +21,10 @@ public class PlayerHealth : HealthBase {
 			return;
 		}
 
+		if(photonView.isMine) {
+			StartCoroutine(hitFlicker ());
+		}
+
 		currentHitPoints -= amt;
 		
 		if(currentHitPoints <= 0) {
@@ -38,6 +42,12 @@ public class PlayerHealth : HealthBase {
 		if (photonView.isMine) {
 			SpawnManager.dead = true;
 		}
+	}
+
+	IEnumerator hitFlicker() {
+		transform.FindChild ("Main Camera").FindChild("Tint").gameObject.SetActive (true);
+		yield return new WaitForSeconds (.1f);
+		transform.FindChild ("Main Camera").FindChild("Tint").gameObject.SetActive (false);
 	}
 	
 }

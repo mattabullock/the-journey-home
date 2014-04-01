@@ -22,6 +22,10 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	OxygenSystem oSys;
 
 	PlayerHealth pHealth;
+	PlayerShooting pShoot;
+
+	Camera mapCam;
+	bool onFirstFloor;
 
 	bool gotFirstUpdate = false;
 
@@ -33,6 +37,13 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		gunAnim = gun.GetComponent<Animator> ();
 		pHealth = GetComponent<PlayerHealth> ();
 		oSys = GameObject.FindObjectOfType<OxygenSystem> ();
+		pShoot = GetComponent<PlayerShooting> ();
+		mapCam = GameObject.FindGameObjectWithTag("overlaymapcam").camera;
+		if(transform.position.y > 4f) {
+			onFirstFloor = true;
+		} else {
+			onFirstFloor = false;
+		}
 	}
 
 	void OnTriggerStay(Collider c){
@@ -45,6 +56,10 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 40, 
 		                   	pHealth.healthBarLength, 20), 
 		         			Mathf.Floor (oSys.oxygenSupply) + "/" + oSys.hitPoints);
+
+		GUI.Box (new Rect (Screen.width - 50, 70, 
+		                   40, 20), 
+		         pShoot.ammo + "/" + pShoot.maxAmmo);
 
 		GameObject[] systems = GameObject.FindGameObjectsWithTag("interactive");
 		foreach(GameObject g in systems) {
@@ -112,6 +127,17 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			//normalize vector??
 			if(cc.isGrounded && Input.GetButton("Jump")) {
 				vertVelocity = jumpSpeed;
+			}
+			if(transform.position.y > 4f && onFirstFloor) {
+				//change mask to second floor
+				mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("Floor 1"));
+				mapCam.cullingMask |= (1 << LayerMask.NameToLayer("Floor 2"));
+				onFirstFloor = false;
+			} else if(transform.position.y < 4f && !onFirstFloor) {
+				//change mask to first floor
+				mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("Floor 2"));
+				mapCam.cullingMask |= (1 << LayerMask.NameToLayer("Floor 1"));
+				onFirstFloor = true;
 			}
 		}
 		else {

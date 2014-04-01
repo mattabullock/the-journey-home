@@ -44,7 +44,6 @@ public class CameraSystem : SystemBase {
         } else if (currentHitPoints + amt > hitPoints) {
             currentHitPoints = hitPoints;
         } else if (currentHitPoints + amt > threshold && down) {
-			Debug.Log ("camera system is above threshold");
             down = false;
             stateChanged = true;
             currentHitPoints += amt;
