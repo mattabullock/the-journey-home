@@ -18,7 +18,8 @@ public class Interaction : MonoBehaviour {
  			foreach (Object obj in tempList) {
  				if (obj.name.Equals ("Map")) {
  					GameObject gObj = (GameObject)obj;
- 					gObj.SetActive (true);
+					gObj.camera.depth = 5;
+ 					//gObj.SetActive (true);
  				}
  			}
  		} else {
@@ -26,7 +27,8 @@ public class Interaction : MonoBehaviour {
  			foreach (Object obj in tempList) {
  				if (obj.name.Equals ("Map")) {
  					GameObject gObj = (GameObject)obj;
- 					gObj.SetActive (false);
+					gObj.camera.depth = -1;
+ 					//gObj.SetActive (false);
  				}
  			}
   		}

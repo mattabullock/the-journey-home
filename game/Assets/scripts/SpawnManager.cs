@@ -52,7 +52,14 @@ public class SpawnManager : Photon.MonoBehaviour {
  				if (obj.name.Equals ("Map")) {
  					Camera gObj = obj.camera;
  					noEnemyMask = gObj.cullingMask;
- 					enemyMask = (gObj.cullingMask) | (1 << LayerMask.NameToLayer("Enemies"));
+				    enemyMask = (1 << LayerMask.NameToLayer("Enemies")) | (1 << LayerMask.NameToLayer("Default")) | (1 << LayerMask.NameToLayer("NavMesh"));
+				    //gObj.cullingMask = enemyMask;
+					Debug.Log (1 << LayerMask.NameToLayer("Enemies"));
+					//gObj.cullingMask = gObj.cullingMask | (1 << LayerMask.NameToLayer("Enemies"));
+					Debug.Log ("Sanity check");
+					if (noEnemyMask != enemyMask) {
+						Debug.Log ("Sanity check");
+					}
  					break;
  				}
  			}
@@ -69,27 +76,22 @@ public class SpawnManager : Photon.MonoBehaviour {
 			oSys = GameObject.FindObjectOfType<OxygenSystem> ();
 		}
 
-		if (mapEnemy && maskChanged) {
- 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
- 			foreach (GameObject obj in tempList) {
- 				if (obj.name.Equals ("Map")) {
- 					Camera gObj = obj.camera;
- 					gObj.cullingMask = enemyMask;
- 					break;
- 				}
- 			}
- 			maskChanged = false;
- 		} else if(!mapEnemy && maskChanged) {
- 			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
- 			foreach (GameObject obj in tempList) {
- 				if (obj.name.Equals ("Map")) {
- 					Camera gObj = obj.camera;
- 					gObj.cullingMask = noEnemyMask;
- 					break;
- 				}
- 			}
- 			maskChanged = false;
- 		}
+		if (maskChanged) {
+			Debug.Log ("flipping mask");
+			Object[] tempList = Resources.FindObjectsOfTypeAll (typeof(GameObject));
+			Camera cam = GameObject.FindGameObjectWithTag ("overlaymapcam").camera;
+			cam.cullingMask ^= 1 << LayerMask.NameToLayer("Enemies");
+//			foreach (GameObject obj in tempList) {
+//				if (obj.name.Equals ("Map")) {
+//					Debug.Log ("found map camera");
+//					Camera gObj = obj.camera;
+//					// -should- flip bits associated with Enemies block
+//					gObj.cullingMask ^= 1 << LayerMask.NameToLayer("Enemies");
+//					break;
+//				}
+//			}
+			maskChanged = false;
+		}
 
 		if (dead) {
 			if(!respawnCamEnabled) {

@@ -4011,6 +4011,14 @@ Prefab:
       propertyPath: m_CullingMask.m_Bits
       value: 513
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 41e935679048b4237a48f5aec69421c1, type: 2}
+      propertyPath: m_TagString
+      value: overlaymapcam
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 41e935679048b4237a48f5aec69421c1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e935679048b4237a48f5aec69421c1, type: 2}
   m_RootGameObject: {fileID: 1735587652}
@@ -12572,11 +12580,11 @@ GameObject:
   - 81: {fileID: 1735587653}
   m_Layer: 0
   m_Name: Map
-  m_TagString: Map
+  m_TagString: overlaymapcam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1735587653
 AudioListener:
   m_ObjectHideFlags: 0
@@ -12623,7 +12631,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 40
-  m_Depth: 5
+  m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 513
