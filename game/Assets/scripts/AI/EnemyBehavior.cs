@@ -231,7 +231,9 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 	void steer(Vector3 pos){
 		Vector3 desiredVelocity = (pos - transform.position);
-		desiredVelocity.y = 0f;
+		if(targetCell == currentCell){
+			desiredVelocity.y = 0f;
+		}
 		desiredVelocity = desiredVelocity.normalized * maxVelocity;
 
 		Vector3 steering = desiredVelocity - currentVelocity;
@@ -248,16 +250,19 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 
 		RaycastHit r = new RaycastHit();
 		if(Physics.Raycast(transform.position, currentVelocity, out r, attackDistance, ~(1 << 9))){
-			Vector3 avoidance = r.normal;
-			avoidance.y = 0f;
-			avoidance = avoidance.normalized;
+			if(r.collider.gameObject.tag != "Player"){
+				Vector3 avoidance = r.normal;
+				if(targetCell == currentCell){
+					avoidance.y = 0f;
+				}
+				avoidance = avoidance.normalized;
 
-			float scalarProjection = Vector3.Dot(avoidance, currentVelocity);
-			Vector3 avoidanceVelocity = avoidance * scalarProjection;
-			avoidanceVelocity = currentVelocity - avoidanceVelocity;
+				float scalarProjection = Vector3.Dot(avoidance, currentVelocity);
+				Vector3 avoidanceVelocity = avoidance * scalarProjection;
+				avoidanceVelocity = currentVelocity - avoidanceVelocity;
 
-			currentVelocity = Vector3.Lerp(currentVelocity, avoidanceVelocity, r.distance/attackDistance).normalized * maxVelocity;
-			
+				currentVelocity = Vector3.Lerp(currentVelocity, avoidanceVelocity, r.distance/attackDistance).normalized * maxVelocity * Time.deltaTime;
+			}
 		}
 		 
 		transform.position = transform.position + currentVelocity;
