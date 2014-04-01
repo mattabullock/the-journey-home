@@ -4,9 +4,9 @@ using System.Collections;
 public class EnemySpawnManager : MonoBehaviour {
 
 	public float timer = 0f;
-	public float spawnDelay = 200f;
+	public float spawnDelay = 30f;
 	public int startSize = 10;
-	public int waveSize = 1;
+	public int waveSize = 3;
 	public int currentHitPoints = 0;
 	public int maxHealth = 100;
 

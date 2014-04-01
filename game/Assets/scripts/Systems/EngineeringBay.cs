@@ -19,7 +19,7 @@ public class EngineeringBay : SystemBase {
 		base.Update ();
 		if (!down && stateChanged) {
 			Debug.Log ("repair faster!");
-			SpawnManager.repairDelay = .07f;
+			SpawnManager.repairDelay = .05f;
 			stateChanged = false;
 		} else if(down && stateChanged) {
 			Debug.Log ("repair slower!");

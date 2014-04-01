@@ -28,9 +28,12 @@ public class LightSystem : SystemBase {
 	protected override void Update () {
 		base.Update ();
 		if(changed) {
+			int count = 0;
 			foreach (Transform child in lights) {
+				count++;
 				child.light.color = lightColor * (currentHitPoints/threshold);
 			}
+			Debug.Log(count);
 			changed = false;
 		}
 	}

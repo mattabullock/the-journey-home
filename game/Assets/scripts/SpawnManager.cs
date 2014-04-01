@@ -32,8 +32,8 @@ public class SpawnManager : Photon.MonoBehaviour {
 			"LightSystem",
 			"HealthBay",
 			"alienspawn",
-			"CameraSystem",
 			"EngineeringBay",
+			"CameraSystem",
 			"EngineSystem",
 			
 		};
@@ -161,6 +161,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerHealth")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
+		// myPlayerGO.GetComponent<AudioSource> ().gameObject.SetActive(true);
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Minimap").gameObject.SetActive (true);

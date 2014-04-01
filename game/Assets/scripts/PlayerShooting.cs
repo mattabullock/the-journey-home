@@ -15,8 +15,11 @@ public class PlayerShooting : MonoBehaviour {
 	public GameObject gun;
 	Animator gunAnim;
 	bool reloading = false;
+	public AudioClip reloadSound;
 
 	public GameObject muzzleFlash;
+
+	public AudioSource audioSource;
 
 	public int NavMeshLayer;
 	public int NavMeshMask;
@@ -26,6 +29,7 @@ public class PlayerShooting : MonoBehaviour {
 	void Start() {
 		gunAnim = gun.GetComponent<Animator> ();
 		fx = GameObject.FindObjectOfType<FXManager>();
+		audioSource = GetComponent<AudioSource> ();
 
 		NavMeshLayer = 9;
 		NavMeshMask = 1 << NavMeshLayer;
@@ -55,6 +59,7 @@ public class PlayerShooting : MonoBehaviour {
 
 			} else if ((Input.GetButton ("Shoot") && !Input.GetButton ("Interact") && ammo <= maxAmmo) || (Input.GetButton ("Reload") && ammo < maxAmmo)){
 				reload();
+
 			}
 		}
 		
@@ -119,6 +124,9 @@ public class PlayerShooting : MonoBehaviour {
 	}
 
 	void reload() {
+		if(reloadSound) {
+			audioSource.PlayOneShot(reloadSound, .3f);
+		}
 		reloading = true;
 		cooldown = reloadCooldown;
 	}

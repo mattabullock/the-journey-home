@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: alienspawn
-  m_TagString: Untagged
+  m_TagString: AlienSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  spawnDelay: 30
+  spawnDelay: 5
+  startSize: 10
+  waveSize: 1
+  currentHitPoints: 0
+  maxHealth: 100
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,7 +104,7 @@ MonoBehaviour:
   ownerId: 0
   group: 0
   prefixBackup: -1
-  observed: {fileID: 400000}
+  observed: {fileID: 11400000}
   synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
