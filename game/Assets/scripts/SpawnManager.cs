@@ -165,6 +165,7 @@ public class SpawnManager : Photon.MonoBehaviour {
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Minimap").gameObject.SetActive (true);
+		myPlayerGO.transform.FindChild ("minimapMarker").FindChild ("Cone").gameObject.renderer.material.color = Color.green;
 
 	}
 
