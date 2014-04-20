@@ -15,6 +15,7 @@ public class PlayerShooting : MonoBehaviour {
 	public AudioClip reloadSound;
 
 	public GameObject muzzleFlash;
+	Transform gunHolder;
 
 	public AudioSource audioSource;
 
@@ -26,7 +27,8 @@ public class PlayerShooting : MonoBehaviour {
 	void Start() {
 		fx = GameObject.FindObjectOfType<FXManager>();
 		audioSource = GetComponent<AudioSource> ();
-		gun = transform.FindChild ("M4A1");
+		gunHolder = transform.FindChild ("GunHolder");
+		gun = gunHolder.FindChild ("M4A1");
 		gunBase = gun.GetComponent<GunBase>();
 		gunAnim = gun.GetComponent<Animator> ();
 		NavMeshLayer = 9;
@@ -39,7 +41,7 @@ public class PlayerShooting : MonoBehaviour {
 
 		if (Input.GetButton ("SecondaryWeapon") && gun.tag != "SecondaryWeapon") {
 			gun.gameObject.SetActive(false);
-			gun = transform.FindChild ("G36-C");
+			gun = gunHolder.FindChild ("G36-C");
 			gunBase = gun.GetComponent<GunBase>();
 			gunAnim = gun.GetComponent<Animator> ();
 			bulletSpawn = gun.FindChild("BulletSpawn");
@@ -47,7 +49,7 @@ public class PlayerShooting : MonoBehaviour {
 
 		} else if (Input.GetButton ("PrimaryWeapon") && gun.tag != "PrimaryWeapon") {
 			gun.gameObject.SetActive(false);
-			gun = transform.FindChild ("M4A1");
+			gun = gunHolder.FindChild ("M4A1");
 			gunBase = gun.GetComponent<GunBase>();
 			gunAnim = gun.GetComponent<Animator> ();
 			bulletSpawn = gun.FindChild("BulletSpawn");
