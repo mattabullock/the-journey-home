@@ -3,16 +3,13 @@ using System.Collections;
 
 public class PlayerShooting : MonoBehaviour {
 	
-	public float fireRate = 0.1f;
 	float cooldown = 0;
-	public float damage = 25f;
 	public GameObject decalHitWall;
 	float floatInFrontOfWall = 0.0001f;
-	public float ammo;
-	public float maxAmmo = 20;
-	float reloadCooldown = 3f;
+
 	FXManager fx;
-	public GameObject gun;
+	Transform gun;
+	GunBase gunBase;
 	Animator gunAnim;
 	bool reloading = false;
 	public AudioClip reloadSound;
@@ -27,26 +24,44 @@ public class PlayerShooting : MonoBehaviour {
 	Transform bulletSpawn;
 
 	void Start() {
-		gunAnim = gun.GetComponent<Animator> ();
 		fx = GameObject.FindObjectOfType<FXManager>();
 		audioSource = GetComponent<AudioSource> ();
-
+		gun = transform.FindChild ("Main Camera").FindChild ("Gun Camera").FindChild ("M4A1");
+		gunBase = gun.GetComponent<GunBase>();
+		gunAnim = gun.GetComponent<Animator> ();
 		NavMeshLayer = 9;
 		NavMeshMask = 1 << NavMeshLayer;
 		FinalMask = ~NavMeshMask;
-		ammo = maxAmmo;
-		bulletSpawn = transform.FindChild("Main Camera").FindChild("Gun Camera").FindChild("M4A1").FindChild("BulletSpawn");
+		bulletSpawn = gun.FindChild("BulletSpawn");
 	}
 
 	void Update () {
+
+		if (Input.GetButton ("SecondaryWeapon") && gun.tag != "SecondaryWeapon") {
+			gun.gameObject.SetActive(false);
+			gun = transform.FindChild ("Main Camera").FindChild ("Gun Camera").FindChild ("G36-C");
+			gunBase = gun.GetComponent<GunBase>();
+			gunAnim = gun.GetComponent<Animator> ();
+			bulletSpawn = gun.FindChild("BulletSpawn");
+			gun.gameObject.SetActive(true);
+
+		} else if (Input.GetButton ("PrimaryWeapon") && gun.tag != "PrimaryWeapon") {
+			gun.gameObject.SetActive(false);
+			gun = transform.FindChild ("Main Camera").FindChild ("Gun Camera").FindChild ("M4A1");
+			gunBase = gun.GetComponent<GunBase>();
+			gunAnim = gun.GetComponent<Animator> ();
+			bulletSpawn = gun.FindChild("BulletSpawn");
+			gun.gameObject.SetActive(true);
+		}
+
 		cooldown -= Time.deltaTime;
 
 		if(cooldown <= 0) {
 			if(reloading) {
-				ammo = maxAmmo;
+				gunBase.ammo = gunBase.maxAmmo;
 				reloading = false;
 			}
-			if(Input.GetButton("Shoot") && !Input.GetButton ("Interact") && ammo > 0 && !reloading) {
+			if(Input.GetButton("Shoot") && !Input.GetButton ("Interact") && gunBase.ammo > 0 && !reloading) {
 				Fire ();
 				gunAnim.SetTrigger("Shoot");
 				GameObject holdMuzzleFlash;
@@ -57,7 +72,7 @@ public class PlayerShooting : MonoBehaviour {
 					}
 				}
 
-			} else if ((Input.GetButton ("Shoot") && !Input.GetButton ("Interact") && ammo <= maxAmmo) || (Input.GetButton ("Reload") && ammo < maxAmmo)){
+			} else if ((Input.GetButton ("Shoot") && !Input.GetButton ("Interact") && gunBase.ammo <= gunBase.maxAmmo) || (Input.GetButton ("Reload") && gunBase.ammo < gunBase.maxAmmo)){
 				reload();
 
 			}
@@ -95,7 +110,7 @@ public class PlayerShooting : MonoBehaviour {
 							Debug.LogError("Freak out!");
 						}
 						else {
-							pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
+							pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage);
 						}
 					}
 				}
@@ -105,7 +120,7 @@ public class PlayerShooting : MonoBehaviour {
 						Debug.LogError("Freak out!");
 					}
 					else {
-						pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
+						pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage);
 					}	
 				}
 			} else if(hitTransform.tag == "AlienSpawnPoint") {
@@ -115,12 +130,12 @@ public class PlayerShooting : MonoBehaviour {
 					Debug.LogError("Freak out!");
 				}
 				else {
-					pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, damage);
+					pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage);
 				}	
 			}
 		}
-		ammo--;
-		cooldown = fireRate;
+		gunBase.ammo--;
+		cooldown = gunBase.fireRate;
 	}
 
 	void reload() {
@@ -128,7 +143,7 @@ public class PlayerShooting : MonoBehaviour {
 			audioSource.PlayOneShot(reloadSound, 1f);
 		}
 		reloading = true;
-		cooldown = reloadCooldown;
+		cooldown = gunBase.reloadCooldown;
 	}
 	
 	Transform FindClosestHitObject(Ray ray, out Vector3 hitPoint) {
@@ -149,5 +164,9 @@ public class PlayerShooting : MonoBehaviour {
 
 		return closestHit;
 		
+	}
+
+	public GunBase getGun() {
+		return gunBase;
 	}
 }

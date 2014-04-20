@@ -84,9 +84,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  spawnDelay: 5
+  spawnDelay: 20
   startSize: 10
-  waveSize: 1
+  waveSize: 3
   currentHitPoints: 0
   maxHealth: 100
 --- !u!114 &11400002

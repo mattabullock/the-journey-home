@@ -155,13 +155,13 @@ public class SpawnManager : Photon.MonoBehaviour {
 
 	public void spawnPlayer() {
 		SpawnSpot mySpawn = spawnSpots [Random.Range (0, spawnSpots.Length)];
+		Debug.Log (mySpawn);
 		
 		GameObject myPlayerGO = (GameObject) PhotonNetwork.Instantiate ("PlayerController", mySpawn.transform.position, mySpawn.transform.rotation, 0);
 		((MonoBehaviour) myPlayerGO.GetComponent ("MouseLook")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerHealth")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
-		// myPlayerGO.GetComponent<AudioSource> ().gameObject.SetActive(true);
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Minimap").gameObject.SetActive (true);

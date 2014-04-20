@@ -6,7 +6,7 @@ SubstanceImporter:
   - serializedVersion: 10
     name: sci_fi_003
     prototypeName: sci_fi_003
-    shaderName: Bumped Specular
+    shaderName: Specular
     inputs:
     - name: $normalformat
       value:
@@ -167,13 +167,6 @@ SubstanceImporter:
         data:
           first:
             name: _MainTex
-          second:
-            texture: {instanceID: 0}
-            scale: {x: 1, y: 1}
-            offset: {x: 0, y: 0}
-        data:
-          first:
-            name: _BumpMap
           second:
             texture: {instanceID: 0}
             scale: {x: 1, y: 1}

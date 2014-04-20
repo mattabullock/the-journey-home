@@ -78,7 +78,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 		GUI.Box (new Rect (Screen.width - 50, 70, 
 		                   40, 20), 
-		         pShoot.ammo + "/" + pShoot.maxAmmo);
+		         pShoot.getGun ().ammo + "/" + pShoot.getGun ().maxAmmo);
 
 		GameObject[] systems = GameObject.FindGameObjectsWithTag("interactive");
 		foreach(GameObject g in systems) {
