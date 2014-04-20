@@ -23,7 +23,11 @@ public class HealthBase : Photon.MonoBehaviour {
 		
 		if(currentHitPoints <= 0) {
 			GetComponent<NetworkCharacter>().enabled = false;
-			GetComponent<MouseLook>().enabled = false;
+//			GetComponent<MouseLook>().enabled = false;
+			foreach(MouseLook m in GetComponentsInChildren<MouseLook>()) {
+				m.enabled = false;
+			}
+//			transform.FindChild("Main Camera").gameObject.GetComponent<MouseLook>().enabled = false;
 			GetComponentInChildren<MouseLook>().enabled = false;
 			Die ();
 		}
