@@ -18,6 +18,15 @@ public class Interaction : MonoBehaviour {
  		} else {
 			GameObject.FindGameObjectWithTag ("overlaymapcam").camera.depth = -1;
   		}
+
+		foreach (GameObject go in GameObject.FindGameObjectsWithTag("interactive")) {
+			var dist = go.transform.position - transform.position;
+			var absDist = dist.sqrMagnitude;
+
+			if(absDist < 50) {
+				go.GetComponent<PhotonView>().RPC( "found", PhotonTargets.AllBuffered, null);
+			}
+		}
 	}
 
 	void interact() {
