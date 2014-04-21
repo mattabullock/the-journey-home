@@ -162,10 +162,10 @@ public class SpawnManager : Photon.MonoBehaviour {
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerHealth")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("Interaction")).enabled = true;
 		((MonoBehaviour) myPlayerGO.GetComponent ("PlayerShooting")).enabled = true;
-		((MonoBehaviour)myPlayerGO.transform.FindChild ("Flashlight").gameObject.GetComponent ("Flashlight")).enabled = true;
 		myPlayerGO.transform.FindChild ("Main Camera").gameObject.SetActive (true);
+		((MonoBehaviour) myPlayerGO.transform.FindChild ("Flashlight").gameObject.GetComponent ("Flashlight")).enabled = true;
 		myPlayerGO.transform.FindChild ("Main Camera").FindChild("Gun Camera").gameObject.SetActive (true);
-		myPlayerGO.transform.FindChild ("GunHolder").gameObject.SetActive (true);
+//		myPlayerGO.transform.FindChild ("GunHolder").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("Minimap").gameObject.SetActive (true);
 		myPlayerGO.transform.FindChild ("minimapMarker").FindChild ("Cone").gameObject.renderer.material.color = Color.green;
 

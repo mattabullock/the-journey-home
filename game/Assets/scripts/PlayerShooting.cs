@@ -9,7 +9,7 @@ public class PlayerShooting : MonoBehaviour {
 
 	FXManager fx;
 	Transform gun;
-	GunBase gunBase;
+	public GunBase gunBase;
 	Animator gunAnim;
 	bool reloading = false;
 	public AudioClip reloadSound;
@@ -27,7 +27,7 @@ public class PlayerShooting : MonoBehaviour {
 	void Start() {
 		fx = GameObject.FindObjectOfType<FXManager>();
 		audioSource = GetComponent<AudioSource> ();
-		gunHolder = transform.FindChild ("GunHolder");
+		gunHolder = transform.FindChild("Main Camera").FindChild ("GunHolder");
 		gun = gunHolder.FindChild ("M4A1");
 		gunBase = gun.GetComponent<GunBase>();
 		gunAnim = gun.GetComponent<Animator> ();
@@ -166,9 +166,5 @@ public class PlayerShooting : MonoBehaviour {
 
 		return closestHit;
 		
-	}
-
-	public GunBase getGun() {
-		return gunBase;
 	}
 }

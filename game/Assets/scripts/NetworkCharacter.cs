@@ -76,9 +76,10 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		                   	pHealth.healthBarLength, 20), 
 		         			Mathf.Floor (oSys.oxygenSupply) + "/" + oSys.hitPoints);
 
-		GUI.Box (new Rect (Screen.width - 50, 70, 
-		                   40, 20), 
-		         pShoot.getGun ().ammo + "/" + pShoot.getGun ().maxAmmo);
+		if (photonView.isMine) {
+			GUI.Box (new Rect (Screen.width - 50, 70, 
+           		40, 20), pShoot.gunBase.ammo + "/" + pShoot.gunBase.maxAmmo);
+		}
 
 		GameObject[] systems = GameObject.FindGameObjectsWithTag("interactive");
 		foreach(GameObject g in systems) {

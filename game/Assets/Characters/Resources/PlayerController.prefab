@@ -982,6 +982,7 @@ GameObject:
   - 95: {fileID: 9500006}
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400022}
+  - 114: {fileID: 11400028}
   m_Layer: 8
   m_Name: G36-C
   m_TagString: SecondaryWeapon
@@ -1014,6 +1015,7 @@ GameObject:
   - 4: {fileID: 400128}
   - 108: {fileID: 10800000}
   - 114: {fileID: 11400016}
+  - 114: {fileID: 11400026}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -1023,7 +1025,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100130
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -1035,7 +1037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100132
 GameObject:
   m_ObjectHideFlags: 1
@@ -1098,7 +1100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: -.0348994993, y: 0, z: 0, w: .999390841}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .0120524168, z: -.145996094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400126}
@@ -1677,7 +1679,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400128}
-  - {fileID: 400130}
   - {fileID: 400000}
   - {fileID: 400102}
   - {fileID: 400134}
@@ -1694,6 +1695,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
+  - {fileID: 400130}
   - {fileID: 400104}
   m_Father: {fileID: 400100}
 --- !u!4 &400104
@@ -1818,7 +1820,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100124}
   m_LocalRotation: {x: -.0348994993, y: 0, z: 0, w: .999390841}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -.018533349, z: .139518738}
   m_LocalScale: {x: .100000001, y: .100000001, z: .100000001}
   m_Children:
   - {fileID: 400122}
@@ -1855,12 +1857,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .196020126, y: 1.46803415, z: .524307251}
+  m_LocalPosition: {x: .196020126, y: -.244024038, z: .344306946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400124}
   - {fileID: 400004}
-  m_Father: {fileID: 400100}
+  m_Father: {fileID: 400102}
 --- !u!4 &400132
 Transform:
   m_ObjectHideFlags: 1
@@ -2432,6 +2434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   decalHitWall: {fileID: 100002, guid: c7a47b9ec04724b43a3aed55999c2e9d, type: 2}
+  gunBase: {fileID: 0}
   reloadSound: {fileID: 8300000, guid: 7b1d3a5c075324e129efcd2077921ee4, type: 3}
   muzzleFlash: {fileID: 100000, guid: 1f1e4debe57ac224ebaaa22fe4dc0d31, type: 2}
   audioSource: {fileID: 0}
@@ -2552,6 +2555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   l: {fileID: 10800000}
+  cam: {fileID: 2000004}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2568,7 +2572,6 @@ MonoBehaviour:
   fireRate: .100000001
   damage: 25
   ammo: 0
-  camera: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2585,7 +2588,6 @@ MonoBehaviour:
   fireRate: .0799999982
   damage: 25
   ammo: 0
-  camera: {fileID: 0}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2617,6 +2619,43 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
+--- !u!114 &11400026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subId: 0
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 11400016}
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  instantiationId: -1
+--- !u!114 &11400028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f26488ee527764d76abbb0a8e6a50c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultFOV: 0
+  fovSpeed: 6
+  fovIn: 35
+  gunAim: 0
+  playerCam: {fileID: 100102}
+  gunCam: {fileID: 100002}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
