@@ -9,8 +9,14 @@ public class GunBase : MonoBehaviour {
 	public float damage = 25f;
 	public float ammo;
 
+	public GameObject camera;
+
 	void Start () {
 		ammo = maxAmmo;
 	} 
+
+	void Update() {
+
+	}
 	
 }
