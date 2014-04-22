@@ -33,4 +33,5 @@ MonoBehaviour:
   - AssaultBulletFX
   - loadScene
   - trigger
+  - found
   DisableAutoOpenWizard: 0
