@@ -189,7 +189,7 @@ public class AstarAI : MonoBehaviour
 								if (playerFound) {
 										Thetarget = Random.Range (0, 23);
 										if (Thetarget < 20) {
-												while (!targets[Thetarget].GetComponent<SystemSpawn>().enemyFound || targets[Thetarget].GetComponent<SystemSpawn>()) {
+												while (!targets[Thetarget].GetComponent<SystemSpawn>().enemyFound) {
 														Thetarget = Random.Range (0, 19);
 														//if Thetarget has 0 health already, choose a new target
 												}
