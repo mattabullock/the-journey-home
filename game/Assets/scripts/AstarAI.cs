@@ -143,73 +143,71 @@ public class AstarAI : MonoBehaviour
 	}
 
 	public void decision (){
-		newPath = false;
-		clockTick = 0;
-		count = 0;
-		if (exploring) {
-			closest = 10000;
-			foreach (GameObject o in systems) {
-				SystemSpawn g = o.GetComponent<SystemSpawn> ();
-				if (g.enemyFound) {
-					Debug.Log("here");
-					count++;
-					if (count>4){
-						exploring = false;
-						Debug.Log("GOING AGGRESSIVE!!!!!!!");
-					}
-				}
-				else {
-					if ((Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) < closest) {
-						Debug.Log ("" + o + " is closest, it is " + (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) + " units away.");
-						closest = (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude));
-						targetPosition = o.transform.position;
-						target = o;
-						systemTarget = true;
-					}
-				}
-			}
-			foreach (GameObject o in players) {
-				if ((Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) < closest) {
-					Debug.Log ("" + o + " is closest, it is " + (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) + " units away.");
-					closest = (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude));
-					targetPosition = o.transform.position;
-					target = o;
-					systemTarget = false;
-					playerFound = true;
-				}
-			}
-			Debug.Log ("" + target + " is closest");
-			targetPosition = target.transform.position;
-			pathCalc ();
-		} 
-		else {
-
-
-			if (targetAquired) {
-			} 
-			else {
-				int Thetarget = 0;		
-				if (playerFound) {
-					Thetarget = Random.Range (0, 23);
-					if (Thetarget < 20){
-						while (!targets[Thetarget].GetComponent<SystemSpawn>().enemyFound || targets[Thetarget].GetComponent<SystemSpawn>()) {
-							Thetarget = Random.Range (0, 19);
-							//if Thetarget has 0 health already, choose a new target
+				newPath = false;
+				clockTick = 0;
+				count = 0;
+				if (exploring) {
+						closest = 10000;
+						foreach (GameObject o in systems) {
+								SystemSpawn g = o.GetComponent<SystemSpawn> ();
+								if (g.enemyFound) {
+										Debug.Log ("here");
+										count++;
+										if (count > 4) {
+												exploring = false;
+												Debug.Log ("GOING AGGRESSIVE!!!!!!!");
+										}
+								} else {
+										if ((Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) < closest) {
+												Debug.Log ("" + o + " is closest, it is " + (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) + " units away.");
+												closest = (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude));
+												targetPosition = o.transform.position;
+												target = o;
+												systemTarget = true;
+										}
+								}
 						}
+						foreach (GameObject o in players) {
+								if ((Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) < closest) {
+										Debug.Log ("" + o + " is closest, it is " + (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) + " units away.");
+										closest = (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude));
+										targetPosition = o.transform.position;
+										target = o;
+										systemTarget = false;
+										playerFound = true;
+								}
+						}
+						Debug.Log ("" + target + " is closest");
+						targetPosition = target.transform.position;
+						pathCalc ();
+				} else {
 
-				} 
-				else {
-					Thetarget = Random.Range (0, count - 1);
-					//While Thetarget has 0 health, choose a new target.
-				}
 
-				if (Thetarget > 19) {
-					systemTarget = false;
+						if (targetAquired) {
+						} else {
+								int Thetarget = 0;		
+								if (playerFound) {
+										Thetarget = Random.Range (0, 23);
+										if (Thetarget < 20) {
+												while (!targets[Thetarget].GetComponent<SystemSpawn>().enemyFound || targets[Thetarget].GetComponent<SystemSpawn>()) {
+														Thetarget = Random.Range (0, 19);
+														//if Thetarget has 0 health already, choose a new target
+												}
+										}
+
+										} else {
+												Thetarget = Random.Range (0, count - 1);
+												//While Thetarget has 0 health, choose a new target.
+										}
+
+										if (Thetarget > 19) {
+												systemTarget = false;
+										}
+										targetAquired = true;
+										target = targets [Thetarget];
+										pathCalc ();
+								}	
+						}
 				}
-				targetAquired = true;
-				target = targets [Thetarget];
-				pathCalc ();
-			}	
 		}
-	}
-} 
+
