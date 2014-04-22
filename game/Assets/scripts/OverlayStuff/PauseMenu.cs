@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SystemOverlay : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
 //	GUISkin newSkin;
 
