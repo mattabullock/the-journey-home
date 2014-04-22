@@ -184,23 +184,18 @@ public class AstarAI : MonoBehaviour
 		} 
 		else {
 
-			foreach (GameObject o in systems) {
-				SystemSpawn g = o.GetComponent<SystemSpawn> ();
-				if (g.enemyFound) {
-					targets[count] = o;
-					count++;
-				}
-			}
+
 			if (targetAquired) {
 			} 
 			else {
 				int Thetarget = 0;		
 				if (playerFound) {
 					Thetarget = Random.Range (0, 23);
-					while (Thetarget>=count && Thetarget<=19) {
-						Thetarget = Random.Range (0, 23);
-						//if Thetarget has 0 health already, choose a new target
-					}
+					if (Thetarget < 20){
+						while (!targets[Thetarget].GetComponent<SystemSpawn>().enemyFound || targets[Thetarget].GetComponent<SystemSpawn>()) {
+							Thetarget = Random.Range (0, 19);
+							//if Thetarget has 0 health already, choose a new target
+						}
 
 				} 
 				else {
