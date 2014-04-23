@@ -6,6 +6,11 @@ public class Interaction : MonoBehaviour {
 	
 	public float cooldown = 0f;
 	public float repairDistance = 5f;
+	List<SystemBase> systems;
+
+	void Start () {
+		systems = new List<SystemBase>(GameObject.FindObjectsOfType<SystemBase> ());
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -19,6 +24,21 @@ public class Interaction : MonoBehaviour {
  		} else {
 			GameObject.FindGameObjectWithTag ("overlaymapcam").camera.depth = -1;
   		}
+
+		//finding systems stuff
+		SystemBase toDelete = null;
+		foreach (SystemBase go in systems) {
+			var dist = go.transform.position - transform.position;
+			var absDist = dist.sqrMagnitude;
+			
+			if(absDist < 50) {
+				toDelete = go;
+				go.GetComponent<PhotonView>().RPC( "found", PhotonTargets.AllBuffered, null);
+			}
+		}
+		if (toDelete != null) {
+			systems.Remove (toDelete);
+		}
 	}
 
 	void interact() {

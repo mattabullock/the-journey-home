@@ -7,12 +7,12 @@ public class UpdateScript: MonoBehaviour {
 	bool menuScreen = false;
 	PauseMenu sysO;
 	public SystemOverlay overlay;
-	List<SystemBase> systems;
+
 
 
 	// Use this for initialization
 	void Start () {
-		systems = new List<SystemBase>(GameObject.FindObjectsOfType<SystemBase> ());
+
 	}
 	
 	// Update is called once per frame
@@ -35,21 +35,6 @@ public class UpdateScript: MonoBehaviour {
 			overlay.enabled = true;
 		} else if(Input.GetButtonUp ("Overlay")) {
 			overlay.enabled = false;
-		}
-
-		//finding systems stuff
-		SystemBase toDelete = null;
-		foreach (SystemBase go in systems) {
-			var dist = go.transform.position - transform.position;
-			var absDist = dist.sqrMagnitude;
-			
-			if(absDist < 50) {
-				toDelete = go;
-				go.GetComponent<PhotonView>().RPC( "found", PhotonTargets.AllBuffered, null);
-			}
-		}
-		if (toDelete != null) {
-			systems.Remove (toDelete);
 		}
 
 	}
