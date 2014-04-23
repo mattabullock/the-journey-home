@@ -6973,7 +6973,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1030553580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6be27cc835f493b8ffc2876f0111c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9efcafba8686e4a2c8c3335177ae6176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   overlay: {fileID: 1030553586}
@@ -6986,16 +6986,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1030553580}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 735c656c7494a43399ee678e12945d76, type: 3}
+  m_Script: {fileID: 11500000, guid: 598b1b7fd8d4a46da8061c703c5b1565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cross: {fileID: 2800000, guid: 65e6beab0ae854740a6e2f34070fa9cd, type: 3}
-  lights: {fileID: 0}
-  oxygen: {fileID: 0}
-  engine: {fileID: 0}
+  cross: {fileID: 2800000, guid: 38aeda311dc434bc28dbd6e80ba05ab3, type: 3}
+  lights: {fileID: 2800000, guid: 3624c0b676ad34a1a9fe556860555d0a, type: 3}
+  oxygen: {fileID: 2800000, guid: 923d53435e4564a5ea2eb010259a716b, type: 3}
+  engine: {fileID: 2800000, guid: df2dbbbe1a7d849e9945d22804c6c78f, type: 3}
   armory: {fileID: 0}
-  engineering: {fileID: 0}
-  camera: {fileID: 0}
+  engineering: {fileID: 2800000, guid: a86d4707061964896b25b374b92455c9, type: 3}
+  cameraTexture: {fileID: 2800000, guid: 1d97c336ab2ca4ea7aa65411666b47c6, type: 3}
 --- !u!1 &1035576002
 GameObject:
   m_ObjectHideFlags: 0
