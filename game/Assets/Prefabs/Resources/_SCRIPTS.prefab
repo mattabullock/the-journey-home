@@ -106,7 +106,7 @@ MonoBehaviour:
   engine: {fileID: 0}
   armory: {fileID: 0}
   engineering: {fileID: 0}
-  camera: {fileID: 0}
+  cameraTexture: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

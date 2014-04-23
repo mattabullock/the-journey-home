@@ -72,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106709}
-  m_LocalPosition: {x: -.00199970114, y: .000219797934, z: -.00282058469}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -82,9 +82,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 60, z: 0}
-  m_LocalScale: {x: 133.333344, y: 133.333344, z: 133.333344}
+  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
+  m_LocalPosition: {x: 0, y: 29, z: 0}
+  m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 400000}
@@ -121,7 +121,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7ecef7ec28f534df6893eb004ca07f89, type: 2}
+  - {fileID: 2100000, guid: fe3da509b325c4ef993981dbd6a1d30d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -143,7 +143,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 4300000, guid: fafd7b19c5286418fb8dfb8e6548c46d, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 7a9c5ae50d4c54403a07b3ea3c5b2311, type: 3}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -152,7 +152,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: fafd7b19c5286418fb8dfb8e6548c46d, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 7a9c5ae50d4c54403a07b3ea3c5b2311, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_ApplyRootMotion: 1
@@ -172,6 +172,7 @@ MonoBehaviour:
   hitPoints: 100
   currentHitPoints: 0
   healthBarLength: 200
+  foundBool: 0
   threshold: 50
   currentCell: {fileID: 0}
 --- !u!114 &11400002

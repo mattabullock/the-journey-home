@@ -60,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.6087971, y: .499985695, z: -16.4718685}
+  m_LocalPosition: {x: 37.2816696, y: .500009835, z: 12.9056969}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -71,8 +71,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106709}
-  m_LocalPosition: {x: -.00199970114, y: .000219797934, z: -.00282058469}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -82,9 +82,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 60, z: 0}
-  m_LocalScale: {x: 400, y: 400, z: 400}
+  m_LocalRotation: {x: -.5, y: -.5, z: -.500000119, w: .49999994}
+  m_LocalPosition: {x: 0, y: 29, z: 0}
+  m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 400000}
@@ -121,7 +121,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: c991bff214cfe49438a956da68d42d27, type: 2}
+  - {fileID: 2100000, guid: 3ce7f64135bb74cb1883bb643f781be3, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -143,7 +143,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 4300000, guid: be9c60cf054484ac5a8b97ba34378b3f, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 8ff6f30ac7a984fdd9a59209b8ca0183, type: 3}
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -164,7 +164,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: be9c60cf054484ac5a8b97ba34378b3f, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 8ff6f30ac7a984fdd9a59209b8ca0183, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_ApplyRootMotion: 1
@@ -184,6 +184,7 @@ MonoBehaviour:
   hitPoints: 100
   currentHitPoints: 0
   healthBarLength: 200
+  foundBool: 0
   threshold: 50
   currentCell: {fileID: 0}
 --- !u!114 &11400002
