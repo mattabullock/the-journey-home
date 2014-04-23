@@ -8,7 +8,7 @@ public class SystemBase : Photon.MonoBehaviour {
 	public float healthBarLength = 200f;
 	protected float currHealthBarLength;
 	protected bool down;
-	protected bool foundBool = false;
+	public bool foundBool = false;
 	protected bool belowThresh = false;
 	protected Transform t;
 	protected Vector3 realPosition = Vector3.zero;
@@ -64,14 +64,11 @@ public class SystemBase : Photon.MonoBehaviour {
 	[RPC]
 	public void found() {
 
-		if (foundBool) {
-			// do nothing
-		} else {
-			Transform t = transform.FindChild("indicator");
-			Transform tChild = t.FindChild("Plane");
-			t.gameObject.layer = 9; // layer 9 should be NavMesh
-			tChild.gameObject.layer = 9;
-		}
+		foundBool = true;
+		Transform t = transform.FindChild("indicator");
+		Transform tChild = t.FindChild("Plane");
+		t.gameObject.layer = 9; // layer 9 should be NavMesh
+		tChild.gameObject.layer = 9;
 	}	
 	
 
