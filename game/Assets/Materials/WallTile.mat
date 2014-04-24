@@ -17,8 +17,8 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: caceee7d24a2b4da0ba165faaaa553a3, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: 9b1dbb54b9c5f1143aa7e0be2921a7bb, type: 3}
+          m_Scale: {x: 100, y: 0}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -38,8 +38,8 @@ Material:
         first:
           name: _Cube
         second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 8900000, guid: 779336bc2dc864ac3ad5deecd4f52545, type: 2}
+          m_Scale: {x: 100, y: 100}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
@@ -54,4 +54,4 @@ Material:
       data:
         first:
           name: _ReflectColor
-        second: {r: .0661764741, g: .067149654, b: .067149654, a: .501960814}
+        second: {r: 1, g: 1, b: 1, a: .501960814}

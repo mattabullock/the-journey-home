@@ -18,8 +18,6 @@ TagManager:
   - Map
   - AlienSpawnPoint
   - overlaymapcam
-  - PrimaryWeapon
-  - SecondaryWeapon
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -34,9 +32,9 @@ TagManager:
   User Layer 10: Enemies
   User Layer 11: Floor 1
   User Layer 12: Floor 2
-  User Layer 13: TheFloor1
-  User Layer 14: 
-  User Layer 15: 
+  User Layer 13: Ceiling
+  User Layer 14: FloorCollidable
+  User Layer 15: Walls
   User Layer 16: 
   User Layer 17: 
   User Layer 18: 
