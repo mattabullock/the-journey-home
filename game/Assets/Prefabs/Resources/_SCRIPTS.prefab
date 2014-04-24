@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AssaultBulletSFX: {fileID: 8300000, guid: 6eb8422e82fcf4bf99d65c70df814527, type: 3}
+  AlienAttackSFX: {fileID: 8300000, guid: 78c72d3eba7ed42e186263886378e65c, type: 3}
   volume: .200000003
 --- !u!114 &11400006
 MonoBehaviour:
@@ -85,7 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6be27cc835f493b8ffc2876f0111c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6eacc60c2de8c490892b31fbb3550dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   overlay: {fileID: 11400008}
@@ -97,16 +98,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 735c656c7494a43399ee678e12945d76, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f9b21254a6c94e289fafa0e08034f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cross: {fileID: 2800000, guid: 65e6beab0ae854740a6e2f34070fa9cd, type: 3}
-  lights: {fileID: 0}
-  oxygen: {fileID: 0}
-  engine: {fileID: 0}
+  cross: {fileID: 2800000, guid: 25b33ef70acdc4ba8a28fc5dfa168538, type: 3}
+  lights: {fileID: 2800000, guid: 7f9ece4205e23485b91055e90d0cccec, type: 3}
+  oxygen: {fileID: 2800000, guid: 380ede14efa814fe394bb81472ba2004, type: 3}
+  engine: {fileID: 2800000, guid: 78915295e77af4d1e97b07762335acdd, type: 3}
   armory: {fileID: 0}
-  engineering: {fileID: 0}
-  cameraTexture: {fileID: 0}
+  engineering: {fileID: 2800000, guid: 27d3313aaf1294683956898943bb2e44, type: 3}
+  cameraTexture: {fileID: 2800000, guid: 6d59671964a1342f78de4925f6b92f51, type: 3}
+  progressBarEmpty: {fileID: 0}
+  progressBarFull: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

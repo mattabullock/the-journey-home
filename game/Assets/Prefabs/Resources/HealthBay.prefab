@@ -220,14 +220,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100026
+--- !u!1 &100030
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 400026}
+  - 4: {fileID: 400028}
   - 95: {fileID: 9500002}
   m_Layer: 1
   m_Name: indicator
@@ -270,7 +270,7 @@ Transform:
   m_Children:
   - {fileID: 400002}
   - {fileID: 400000}
-  - {fileID: 400026}
+  - {fileID: 400028}
   - {fileID: 400020}
   - {fileID: 400014}
   - {fileID: 400012}
@@ -390,13 +390,13 @@ Transform:
   m_LocalPosition: {x: -.00199970114, y: .000219797934, z: -.00282058469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400026}
---- !u!4 &400026
+  m_Father: {fileID: 400028}
+--- !u!4 &400028
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100026}
+  m_GameObject: {fileID: 100030}
   m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106709}
   m_LocalPosition: {x: 0, y: 29, z: 0}
   m_LocalScale: {x: 200, y: 200, z: 200}
@@ -541,7 +541,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 83f4ed5d0ddea4acb9657d0c54225625, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -598,7 +598,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100024}
-  m_Mesh: {fileID: 4300000, guid: 21b00c423d80948ab82ca71fa7510d60, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 2372bacbe435943ddb172bdb50ae1718, type: 3}
 --- !u!64 &6400000
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -645,9 +645,9 @@ Animator:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100026}
+  m_GameObject: {fileID: 100030}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 21b00c423d80948ab82ca71fa7510d60, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 2372bacbe435943ddb172bdb50ae1718, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_ApplyRootMotion: 1
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28a2c4b76b882412ea853a1b6db98c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 2800000, guid: 38aeda311dc434bc28dbd6e80ba05ab3, type: 3}
+  image: {fileID: 2800000, guid: 25b33ef70acdc4ba8a28fc5dfa168538, type: 3}
   name: Med Bay
   hitPoints: 100
   currentHitPoints: 0

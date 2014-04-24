@@ -41,6 +41,7 @@ public class ArmorySystem : SystemBase {
 	
 	[RPC]
 	protected override void repair (float amt) {
+		Debug.Log ("repair!!");
 		if (currentHitPoints >= hitPoints) {
 			return;	
 		} else if (currentHitPoints + amt > hitPoints) {

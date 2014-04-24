@@ -32,10 +32,10 @@ public class SpawnManager : Photon.MonoBehaviour {
 			"LightSystem",
 			"HealthBay",
 			"alienspawn",
+			"Armory",
 			"EngineeringBay",
 			"CameraSystem",
 			"EngineSystem",
-			
 		};
 
 	// Use this for initialization
