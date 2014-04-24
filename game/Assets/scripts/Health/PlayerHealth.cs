@@ -11,7 +11,7 @@ public class PlayerHealth : HealthBase {
 	}
 
 	protected void OnGUI() {
-		GUI.Box (new Rect (Screen.width - healthBarLength - 10, 10, healthBarLength, 20), Mathf.Floor (currentHitPoints) + "/" + hitPoints);
+		GUI.Box (new Rect (10, 15, healthBarLength , 25), "Health: " + Mathf.Floor (currentHitPoints) + "%");
 	}
 	
 	[RPC]

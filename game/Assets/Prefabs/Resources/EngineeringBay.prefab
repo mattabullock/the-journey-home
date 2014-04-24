@@ -121,7 +121,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 3ce7f64135bb74cb1883bb643f781be3, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ffcf6bd0c7949dc8f3da337679546b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 2800000, guid: a86d4707061964896b25b374b92455c9, type: 3}
+  name: Engineering
   hitPoints: 100
   currentHitPoints: 0
   healthBarLength: 200

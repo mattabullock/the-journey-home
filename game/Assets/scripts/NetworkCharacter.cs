@@ -72,13 +72,13 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 	// }
 
 	void OnGUI(){
-		GUI.Box (new Rect (Screen.width - pHealth.healthBarLength - 10, 40, 
-		                   	pHealth.healthBarLength, 20), 
-		         			Mathf.Floor (oSys.oxygenSupply) + "/" + oSys.hitPoints);
+		GUI.Box (new Rect (10, 50, 
+		                   	pHealth.healthBarLength, 25), "Oxygen: "+
+		         			Mathf.Floor (oSys.oxygenSupply) + "%");
 
 		if (photonView.isMine) {
-			GUI.Box (new Rect (Screen.width - 50, 70, 
-           		40, 20), pShoot.gunBase.ammo + "/" + pShoot.gunBase.maxAmmo);
+			GUI.Box (new Rect (10, 85, 
+           		pHealth.healthBarLength, 25), "Ammo: "+ pShoot.gunBase.ammo + "/" + pShoot.gunBase.maxAmmo);
 		}
 
 		GameObject[] systems = GameObject.FindGameObjectsWithTag("interactive");

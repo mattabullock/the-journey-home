@@ -10,6 +10,7 @@ public class PlayerShooting : MonoBehaviour {
 	FXManager fx;
 	Transform gun;
 	public GunBase gunBase;
+	public int bonusDmg;
 	Animator gunAnim;
 	bool reloading = false;
 	public AudioClip reloadSound;
@@ -25,6 +26,8 @@ public class PlayerShooting : MonoBehaviour {
 	Transform bulletSpawn;
 
 	void Start() {
+		bonusDmg = 0;
+
 		fx = GameObject.FindObjectOfType<FXManager>();
 		audioSource = GetComponent<AudioSource> ();
 		gunHolder = transform.FindChild("Main Camera").FindChild ("GunHolder");
@@ -112,7 +115,7 @@ public class PlayerShooting : MonoBehaviour {
 							Debug.LogError("Freak out!");
 						}
 						else {
-							pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage);
+							pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage + bonusDmg);
 						}
 					}
 				}
@@ -122,7 +125,7 @@ public class PlayerShooting : MonoBehaviour {
 						Debug.LogError("Freak out!");
 					}
 					else {
-						pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage);
+						pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage + bonusDmg);
 					}	
 				}
 			} else if(hitTransform.tag == "AlienSpawnPoint") {
@@ -132,7 +135,7 @@ public class PlayerShooting : MonoBehaviour {
 					Debug.LogError("Freak out!");
 				}
 				else {
-					pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage);
+					pv.RPC ("TakeDamage", PhotonTargets.AllBuffered, gunBase.damage + bonusDmg);
 				}	
 			}
 		}

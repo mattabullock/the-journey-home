@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class SystemBase : Photon.MonoBehaviour {
-	
+
+	public Texture2D image;
+	public string name;
 	public float hitPoints = 100f;
 	public float currentHitPoints;
 	public float healthBarLength = 200f;

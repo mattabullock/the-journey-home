@@ -2454,7 +2454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitPoints: 100
   currentHitPoints: 0
-  healthBarLength: 60
+  healthBarLength: 100
   anim: {fileID: 9500002}
 --- !u!114 &11400006
 MonoBehaviour:
@@ -2570,7 +2570,7 @@ MonoBehaviour:
   maxAmmo: 20
   reloadCooldown: 3
   fireRate: .100000001
-  damage: 10
+  damage: 8
   ammo: 0
 --- !u!114 &11400020
 MonoBehaviour:
