@@ -34,4 +34,5 @@ MonoBehaviour:
   - loadScene
   - trigger
   - found
+  - AlienAttackFX
   DisableAutoOpenWizard: 0

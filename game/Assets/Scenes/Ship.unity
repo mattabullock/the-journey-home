@@ -6963,6 +6963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AssaultBulletSFX: {fileID: 8300000, guid: 6eb8422e82fcf4bf99d65c70df814527, type: 3}
+  AlienAttackSFX: {fileID: 8300000, guid: 78c72d3eba7ed42e186263886378e65c, type: 3}
   volume: .200000003
 --- !u!114 &1030553585
 MonoBehaviour:
@@ -6973,7 +6974,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1030553580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9efcafba8686e4a2c8c3335177ae6176, type: 3}
+  m_Script: {fileID: 11500000, guid: 6eacc60c2de8c490892b31fbb3550dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   overlay: {fileID: 1030553586}
@@ -6986,16 +6987,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1030553580}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 598b1b7fd8d4a46da8061c703c5b1565, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f9b21254a6c94e289fafa0e08034f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cross: {fileID: 2800000, guid: 38aeda311dc434bc28dbd6e80ba05ab3, type: 3}
-  lights: {fileID: 2800000, guid: 3624c0b676ad34a1a9fe556860555d0a, type: 3}
-  oxygen: {fileID: 2800000, guid: 923d53435e4564a5ea2eb010259a716b, type: 3}
-  engine: {fileID: 2800000, guid: df2dbbbe1a7d849e9945d22804c6c78f, type: 3}
+  cross: {fileID: 2800000, guid: 25b33ef70acdc4ba8a28fc5dfa168538, type: 3}
+  lights: {fileID: 2800000, guid: 7f9ece4205e23485b91055e90d0cccec, type: 3}
+  oxygen: {fileID: 2800000, guid: 380ede14efa814fe394bb81472ba2004, type: 3}
+  engine: {fileID: 2800000, guid: 78915295e77af4d1e97b07762335acdd, type: 3}
   armory: {fileID: 0}
-  engineering: {fileID: 2800000, guid: a86d4707061964896b25b374b92455c9, type: 3}
-  cameraTexture: {fileID: 2800000, guid: 1d97c336ab2ca4ea7aa65411666b47c6, type: 3}
+  engineering: {fileID: 2800000, guid: 27d3313aaf1294683956898943bb2e44, type: 3}
+  cameraTexture: {fileID: 2800000, guid: 6d59671964a1342f78de4925f6b92f51, type: 3}
+  progressBarEmpty: {fileID: 0}
+  progressBarFull: {fileID: 0}
 --- !u!1 &1035576002
 GameObject:
   m_ObjectHideFlags: 0

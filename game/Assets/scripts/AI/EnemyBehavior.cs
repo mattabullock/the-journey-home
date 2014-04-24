@@ -32,10 +32,13 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 	bool gotFirstUpdate = false;
 	bool go = false;
 
+	FXManager fxm;
+
 	void Awake(){
 		shortestPathSoFar = int.MaxValue;
 		currentVelocity = new Vector3(0f,0f,0f);
 		attackTimer = 0f;
+		fxm = FindObjectOfType<FXManager> ();
 	}
 
 	void Update(){
@@ -174,6 +177,7 @@ public class EnemyBehavior : Photon.MonoBehaviour {
 					else{
 						target.GetComponent<SystemBase>().GetComponent<PhotonView>().RPC ("TakeDamage",PhotonTargets.All,damage);
 					}
+					fxm.GetComponent<PhotonView>().RPC ("AlienAttackFX", PhotonTargets.All, transform.position);
 					attackTimer = 0f;
 				}
 				else{
