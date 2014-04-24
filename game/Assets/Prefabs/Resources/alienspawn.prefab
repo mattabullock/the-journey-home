@@ -13,7 +13,7 @@ GameObject:
   - 64: {fileID: 6400000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: alienspawn
   m_TagString: AlienSpawnPoint
   m_Icon: {fileID: 0}

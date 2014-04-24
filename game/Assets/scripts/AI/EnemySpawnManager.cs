@@ -27,7 +27,10 @@ public class EnemySpawnManager : MonoBehaviour {
 			if (timer > spawnDelay) {
 				timer = 0;
 				for(int i = 0; i < waveSize; i++) {
-					PhotonNetwork.Instantiate("Test Enemy", transform.position, Quaternion.identity, 0, null);
+					Vector3 theSpawn = transform.position;
+					theSpawn.y +=1;
+					theSpawn.y +=i;
+					PhotonNetwork.Instantiate("Test Enemy", theSpawn, Quaternion.identity, 0, null);
 				}
 			}
 		}

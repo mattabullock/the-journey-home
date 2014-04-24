@@ -21,6 +21,8 @@ TagManager:
   - PrimaryWeapon
   - SecondaryWeapon
   - 
+  - MainWeapon
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -35,7 +37,7 @@ TagManager:
   User Layer 11: Floor 1
   User Layer 12: Floor 2
   User Layer 13: TheFloor1
-  User Layer 14: 
+  User Layer 14: AIapproved
   User Layer 15: 
   User Layer 16: 
   User Layer 17: 

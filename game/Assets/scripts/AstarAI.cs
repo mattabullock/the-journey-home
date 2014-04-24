@@ -12,21 +12,16 @@ public class AstarAI : MonoBehaviour
 	private GameObject tempTarget;
 	private float clockTick;
 	private Seeker seeker;
-	private	GameObject[] systems;
+	private	SystemBase[] systems;
 	private	GameObject[] players;
 	private CharacterController controller;
 	private bool newPath;
 	private GameObject player;
 	private Transform playerTrans;
 	private Vector3 playerLoc;
-	private bool exploring;
 	private bool systemTarget;
 	private float closest;
-	private int count;
-	private bool playerFound;
-	private GameObject[] targets;
-	private bool targetAquired;
-	private bool targetLocked;
+	private float count;
 
 	//The calculated path
 	public Path path;
@@ -42,26 +37,14 @@ public class AstarAI : MonoBehaviour
 
 	public void Start ()
 	{
-		systems = GameObject.FindGameObjectsWithTag ("SystemSpawn");
+		systems = FindObjectsOfType<SystemBase>();
 		players = GameObject.FindGameObjectsWithTag ("Player");
-		targets = new GameObject[24];
-		count = 0;
-		foreach (GameObject o in systems) {
-			targets [count] = o;
-			count++;
-		}
-		foreach (GameObject o in players) {
-				targets [count] = o;
-				count++;
-		}
-		count = 0;
+		count = 0f;
 		closest = 100000f;
 		targetPosition = new Vector3 (0, 0, 0);
 		target = null;
 		systemTarget = false;
 		clockTick = 0;
-		exploring = true;
-		targetAquired = false;
 		seeker = GetComponent<Seeker> ();
 		controller = GetComponent<CharacterController> ();
 		decision ();
@@ -90,45 +73,39 @@ public class AstarAI : MonoBehaviour
 			return;
 		}
 
-		if (exploring) {
-			if ((path.vectorPath.Count - currentWaypoint) < 2) {
-				if (systemTarget) {
-					foreach (GameObject o in systems) {
-						if (o.transform.position.magnitude == target.transform.position.magnitude) {
-							Debug.Log("found " + target); 
-							o.GetComponent<SystemSpawn> ().enemyFound = true;
-						}
-					}
-				}
-			}
-			if (newPath) {
-				if (clockTick == 10) {
-					decision ();
-				} else {
-					clockTick++;
-				}
-			}
-		} 
-		else {
-			if ((path.vectorPath.Count - currentWaypoint) < 1) {
-				if (targetAquired) {
-					//attack the target
-					//if the target hits 0 health targetAquired goes false.
+
+		if ((path.vectorPath.Count - currentWaypoint) < 2) {
+			if (systemTarget) {
+				if (count>1) {
+					target.GetComponent<SystemBase> ().currentHitPoints = target.GetComponent<SystemBase> ().currentHitPoints - 1;
+					count=0;
 				} 
 				else {
-					if (newPath) {
-						if (clockTick == 10) {
-							decision ();
-						} else {
-							clockTick++;
-						}
-					}
-				}							
+					count+=Time.deltaTime;
+				}
+			}
+			else{
+				if (count>1) {
+					target.GetComponent<PlayerHealth> ().currentHitPoints = target.GetComponent<PlayerHealth> ().currentHitPoints - 1;
+					count=0;
+				} 
+				else {
+					count+=Time.deltaTime;
+				}
 			}
 		}
+
+		if (newPath) {
+			if (clockTick >= 2) {
+				decision ();
+			} else {
+				clockTick+=Time.deltaTime;
+			}
+		}
+		Debug.Log ("" + path.vectorPath.Count + " and : " + currentWaypoint);
+
 		if (currentWaypoint < path.vectorPath.Count) {
 			//Direction to the next waypoint
-			//Debug.Log ("" + path.vectorPath.Count + " and : " + currentWaypoint);
 			Vector3 dir = (path.vectorPath [currentWaypoint] - transform.position).normalized;
 			dir *= speed * Time.fixedDeltaTime;
 			controller.SimpleMove (dir);
@@ -136,78 +113,43 @@ public class AstarAI : MonoBehaviour
 			//Check if we are close enough to the next waypoint
 			//If we are, proceed to follow the next waypoint
 			if (Vector3.Distance (transform.position, path.vectorPath [currentWaypoint]) < nextWaypointDistance) {
-					currentWaypoint++;
-					return;
+				currentWaypoint++;
+				return;
 			}
+		} 
+		else {
 		}
 	}
 
 	public void decision (){
-				newPath = false;
-				clockTick = 0;
-				count = 0;
-				if (exploring) {
-						closest = 10000;
-						foreach (GameObject o in systems) {
-								SystemSpawn g = o.GetComponent<SystemSpawn> ();
-								if (g.enemyFound) {
-										Debug.Log ("here");
-										count++;
-										if (count > 4) {
-												exploring = false;
-												Debug.Log ("GOING AGGRESSIVE!!!!!!!");
-										}
-								} else {
-										if ((Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) < closest) {
-												Debug.Log ("" + o + " is closest, it is " + (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) + " units away.");
-												closest = (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude));
-												targetPosition = o.transform.position;
-												target = o;
-												systemTarget = true;
-										}
-								}
-						}
-						foreach (GameObject o in players) {
-								if ((Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) < closest) {
-										Debug.Log ("" + o + " is closest, it is " + (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) + " units away.");
-										closest = (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude));
-										targetPosition = o.transform.position;
-										target = o;
-										systemTarget = false;
-										playerFound = true;
-								}
-						}
-						Debug.Log ("" + target + " is closest");
-						targetPosition = target.transform.position;
-						pathCalc ();
-				} else {
-
-
-						if (targetAquired) {
-						} else {
-								int Thetarget = 0;		
-								if (playerFound) {
-										Thetarget = Random.Range (0, 23);
-										if (Thetarget < 20) {
-												while (!targets[Thetarget].GetComponent<SystemSpawn>().enemyFound) {
-														Thetarget = Random.Range (0, 19);
-														//if Thetarget has 0 health already, choose a new target
-												}
-										}
-
-										} else {
-												Thetarget = Random.Range (0, count - 1);
-												//While Thetarget has 0 health, choose a new target.
-										}
-
-										if (Thetarget > 19) {
-												systemTarget = false;
-										}
-										targetAquired = true;
-										target = targets [Thetarget];
-										pathCalc ();
-								}	
-						}
+		newPath = false;
+		clockTick = 0;
+		count = 0;
+		closest = 10000000;
+		foreach (SystemBase o in systems) {
+			if (o.currentHitPoints==0) {
+				Debug.Log("health is 0");
+			} 
+			else {
+				if ((Mathf.Abs (o.gameObject.transform.position.magnitude - gameObject.transform.position.magnitude)) < closest) {
+					Debug.Log ("" + o + " is closest, it is " + (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) + " units away.");
+					closest = (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude));
+					target = o.gameObject;
+					systemTarget = true;
 				}
+			}
 		}
-
+		foreach (GameObject o in players) {
+			if ((Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) < closest) {
+				Debug.Log ("" + o + " is closest, it is " + (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude)) + " units away.");
+				closest = (Mathf.Abs (o.transform.position.magnitude - gameObject.transform.position.magnitude));
+				target = o;
+				systemTarget = false;
+			}
+		}
+		Debug.Log ("" + target + " is closest");
+		targetPosition = target.transform.position;
+		pathCalc ();
+				
+	}
+}
